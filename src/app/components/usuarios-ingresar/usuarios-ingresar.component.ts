@@ -34,6 +34,8 @@ export class UsuariosIngresarComponent implements OnInit {
         localStorage.setItem('token',result.token);
         localStorage.setItem('rol',result.rol);
         localStorage.setItem('dni',result.dni);
+        var nombreApellido = result.nombre + " "+ result.apellido;
+        localStorage.setItem('nombreApellido', nombreApellido);
         switch(result.rol)
         {
           case 1: 

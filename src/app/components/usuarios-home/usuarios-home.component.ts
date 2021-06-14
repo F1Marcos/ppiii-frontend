@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsuariosHomeComponent implements OnInit {
 
+  usuario = "";
+
   constructor() { }
 
   ngOnInit(): void {
+    this.usuario = localStorage.nombreApellido;
   }
 
 }
