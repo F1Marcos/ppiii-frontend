@@ -11,12 +11,12 @@ import { Router } from '@angular/router';
 
 export class UsuariosService{
 	// API_URI = 'http://localhost:3000/user';
-	API_URI = 'https://ppiii-demo1.herokuapp.com';
+	API_URI = 'https://ppiii-demo1.herokuapp.com/user';
 	
 	constructor(private http: HttpClient, private router:Router) { }
 
 	listarUsuarios(){
-		//para expandir/especializar las variables usamos ` y no ' o "
+		//para expandir/especializar las variables usamos ` y no ' o "  
 		//Las variables salen pintadas de otro color diferente del de texto
 		return this.http.get(`${this.API_URI}/list`);
 		//si no funciona usar 
