@@ -15,6 +15,8 @@ import {AuthGuard} from './auth.guard';
 import {TokenInterceptorService} from './services/token-interceptor.service';
 import { AlumnoListarAprobComponent } from './components/alumno-listar-aprob/alumno-listar-aprob.component';
 import { AlumnoListarCorreComponent } from './components/alumno-listar-corre/alumno-listar-corre.component';
+import { WebTPComponent } from './components/web-tp/web-tp.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { AlumnoListarCorreComponent } from './components/alumno-listar-corre/alu
     UsuariosPrincipalComponent,
     UsuariosHomeComponent,
     AlumnoListarAprobComponent,
-    AlumnoListarCorreComponent
+    AlumnoListarCorreComponent,
+    WebTPComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

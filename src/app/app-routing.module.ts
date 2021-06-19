@@ -7,6 +7,7 @@ import { UsuariosPrincipalComponent } from "./components/usuarios-principal/usua
 import { AlumnoListarAprobComponent } from "./components/alumno-listar-aprob/alumno-listar-aprob.component";
 import { AlumnoListarCorreComponent } from "./components/alumno-listar-corre/alumno-listar-corre.component";
 import { UsuariosHomeComponent } from "./components/usuarios-home/usuarios-home.component";
+import { WebTPComponent } from "./components/web-tp/web-tp.component";
 import {AuthGuard} from './auth.guard';
 
 
@@ -16,6 +17,11 @@ const routes: Routes = [
 		path: '',
 		redirectTo: 'usuarios/ingresar',
 		pathMatch: 'full'
+	},
+	{	
+		path: 'usuarios/pizarra',
+		component: WebTPComponent,
+		
 	},
 	{
 		path: 'usuarios/listar',
@@ -32,7 +38,8 @@ const routes: Routes = [
 	},
 	{
 		path: 'usuarios/principal',
-		component: UsuariosPrincipalComponent
+		component: UsuariosPrincipalComponent,
+		canActivate: [AuthGuard]
 	},
 	{
 		path:'usuarios/home',
@@ -42,10 +49,13 @@ const routes: Routes = [
 	{
 		path:'usuarios/listMaterias',
 		component: AlumnoListarAprobComponent,
+		canActivate: [AuthGuard]
+		
 	},
 	{
 		path:'usuarios/listCorre',
 		component: AlumnoListarCorreComponent,
+		canActivate: [AuthGuard]
 	}
 ];
 

@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 
 export class UsuariosService{
-	// API_URI = 'http://localhost:3000/user';
-	API_URI = 'https://ppiii-demo1.herokuapp.com/user';
+	API_URI = 'http://localhost:3000/user';
+	//API_URI = 'https://ppiii-demo1.herokuapp.com/user';
 	
 	constructor(private http: HttpClient, private router:Router) { }
 
@@ -69,5 +69,22 @@ listarMateriasCorrelativas(dni:any){
 	console.log(dni);
 	console.log(dni);
 	return this.http.get(`${this.API_URI}/listMateriasCorre/${dni}`);
+}
+
+listarComentarios(){
+	//para expandir/especializar las variables usamos ` y no ' o "  
+	//Las variables salen pintadas de otro color diferente del de texto
+	return this.http.get(`${this.API_URI}/listComent`);
+	//si no funciona usar 
+	//return this.http.get(this.API_URI+'/list');
+}
+
+agregarComentarios(com:any){
+	//para expandir/especializar las variables usamos ` y no ' o "  
+	//Las variables salen pintadas de otro color diferente del de texto
+	console.log(com);
+	return this.http.get(`${this.API_URI}/agregarComent`);
+	//si no funciona usar 
+	//return this.http.get(this.API_URI+'/list');
 }
 }
