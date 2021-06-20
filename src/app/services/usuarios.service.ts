@@ -14,14 +14,6 @@ export class UsuariosService{
 	//API_URI = 'https://ppiii-demo1.herokuapp.com/user';
 	
 	constructor(private http: HttpClient, private router:Router) { }
-
-	listarUsuarios(){
-		//para expandir/especializar las variables usamos ` y no ' o "  
-		//Las variables salen pintadas de otro color diferente del de texto
-		return this.http.get(`${this.API_URI}/list`);
-		//si no funciona usar 
-		//return this.http.get(this.API_URI+'/list');
-	}
 	
 	buscarUsuario(id:string){
 		return this.http.get(`${this.API_URI}/find/${id}`);
@@ -87,4 +79,32 @@ agregarComentarios(com:any){
 	//si no funciona usar 
 	//return this.http.get(this.API_URI+'/list');
 }
+
+listarUsuarios(){
+	//para expandir/especializar las variables usamos ` y no ' o "  
+	//Las variables salen pintadas de otro color diferente del de texto
+	return this.http.get(`${this.API_URI}/listarUsuarios`);
+	//si no funciona usar 
+	//return this.http.get(this.API_URI+'/list');
+}
+agregarUsuario(usuario:any){
+	//para expandir/especializar las variables usamos ` y no ' o "  
+	//Las variables salen pintadas de otro color diferente del de texto
+	console.log(usuario);
+	return this.http.post(`${this.API_URI}/agregarUsuario`, usuario);
+	//si no funciona usar 
+	//return this.http.get(this.API_URI+'/list');
+}
+modificarUsuario(usuario:any){
+	console.log('FE: Metodo servicio Modificar Usuarios:')
+	console.log(usuario);
+	return this.http.post(`${this.API_URI}/modificarUsuario`, usuario);
+}
+eliminarUsuario(id:string){
+	console.log('FE: Metodo servicio Eliminar Usuario:')
+	return this.http.delete(`${this.API_URI}/eliminarUsuario/${id}`); // El service devuelve "usuario" tal vez se puede usar para mostrar un mensaje.
+}
+
+
+
 }

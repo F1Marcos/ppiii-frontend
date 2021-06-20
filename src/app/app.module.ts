@@ -17,6 +17,7 @@ import { AlumnoListarAprobComponent } from './components/alumno-listar-aprob/alu
 import { AlumnoListarCorreComponent } from './components/alumno-listar-corre/alumno-listar-corre.component';
 import { WebTPComponent } from './components/web-tp/web-tp.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { AdminAbmAlumnoComponent } from './components/admin-abm-alumno/admin-abm-alumno.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     AlumnoListarAprobComponent,
     AlumnoListarCorreComponent,
     WebTPComponent,
-    FilterPipe
+    FilterPipe,
+    AdminAbmAlumnoComponent
   ],
   imports: [
     BrowserModule,
