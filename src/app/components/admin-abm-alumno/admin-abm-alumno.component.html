@@ -52,44 +52,69 @@
     </table>
   </div>
 
-  <form class="container" (submit)="agregarAlumno()">
+  <form class="container" (submit)="agregarAlumno()" style="font:bolder; color: brown;">
     <div class="form-row">
       <div class="col-md-4 mb-3">
         <label>Usuario</label>
-        <input type="text" class="form-control" name="usuario" placeholder="Ej: jramirez" [(ngModel)]="use.usuario"
-          required>
+        <input type="text" class="form-control" name="usuario" placeholder="Ej: jramirez" [(ngModel)]="use.usuario" (focus)="limpiarUsuario()"required>
+          <div [ngSwitch]="errorUsuario">
+            <div *ngSwitchCase="1">Debes completar el campo</div>
+            <div *ngSwitchCase="2">usuario muy largo</div>
+            <div *ngSwitchCase="3">usuario debe ser alfabetico</div>
+        </div>
       </div>
       <div class="col-md-4 mb-3">
         <label>Nombres</label>
-        <input type="text" class="form-control" name="nombres" placeholder="Ej: Matias Marcos" [(ngModel)]="use.nombres"
-          required>
+        <input type="text" class="form-control" name="nombres" placeholder="Ej: Matias Marcos" [(ngModel)]="use.nombres" (focus)="limpiarNombre()" required>
+        <div [ngSwitch]="errorNombre">
+          <div *ngSwitchCase="1">Debes completar el campo</div>
+          <div *ngSwitchCase="2">Nombre demasiado largo</div>
+          <div *ngSwitchCase="3">Nombre debe ser alfabetico y solo admite un espacio entre nombres</div>
+      </div>
       </div>
       <div class="col-md-4 mb-3">
         <label>Apellidos</label>
-        <input type="text" class="form-control" name="apellidos" placeholder="Ej: Rivero Quispe"
-          [(ngModel)]="use.apellidos" required>
+        <input type="text" class="form-control" name="apellidos" placeholder="Ej: Rivero Quispe" [(ngModel)]="use.apellidos" (focus)="limpiarApellido()" required>
+        <div [ngSwitch]="errorApellido">
+          <div *ngSwitchCase="1">Debes completar el campo</div>
+          <div *ngSwitchCase="2">Apellido demasiado largo</div>
+          <div *ngSwitchCase="2">Apellido debe ser alfabetico y solo admite 1 espacio entre apellidos</div>
+      </div>
       </div>
     </div>
     <div class="form-row">
       <div class="col-md-3 mb-3">
         <label>DNI</label>
-        <input type="text" class="form-control" placeholder="Ej:400xxx32" name="dni" [(ngModel)]="use.dni" required>
+        <input type="text" class="form-control" placeholder="Ej:400xxx32" name="dni" [(ngModel)]="use.dni" (focus)="limpiarDNI()" required>
+        <div [ngSwitch]="errorDNI">
+          <div *ngSwitchCase="1">Debes completar el campo</div>
+          <div *ngSwitchCase="2">DNI muy largo</div>
+          <div *ngSwitchCase="3">DNI debe ser numerico</div>
+      </div>
       </div>
       <div class="col-md-3 mb-3">
         <label>Mail</label>
-        <input type="text" class="form-control" placeholder="Ej roberto@ifts11.com" name="mail" [(ngModel)]="use.mail"
-          required>
+        <input type="text" class="form-control" placeholder="Ej roberto@ifts11.com" name="mail" [(ngModel)]="use.mail" (focus)="limpiarEmail()" required >
+        <div [ngSwitch]="errorEmail">
+          <div *ngSwitchCase="1">Debes completar el campo</div>
+          <div *ngSwitchCase="2">Email muy largo</div>
+          <div *ngSwitchCase="3">Email debe ser nombre@dominio.algo .</div>
+      </div>
       </div>
       <div class="col-md-3 mb-3">
         <label>Rol</label>
-        <select type="text" class="custom-select mr-sm-2" name="rol" [(ngModel)]="use.rol">
+        <select type="text" class="custom-select mr-sm-2" name="rol" [(ngModel)]="use.rol" (focus)="limpiarRol()">
           <option value="1">Admin</option>
           <option value="2">Alumno</option>
         </select>
+        <div [ngSwitch]="errorRol">
+          <div *ngSwitchCase="1">Seleccione una opción</div>
+          <div *ngSwitchCase="2">Error inesperado. Seleccione una opción dentro de las validas, si el error persiste recargue la pagina</div>
+      </div>
       </div>
     </div>
-    <button class="btn btn-success" type="submit">Agregar Alumno</button>
-    <button class="btn btn-dark" style="margin-left: 2%;">Limpiar campos</button>
+    <button class="btn btn-success" type="submit" (click)="verificarForm()">Agregar Alumno</button>
+    <button class="btn btn-dark" style="margin-left: 2%;" (click)="limpiarTodo()">Limpiar campos</button>
   </form>
 
 

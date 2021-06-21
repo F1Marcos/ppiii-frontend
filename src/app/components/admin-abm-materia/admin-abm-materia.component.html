@@ -51,26 +51,47 @@
         <div class="form-row">
           <div class="col-md-4 mb-3">
             <label>ID</label>
-            <input type="number" class="form-control" name="idMat" placeholder="Ej: 5XXX" [(ngModel)]="mat.idMat"
-              required min="0">
+            <input type="text" class="form-control" name="idMat" placeholder="Ej: 5XXX" [(ngModel)]="mat.idMat" (focus)="limpiarID()" required>
+            <div [ngSwitch]="errorID">
+              <div *ngSwitchCase="1">Debes completar el campo</div>
+              <div *ngSwitchCase="2">Codigo de materia muy largo, maximo 6 numeros</div>
+              <div *ngSwitchCase="3">El ID de la materia debe ser un numero.</div>
+          </div>
           </div>
           <div class="col-md-4 mb-3">
             <label>Materia</label>
-            <input type="text" class="form-control" name="nombreMat" placeholder="Ej: Base de Datos" [(ngModel)]="mat.nombreMat"
-              required>
+            <input type="text" class="form-control" name="nombreMat" placeholder="Ej: Base de Datos" [(ngModel)]="mat.nombreMat" (focus)="limpiarNombre()" required>
+            <div [ngSwitch]="errorNombre">
+              <div *ngSwitchCase="1">Debes completar el campo</div>
+              <div *ngSwitchCase="2">Nombre muy largo</div>
+              <div *ngSwitchCase="3">No debe haber mas de un espacio entre palabras</div>
+          </div>
           </div>
         </div>
         <div class="form-row">
           <div class="col-md-3 mb-3">
             <label>AÑO</label>
-            <input type="number" class="form-control" placeholder="Ej: 1 o 2 o 3" name="anio" [(ngModel)]="mat.anio" required min="1" max="3">
+            <select type="text" class="custom-select mr-sm-2" name="anio" [(ngModel)]="mat.anio" (focus)="limpiarAnio()">
+              <option value=1>Primer año</option>
+              <option value=2>Segundo año</option>
+              <option value=3>Tercer año</option>
+            </select>  
+            <div [ngSwitch]="errorAnio">
+              <div *ngSwitchCase="1">Seleccione una opción</div>              
+              <div *ngSwitchCase="2">Error inesperado. Si el error persiste recargue la pagina</div>
+          </div>        
           </div>
           <div class="col-md-3 mb-3">
             <label>TIPO</label>
-            <input type="text" class="form-control" placeholder="Ej Anual/Cutrimestral" name="tipo" [(ngModel)]="mat.tipo"
-              required>
+            <select type="text" class="custom-select mr-sm-2" name="tipo" [(ngModel)]="mat.tipo" (focus)="limpiarTipo()">
+              <option value="Cuatrimestral">Cuatrimestral</option>
+              <option value="Anual">Anual</option>
+            </select>
+            <div [ngSwitch]="errorTipo">
+              <div *ngSwitchCase="1">Seleccione una opción</div>
+              <div *ngSwitchCase="2">Error inesperado. Si el error persiste recargue la pagina</div>
           </div>
-
+          </div>
           
           <div class="col-md-4 mb-3">
             <label>CORRELATIVA</label>
@@ -78,8 +99,8 @@
               required>
           </div>
         </div>
-        <button class="btn btn-success" type="submit">Agregar Alumno</button>
-        <button class="btn btn-dark" style="margin-left: 2%;">Limpiar campos</button>
+        <button class="btn btn-success" type="submit" (click)="verificarForm()">Agregar Materia</button>
+        <button class="btn btn-dark" style="margin-left: 2%;" (click)="limpiarTodo()">Limpiar campos</button>
       </form>
       <div style="left:auto"> <br>
         <a class="btn btn-dark" routerLink="/admin/home">Volver<span class="sr-only">(current)</span></a>
