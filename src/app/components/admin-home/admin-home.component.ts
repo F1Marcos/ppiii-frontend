@@ -8,12 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class AdminHomeComponent implements OnInit {
   rol: string = "";
   usuario: string = "";
-  
+
   constructor() { }
 
   ngOnInit(): void {
     this.rol = localStorage.rol;
-    this.usuario = localStorage.usuario;
+    this.usuario = localStorage.nombreApellido;
   }
-
 }
