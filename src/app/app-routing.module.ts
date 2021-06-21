@@ -12,6 +12,8 @@ import { WebTPComponent } from "./components/web-tp/web-tp.component";
 import {AuthGuard} from './auth.guard';
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { AdminGuard } from './admin.guard';
+import { AdminAbmMateriaComponent } from "./components/admin-abm-materia/admin-abm-materia.component";
+
 
 const routes: Routes = [
 	{	
@@ -65,6 +67,11 @@ const routes: Routes = [
 	{
 		path:'admin/home',
 		component: AdminHomeComponent,
+		canActivate: [AuthGuard,AdminGuard]
+	},
+	{	
+		path: 'admin/abmMateria',
+		component: AdminAbmMateriaComponent,
 		canActivate: [AuthGuard,AdminGuard]
 	}
 ];

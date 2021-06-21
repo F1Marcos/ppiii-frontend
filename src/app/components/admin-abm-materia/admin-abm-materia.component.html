@@ -1,0 +1,88 @@
+<div class="main" style="height: 100%;">
+    <br>
+    <div class="container" style="text-align: center; color: cornsilk;">
+        <h1>ABM USUARIOS</h1>
+    </div>
+    <tbody *ngIf="alert">
+        <div id="aviso">
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong> Articulo Actualizado correctamente </strong>
+            </div>
+        </div>
+    </tbody>
+
+    <br>
+    <div class="container">
+        <table class="table table-dark table-hover">
+            <thead>
+                <th>ID</th>
+                <th>Materia</th>
+                <th>Año</th>
+                <th>Tipo</th>
+                <th>Correlativa</th>
+                <th>Modificar</th>
+                <th>Eliminar</th>
+            </thead>
+            <tbody *ngIf="materias.length > 0; else fila">
+                <tr *ngFor=" let mat of materias">
+                    <td><input type="number" name="idMat" [(ngModel)]="mat.idMat" class=" form-control" disabled></td>
+                    <td><input type="text" name="nombreMat" [(ngModel)]="mat.nombreMat" class=" form-control"></td>
+                    <td><input type="text" name="anio" [(ngModel)]="mat.anio" class="form-control" autofocus required>
+                    </td>
+                    <td><input type="text" name="tipo" [(ngModel)]="mat.tipo" class="form-control" required></td>
+                    <td><input type="text" name="flagCorre" [(ngModel)]="mat.flagCorre" class=" form-control">
+                    </td>
+                    <td><button class="btn btn-info" (click)=modificarMateria(mat)>Modificar</button></td>
+                    <td><a class="btn btn-danger" (click)=eliminarMateria(mat)>Eliminar</a></td>
+                </tr>
+            </tbody>
+            <ng-template #fila>
+                <tbody>
+                    <tr>
+                        <td colspan="4">No hay mas filas</td>
+                    </tr>
+                </tbody>
+            </ng-template>
+        </table>
+    </div>
+
+    <form class="container" (submit)="agregarMateria()">
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label>ID</label>
+            <input type="number" class="form-control" name="idMat" placeholder="Ej: 5XXX" [(ngModel)]="mat.idMat"
+              required min="0">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label>Materia</label>
+            <input type="text" class="form-control" name="nombreMat" placeholder="Ej: Base de Datos" [(ngModel)]="mat.nombreMat"
+              required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-3 mb-3">
+            <label>AÑO</label>
+            <input type="number" class="form-control" placeholder="Ej: 1 o 2 o 3" name="anio" [(ngModel)]="mat.anio" required min="1" max="3">
+          </div>
+          <div class="col-md-3 mb-3">
+            <label>TIPO</label>
+            <input type="text" class="form-control" placeholder="Ej Anual/Cutrimestral" name="tipo" [(ngModel)]="mat.tipo"
+              required>
+          </div>
+
+          
+          <div class="col-md-4 mb-3">
+            <label>CORRELATIVA</label>
+            <input type="number" class="form-control" name="flagCorre" placeholder="Ej: 5XXX" [(ngModel)]="mat.flagCorre"
+              required>
+          </div>
+        </div>
+        <button class="btn btn-success" type="submit">Agregar Alumno</button>
+        <button class="btn btn-dark" style="margin-left: 2%;">Limpiar campos</button>
+      </form>
+      <div style="left:auto"> <br>
+        <a class="btn btn-dark" routerLink="/admin/home">Volver<span class="sr-only">(current)</span></a>
+      </div>
+
+</div>

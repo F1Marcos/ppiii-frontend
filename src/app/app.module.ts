@@ -19,6 +19,7 @@ import { WebTPComponent } from './components/web-tp/web-tp.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { AdminAbmAlumnoComponent } from './components/admin-abm-alumno/admin-abm-alumno.component';
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { AdminAbmMateriaComponent } from './components/admin-abm-materia/admin-abm-materia.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { AdminHomeComponent } from './components/admin-home/admin-home.component
     WebTPComponent,
     FilterPipe,
     AdminAbmAlumnoComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    AdminAbmMateriaComponent
   ],
   imports: [
     BrowserModule,

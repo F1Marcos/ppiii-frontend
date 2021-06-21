@@ -25,7 +25,6 @@ export class AdminAbmAlumnoComponent implements OnInit {
 
 
   ngOnInit(): void {
-
     this.usuariosService.listarUsuarios().subscribe(
       res => {
         console.log(res);
@@ -41,11 +40,7 @@ export class AdminAbmAlumnoComponent implements OnInit {
     );
   }
 
-
-  
   modificarUsuario(user:any){
-
-
     this.usuariosService.modificarUsuario(user).subscribe(
 			res => {
 			  let result:any=res;
