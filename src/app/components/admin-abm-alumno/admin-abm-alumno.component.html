@@ -1,20 +1,22 @@
-<div class="container" style="text-align: center; color: antiquewhite; margin-top: 2%; margin-bottom: 2%;">
-<h1>ABM USUARIOS</h1>
-</div>
+<div class="main">
+  <br>
+  <div class="container" style="text-align: center; color: cornsilk;">
+    <h1>ABM USUARIOS</h1>
+  </div>
 
-<tbody *ngIf="alert">
+  <tbody *ngIf="alert">
     <div id="aviso">
-    <div class="alert alert-success alert-dismissible">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong> Articulo Actualizado correctamente </strong>
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong> Articulo Actualizado correctamente </strong>
+      </div>
     </div>
-    </div>
-</tbody>
+  </tbody>
 
-<br>
-<div class="container">
-<table class="table table-dark table-hover">
-    <thead>
+  <br>
+  <div class="container">
+    <table class="table table-dark table-hover">
+      <thead>
         <th>ID</th>
         <th>Usuario</th>
         <th>Nombres</th>
@@ -25,72 +27,74 @@
         <th>Estado</th>
         <th>Modificar</th>
         <th>Eliminar</th>
-    </thead>
-    <tbody *ngIf="usuarios.length > 0; else fila">
+      </thead>
+      <tbody *ngIf="usuarios.length > 0; else fila">
         <tr *ngFor=" let user of usuarios">
-            <td><input type="number" name="id" [(ngModel)]="user.id" class=" form-control" readonly></td>
-            <td><input type="text" name="usuario" [(ngModel)]="user.usuario" class=" form-control"></td>
-            <td><input type="text" name="nombres" [(ngModel)]="user.nombres" class="form-control" autofocus required></td>
-            <td><input type="text" name="apellidos" [(ngModel)]="user.apellidos" class="form-control" required></td>
-            <td><input type="text" name="DNI" [(ngModel)]="user.dni" class=" form-control" readonly></td>
-            <td><input type="text" name="mail" [(ngModel)]="user.mail" class="form-control"  required></td>
-            <td><input type="number" name="rol" [(ngModel)]="user.rol" class="form-control" required></td>
-            <td><input type="number" name="estado" [(ngModel)]="user.estado" class="form-control" required ></td>
-            <td><button class="btn btn-info" (click)=modificarUsuario(user)>Modificar</button></td>
-            <td><a class="btn btn-danger" (click)=eliminarUsuario(user)>Eliminar</a></td>
+          <td><input type="number" name="id" [(ngModel)]="user.id" class=" form-control" readonly></td>
+          <td><input type="text" name="usuario" [(ngModel)]="user.usuario" class=" form-control"></td>
+          <td><input type="text" name="nombres" [(ngModel)]="user.nombres" class="form-control" autofocus required></td>
+          <td><input type="text" name="apellidos" [(ngModel)]="user.apellidos" class="form-control" required></td>
+          <td><input type="text" name="DNI" [(ngModel)]="user.dni" class=" form-control" readonly></td>
+          <td><input type="text" name="mail" [(ngModel)]="user.mail" class="form-control" required></td>
+          <td><input type="number" name="rol" [(ngModel)]="user.rol" class="form-control" required></td>
+          <td><input type="number" name="estado" [(ngModel)]="user.estado" class="form-control" required></td>
+          <td><button class="btn btn-info" (click)=modificarUsuario(user)>Modificar</button></td>
+          <td><a class="btn btn-danger" (click)=eliminarUsuario(user)>Eliminar</a></td>
         </tr>
-    </tbody>
-    <ng-template #fila>
+      </tbody>
+      <ng-template #fila>
         <tbody>
-            <tr>
-                <td colspan="4">No hay mas filas</td>
-            </tr>
+          <tr>
+            <td colspan="4">No hay mas filas</td>
+          </tr>
         </tbody>
-    </ng-template>
-</table>
-</div>
-
-
-
-
-<form class="container" (submit)="agregarAlumno()">
-  <div class="form-row">  
-    <div class="col-md-4 mb-3">
-      <label>Usuario</label>
-      <input type="text" class="form-control" name="usuario"  placeholder="Ej: jramirez" [(ngModel)]="use.usuario"  required>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label >Nombres</label>
-      <input type="text" class="form-control"  name="nombres" placeholder="Ej: Matias Marcos" [(ngModel)]="use.nombres" required>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label>Apellidos</label>
-      <input type="text" class="form-control"   name="apellidos" placeholder="Ej: Rivero Quispe" [(ngModel)]="use.apellidos" required>
-    </div>
+      </ng-template>
+    </table>
   </div>
-  <div class="form-row">
-    <div class="col-md-3 mb-3">
-      <label>DNI</label>
-      <input type="text" class="form-control" placeholder="Ej:400xxx32" name="dni" [(ngModel)]="use.dni" required>
+
+  <form class="container" (submit)="agregarAlumno()">
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label>Usuario</label>
+        <input type="text" class="form-control" name="usuario" placeholder="Ej: jramirez" [(ngModel)]="use.usuario"
+          required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label>Nombres</label>
+        <input type="text" class="form-control" name="nombres" placeholder="Ej: Matias Marcos" [(ngModel)]="use.nombres"
+          required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label>Apellidos</label>
+        <input type="text" class="form-control" name="apellidos" placeholder="Ej: Rivero Quispe"
+          [(ngModel)]="use.apellidos" required>
+      </div>
     </div>
-    <div class="col-md-3 mb-3">
-      <label>Mail</label>
-      <input type="text" class="form-control"  placeholder="Ej roberto@ifts11.com" name="mail" [(ngModel)]="use.mail" required>
-    </div>
-    <div class="col-md-3 mb-3">
-      <label>Rol</label>
-      <select type="text" class="custom-select mr-sm-2" name="rol" [(ngModel)]="use.rol" >
+    <div class="form-row">
+      <div class="col-md-3 mb-3">
+        <label>DNI</label>
+        <input type="text" class="form-control" placeholder="Ej:400xxx32" name="dni" [(ngModel)]="use.dni" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>Mail</label>
+        <input type="text" class="form-control" placeholder="Ej roberto@ifts11.com" name="mail" [(ngModel)]="use.mail"
+          required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>Rol</label>
+        <select type="text" class="custom-select mr-sm-2" name="rol" [(ngModel)]="use.rol">
           <option value="1">Admin</option>
           <option value="2">Alumno</option>
-        </select>  
+        </select>
       </div>
-  </div>  
-  <button class="btn btn-success" type="submit">Agregar Alumno</button>
-  <button class="btn btn-dark" style="margin-left: 2%;">Limpiar campos</button>
-</form>
+    </div>
+    <button class="btn btn-success" type="submit">Agregar Alumno</button>
+    <button class="btn btn-dark" style="margin-left: 2%;">Limpiar campos</button>
+  </form>
 
 
-<div style="left:auto"> <br>
-  <a class="btn btn-dark" routerLink="/admin/home">Volver<span class="sr-only">(current)</span></a>
+  <div style="left:auto"> <br>
+    <a class="btn btn-dark" routerLink="/admin/home">Volver<span class="sr-only">(current)</span></a>
+  </div>
+
 </div>
-

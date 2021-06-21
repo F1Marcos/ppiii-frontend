@@ -10,8 +10,8 @@ import { AdminAbmAlumnoComponent } from "./components/admin-abm-alumno/admin-abm
 import { UsuariosHomeComponent } from "./components/usuarios-home/usuarios-home.component";
 import { WebTPComponent } from "./components/web-tp/web-tp.component";
 import {AuthGuard} from './auth.guard';
-
-
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
 	{	
@@ -22,13 +22,11 @@ const routes: Routes = [
 	{	
 		path: 'usuarios/pizarra',
 		component: WebTPComponent,
-		
 	},
 	{	
 		path: 'admin/abmAlumn',
 		component: AdminAbmAlumnoComponent,
-		canActivate: [AuthGuard]
-		
+		canActivate: [AuthGuard,AdminGuard]
 	},
 	{
 		path: 'usuarios/listar',
@@ -63,6 +61,11 @@ const routes: Routes = [
 		path:'usuarios/listCorre',
 		component: AlumnoListarCorreComponent,
 		canActivate: [AuthGuard]
+	},
+	{
+		path:'admin/home',
+		component: AdminHomeComponent,
+		canActivate: [AuthGuard,AdminGuard]
 	}
 ];
 

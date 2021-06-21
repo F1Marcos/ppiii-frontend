@@ -40,9 +40,10 @@ export class UsuariosIngresarComponent implements OnInit {
         {
           case 1: 
           console.log('Entre al caso 1');
-          this.router.navigate(['usuarios/home']);
+          this.router.navigate(['admin/home']);
           break; //Aca va la ruta del admin pero como por ahora no existe .. 
-          case 2: this.router.navigate(['usuarios/home']);
+          case 2: 
+          this.router.navigate(['usuarios/home']);
           break;        
         }
     

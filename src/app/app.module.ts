@@ -18,6 +18,7 @@ import { AlumnoListarCorreComponent } from './components/alumno-listar-corre/alu
 import { WebTPComponent } from './components/web-tp/web-tp.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { AdminAbmAlumnoComponent } from './components/admin-abm-alumno/admin-abm-alumno.component';
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AdminAbmAlumnoComponent } from './components/admin-abm-alumno/admin-abm
     AlumnoListarCorreComponent,
     WebTPComponent,
     FilterPipe,
-    AdminAbmAlumnoComponent
+    AdminAbmAlumnoComponent,
+    AdminHomeComponent
   ],
   imports: [
     BrowserModule,
