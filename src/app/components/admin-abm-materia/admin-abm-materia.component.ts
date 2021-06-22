@@ -78,6 +78,7 @@ export class AdminAbmMateriaComponent implements OnInit {
 			  let result:any=res;
 			  console.log('RESPUESTA DEL BACKEN STATUS:');
 			  console.log(result);
+        this.limpiarTodo();
         this.ngOnInit();
 			},
 			err => {

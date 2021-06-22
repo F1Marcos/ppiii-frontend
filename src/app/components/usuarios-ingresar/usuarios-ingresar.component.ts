@@ -20,6 +20,7 @@ export class UsuariosIngresarComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    
   }
 
   ingresar(){
@@ -36,6 +37,7 @@ export class UsuariosIngresarComponent implements OnInit {
         localStorage.setItem('dni',result.dni);
         var nombreApellido = result.nombre + " "+ result.apellido;
         localStorage.setItem('nombreApellido', nombreApellido);
+        this.usuariosService.logued$.emit();
         switch(result.rol)
         {
           case 1: 
@@ -46,7 +48,7 @@ export class UsuariosIngresarComponent implements OnInit {
           this.router.navigate(['usuarios/home']);
           break;        
         }
-    
+        
       },
       err => {
         console.log(err.error.message);

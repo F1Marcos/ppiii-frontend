@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuarioModel';
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class UsuariosService{
 	 API_URI = 'http://localhost:3000/user';
 	//API_URI = 'https://ppiii-demo1.herokuapp.com/user';
+
+	logued$ = new EventEmitter<string>();
 	
 	constructor(private http: HttpClient, private router:Router) { }
 	
@@ -45,7 +47,8 @@ export class UsuariosService{
 	}
 
 	logOut() {
-		localStorage.removeItem('token');
+		//localStorage.removeItem('token');
+		localStorage.clear();
 		this.router.navigate(['usuarios/principal']);
 	}
 	getToken() {//Obtenemos el token que despues enviara el interceptor x cada req

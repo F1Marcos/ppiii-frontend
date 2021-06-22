@@ -22,7 +22,7 @@ const routes: Routes = [
 		pathMatch: 'full'
 	},
 	{	
-		path: 'usuarios/pizarra',
+		path: 'usuarios/web-tp',
 		component: WebTPComponent,
 	},
 	{	
@@ -43,11 +43,13 @@ const routes: Routes = [
 		path: 'usuarios/registrar',
 		component: UsuariosRegistrarComponent,
 	},
+	/* SIN USO:
 	{
 		path: 'usuarios/principal',
 		component: UsuariosPrincipalComponent,
 		canActivate: [AuthGuard]
 	},
+	*/
 	{
 		path:'usuarios/home',
 		component: UsuariosHomeComponent,

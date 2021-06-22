@@ -1,57 +1,62 @@
-<p>admin-abm works!</p>
+<div class="main" style="color: white;">
+<br>
+    <h1 style="text-align: center;">PUNTOS PARA TP WEB</h1>
 
-<tbody *ngIf="alert">
-    <div id="aviso">
-    <div class="alert alert-success alert-dismissible">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong> Comentario actualizado correctamente </strong>
-    </div>
-    </div>
-</tbody>
 
-<br><div class="container">
-    <div style="margin-bottom: 1%;">
-    Filtrar por comentario:   
-<input style="margin-left: 1%;" type="text" name="filterPost" [(ngModel)]="filterPost" autofocus>
-</div>
-<table class="table table-dark table-hover">
-    <thead>
-        <th>ID</th>
-        <th>Comentario</th>
-        <th>Imagen</th>
-    </thead>
-    <tbody *ngIf="comentarios.length > 0; else fila ">
-        <tr *ngFor=" let coment of comentarios | filter:filterPost">
-            <td>{{coment.idcoment}}</td>
-            <td>{{coment.comentario}}</td>
-            <td><img src={{coment.imagenURL}} alt={{coment.imagenURL}} style="width:100px;height:50px;"> </td>
-        </tr>
+    <tbody *ngIf="alert">
+        <div id="aviso">
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong> Comentario actualizado correctamente </strong>
+            </div>
+        </div>
     </tbody>
-    <ng-template #fila>
-        <tbody>
-            <tr>
-                <td colspan="4">No hay comentarios</td>
-            </tr>
-        </tbody>
-    </ng-template>
-</table>
 
-<form (submit)="agregarComentario()">
-    <div style="left:auto"> <br>
-        <div style= "left: auto;">
-            <h3>Agregar comentario:</h3>
-        </div> 
-        <div class="form-group">
-        Comentario:   
-        <input type="text" name="comentario" [(ngModel)]="com.comentario" autofocus>
-        Imagen: <input type="file" name="myImage" accept="image/png, image/jpeg" [(ngModel)]="com.img"/>
-        <button class="btn btn-success" style="margin-left: 1%;">Enviar</button>
+    <br>
+    <div class="container">
+        <div style="margin-bottom: 1%;">
+            Filtrar por comentario:
+            <input style="margin-left: 1%;" type="text" name="filterPost" [(ngModel)]="filterPost" autofocus>
+        </div>
+        <table class="table table-dark table-hover">
+            <thead>
+                <th>ID</th>
+                <th>Comentario</th>
+                <th>Imagen</th>
+            </thead>
+            <tbody *ngIf="comentarios.length > 0; else fila ">
+                <tr *ngFor=" let coment of comentarios | filter:filterPost">
+                    <td>{{coment.idcoment}}</td>
+                    <td>{{coment.comentario}}</td>
+                    <td><img src={{coment.imagenURL}} alt={{coment.imagenURL}} style="width:100px;height:50px;"> </td>
+                </tr>
+            </tbody>
+            <ng-template #fila>
+                <tbody>
+                    <tr>
+                        <td colspan="4">No hay comentarios</td>
+                    </tr>
+                </tbody>
+            </ng-template>
+        </table>
+
+        <form (submit)="agregarComentario()">
+            <div style="left:auto"> <br>
+                <div style="left: auto;">
+                    <h3>Agregar comentario:</h3>
+                </div>
+                <div class="form-group">
+                    Comentario:
+                    <input type="text" name="comentario" [(ngModel)]="com.comentario" autofocus>
+                    Imagen: <input type="file" name="myImage" accept="image/png, image/jpeg" [(ngModel)]="com.img" />
+                    <button class="btn btn-success" style="margin-left: 1%;">Enviar</button>
+                </div>
+            </div>
+        </form>
+
+        <div style="left:auto"> <br>
+            <h3>Volver:</h3>
+            <a class="btn btn-info" routerLink="/usuarios/home">Volver<span class="sr-only">(current)</span></a>
         </div>
     </div>
-</form>
-
-<div style="left:auto"> <br>
-    <h3>Volver:</h3>
-    <a class="btn btn-info" routerLink="/usuarios/home">Volver<span class="sr-only">(current)</span></a>
-</div>
 </div>
