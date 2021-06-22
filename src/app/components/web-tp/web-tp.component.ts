@@ -12,7 +12,7 @@ export class WebTPComponent implements OnInit {
   filterPost="";
   com={
     comentario:"",
-    img:""
+    imagenURL:""
   }
   alert:boolean=false;
   constructor(private usuariosService:UsuariosService) { }
@@ -29,12 +29,16 @@ export class WebTPComponent implements OnInit {
   }
 
   agregarComentario(){
+    console.log(this.com);
     this.usuariosService.agregarComentarios(this.com).subscribe(
 			res => { 
+        console.log("hola");
         this.ngOnInit();
       },
 			err => console.log(err)
 		)
   }
+
+
 
 }

@@ -77,10 +77,14 @@ export class UsuariosService{
 	agregarComentarios(com: any) {
 		//para expandir/especializar las variables usamos ` y no ' o "  
 		//Las variables salen pintadas de otro color diferente del de texto
-		console.log(com);
-		return this.http.get(`${this.API_URI}/agregarComent`);
+		console.log("entro a service");
+		return this.http.post(`${this.API_URI}/agregarComent`, com);
 		//si no funciona usar 
 		//return this.http.get(this.API_URI+'/list');
+	}
+	modificarComentario(com: any) {
+		console.log('FE: Metodo servicio Modificar Comentario:')
+		return this.http.post(`${this.API_URI}/modificarComent`, com);
 	}
 
 	listarUsuarios() {

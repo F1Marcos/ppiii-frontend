@@ -17,7 +17,8 @@ export class AdminAbmAlumnoComponent implements OnInit {
     apellidos:"",
     dni:"",
     mail:"",
-    rol:""
+    rol:"",
+    password:""
   };
   errorUsuario=0;
   errorNombre=0;
@@ -110,7 +111,7 @@ export class AdminAbmAlumnoComponent implements OnInit {
   }
 
   verificarUsuario(nombre:string):number {
-    const patron=/^[a-zA-Z]+$/;
+    const patron=/^[a-zA-Z0-9]+$/;
     if(nombre.length==0)
       return 1;
     if(nombre.length>20)
@@ -120,7 +121,7 @@ export class AdminAbmAlumnoComponent implements OnInit {
     return 0;
   }
   verificarNombre(nombre:string):number {
-    const patron=/^\b(?!.*?\s{2})[A-Za-z ]{1,50}\b$/;
+    const patron=/^\b(?!.*?\s{2})[A-Za-z ]{1,20}\b$/;
     console.log(nombre);
     if(nombre.length==0)
       return 1;
@@ -131,7 +132,7 @@ export class AdminAbmAlumnoComponent implements OnInit {
     return 0;
   }
   verificarApellido(apellido:string):number {
-    const patron=/^\b(?!.*?\s{2})[A-Za-z ]{1,50}\b$/;
+    const patron=/^\b(?!.*?\s{2})[A-Za-z ]{1,30}\b$/;
     if(apellido.length==0)
       return 1;
     if(apellido.length>20)
@@ -216,7 +217,8 @@ export class AdminAbmAlumnoComponent implements OnInit {
       apellidos:"",
       dni:"",
       mail:"",
-      rol:""
+      rol:"",
+      password:""
     };
     this.errorUsuario=0;
     this.errorNombre=0;

@@ -14,13 +14,14 @@
   </tbody>
 
   <br>
-  <div class="container">
+  <div class="container-fluid">
     <table class="table table-dark table-hover">
       <thead>
         <th>ID</th>
         <th>Usuario</th>
         <th>Nombres</th>
         <th>Apellidos</th>
+        <th>Password</th>
         <th>DNI</th>
         <th>Mail</th>
         <th>Rol</th>
@@ -33,6 +34,7 @@
           <td><input type="number" name="id" [(ngModel)]="user.id" class=" form-control" readonly></td>
           <td><input type="text" name="usuario" [(ngModel)]="user.usuario" class=" form-control"></td>
           <td><input type="text" name="nombres" [(ngModel)]="user.nombres" class="form-control" autofocus required></td>
+          <td><input type="text" name="password" [(ngModel)]="user.password" class="form-control" autofocus required></td>
           <td><input type="text" name="apellidos" [(ngModel)]="user.apellidos" class="form-control" required></td>
           <td><input type="text" name="DNI" [(ngModel)]="user.dni" class=" form-control" readonly></td>
           <td><input type="text" name="mail" [(ngModel)]="user.mail" class="form-control" required></td>
@@ -111,6 +113,10 @@
           <div *ngSwitchCase="1">Seleccione una opción</div>
           <div *ngSwitchCase="2">Error inesperado. Seleccione una opción dentro de las validas, si el error persiste recargue la pagina</div>
       </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>Password (opcional)</label>
+        <input type="text" class="form-control" name="password" placeholder="Ej: hola123" [(ngModel)]="use.password" required>
       </div>
     </div>
     <button class="btn btn-success" type="submit" (click)="verificarForm()">Agregar Alumno</button>
