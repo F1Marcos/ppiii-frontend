@@ -14,9 +14,10 @@ export class WebTPComponent implements OnInit {
   comentarios: any = [];
 
   filterPost = "";
+  
   com = {
     comentario: "",
-    file: File
+    imagenURL: ""
   }
   alert: boolean = false;
 
@@ -48,8 +49,6 @@ export class WebTPComponent implements OnInit {
     }
   }
 
-
-
   agregarComentario() {
     console.log('IMPRIMO LO que tengo en el bloque COM');
     console.log('IMPRIMO LO que tengo en el bloque COM');
@@ -57,7 +56,7 @@ export class WebTPComponent implements OnInit {
     console.log('IMPRIMO LO que tengo en el bloque COM');
     console.log('IMPRIMO LO que tengo en el bloque COM');
     console.log(this.com);
-    console.log(this.com.file);
+    console.log(this.com.imagenURL);
     this.usuariosService.agregarComentarios(this.com).subscribe(
       res => {
         console.log("agregarComentario");
@@ -67,7 +66,7 @@ export class WebTPComponent implements OnInit {
     )
   }
 
-
+  // LINK https://github.com/funOfheuristic/fileUpload/blob/master/fileUpload_be/app.js
   selectImage(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
