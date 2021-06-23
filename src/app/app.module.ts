@@ -20,6 +20,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { AdminAbmAlumnoComponent } from './components/admin-abm-alumno/admin-abm-alumno.component';
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { AdminAbmMateriaComponent } from './components/admin-abm-materia/admin-abm-materia.component';
+import { AngularFileUploaderModule } from 'angular-file-uploader';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AdminAbmMateriaComponent } from './components/admin-abm-materia/admin-a
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularFileUploaderModule
   ],
   providers: [
     UsuariosService,
