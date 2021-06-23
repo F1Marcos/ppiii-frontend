@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios.service';
 
+
+
 @Component({
   selector: 'app-web-tp',
   templateUrl: './web-tp.component.html',
@@ -12,8 +14,14 @@ export class WebTPComponent implements OnInit {
   filterPost="";
   com={
     comentario:"",
-    imagenURL:""
+    imagenURL:File
   }
+  comen:any=[
+    "idcoment",
+    "comentario",
+    "imagenURL"
+
+  ];
   alert:boolean=false;
   constructor(private usuariosService:UsuariosService) { }
 
@@ -23,13 +31,14 @@ export class WebTPComponent implements OnInit {
     this.usuariosService.listarComentarios().subscribe(
 			res => { 
         this.comentarios = res;
+       
       },
 			err => console.log(err)
 		)
   }
 
   agregarComentario(){
-    console.log(this.com);
+    console.log(this.com.imagenURL);
     this.usuariosService.agregarComentarios(this.com).subscribe(
 			res => { 
         console.log("hola");
@@ -39,6 +48,8 @@ export class WebTPComponent implements OnInit {
 		)
   }
 
-
-
 }
+
+
+
+
