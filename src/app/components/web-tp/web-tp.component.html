@@ -28,7 +28,7 @@
                 <tr *ngFor=" let coment of comentarios | filter:filterPost">
                     <td>{{coment.idcoment}}</td>
                     <td>{{coment.comentario}}</td>
-                    <td><img src={{coment.imagenURL}} alt={{coment.imagenURL}} style="width:100px;height:50px;"> </td>
+                    <td><img src="http://localhost:3000/user/uploads/{{coment.imagenURL}}" alt={{coment.imagenURL}} style="width:100px;height:50px;"> </td>
                 </tr>
             </tbody>
             <ng-template #fila>
@@ -40,7 +40,7 @@
             </ng-template>
         </table>
 
-        <form (submit)="agregarComentario()">
+        <form (submit)="onSubmit()">
             <div style="left:auto"> <br>
                 <div style="left: auto;">
                     <h3>Agregar comentario:</h3>
@@ -48,7 +48,7 @@
                 <div class="form-group">
                     Comentario:
                     <input type="text" name="comentario" [(ngModel)]="com.comentario" autofocus>
-                    Imagen: <input type="file" name="imagenURL" accept="image/png, image/jpeg" [(ngModel)]="com.imagenURL" />
+                    Imagen: <input type="file" name="imagenURL" accept="image/png, image/jpeg" (change)="selectImage($event)" />
                     <button class="btn btn-success" style="margin-left: 1%;">Enviar</button>
                 </div>
             </div>

@@ -80,7 +80,6 @@ export class UsuariosService{
 		console.log("entro a service");
 		return this.http.post(`${this.API_URI}/agregarComent`, com);
 		//si no funciona usar 
-		//return this.http.get(this.API_URI+'/list');
 	}
 	modificarComentario(com: any) {
 		console.log('FE: Metodo servicio Modificar Comentario:')
