@@ -17,7 +17,7 @@ export class AdminAbmMateriaComponent implements OnInit {
     tipo:"",
     flagCorre:0
   };
-
+  filterPost="";
   errorID=0;
   errorNombre=0;
   errorAnio=0;

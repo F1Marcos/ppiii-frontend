@@ -20,6 +20,8 @@ export class AdminAbmAlumnoComponent implements OnInit {
     rol:"",
     password:""
   };
+  filterPost = "";
+
   errorUsuario=0;
   errorNombre=0;
   errorApellido=0;

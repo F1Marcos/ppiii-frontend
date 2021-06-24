@@ -20,6 +20,8 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { AdminAbmAlumnoComponent } from './components/admin-abm-alumno/admin-abm-alumno.component';
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { AdminAbmMateriaComponent } from './components/admin-abm-materia/admin-abm-materia.component';
+import { MateriasFilterPipe } from './pipes/materias-filter.pipe';
+import { UsuariosFilterPipe } from './pipes/usuarios-filter.pipe';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { AdminAbmMateriaComponent } from './components/admin-abm-materia/admin-a
     FilterPipe,
     AdminAbmAlumnoComponent,
     AdminHomeComponent,
-    AdminAbmMateriaComponent
+    AdminAbmMateriaComponent,
+    MateriasFilterPipe,
+    UsuariosFilterPipe
   ],
   imports: [
     BrowserModule,

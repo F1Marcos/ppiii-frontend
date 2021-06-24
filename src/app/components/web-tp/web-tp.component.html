@@ -23,12 +23,14 @@
                 <th>ID</th>
                 <th>Comentario</th>
                 <th>Imagen</th>
+                <th>Fecha creacion</th>
             </thead>
             <tbody *ngIf="comentarios.length > 0; else fila ">
                 <tr *ngFor=" let coment of comentarios | filter:filterPost">
                     <td>{{coment.idcoment}}</td>
                     <td>{{coment.comentario}}</td>
                     <td><img src="http://localhost:3000/user/uploads/{{coment.imagenURL}}" alt={{coment.imagenURL}} style="width:100px;height:50px;"> </td>
+                    <td>{{coment.fechaCreacion}}</td>
                 </tr>
             </tbody>
             <ng-template #fila>
@@ -48,7 +50,7 @@
                 <div class="form-group">
                     Comentario:
                     <input type="text" name="comentario" [(ngModel)]="com.comentario" autofocus>
-                    Imagen: <input type="file" name="imagenURL" accept="image/png, image/jpeg" (change)="selectImage($event)" />
+                    Imagen: <input type="file" name="image" accept="image/png, image/jpeg" (change)="selectImage($event)" />
                     <button class="btn btn-success" style="margin-left: 1%;">Enviar</button>
                 </div>
             </div>

@@ -32,6 +32,7 @@ ngOnInit(): void {
   this.usuariosService.listarComentarios().subscribe(
     res => {
       this.comentarios = res;
+
     },
     err => console.log(err)
   )
@@ -74,6 +75,7 @@ selectImage(event: any) {
 }
 
 onSubmit() {
+  console.log(this.images);
   const formData = new FormData();
   formData.append('file', this.images);
   console.log(formData);
@@ -82,7 +84,7 @@ onSubmit() {
   console.log(formData);
   this.http.post<any>('http://localhost:3000/user/uploads', formData).subscribe(
     (res) => {
-      this.com.imagenURL=res.filename;
+      this.com.imagenURL=res.file;
       console.log(this.com);
       this.agregarComentario();
     },
