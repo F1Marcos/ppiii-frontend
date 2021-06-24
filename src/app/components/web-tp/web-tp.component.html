@@ -1,16 +1,8 @@
+<div style="height: 100%;">
 <div class="main" style="color: white; height: 100%;">
 <br>
     <h1 style="text-align: center;">PUNTOS PARA TP WEB</h1>
 
-
-    <tbody *ngIf="alert">
-        <div id="aviso">
-            <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong> Comentario actualizado correctamente </strong>
-            </div>
-        </div>
-    </tbody>
 
     <br>
     <div class="container">
@@ -29,7 +21,7 @@
                 <tr *ngFor=" let coment of comentarios | filter:filterPost">
                     <td>{{coment.idcoment}}</td>
                     <td>{{coment.comentario}}</td>
-                    <td><img src="http://localhost:3000/user/uploads/{{coment.imagenURL}}" alt={{coment.imagenURL}} style="width:100px;height:50px;"> </td>
+                    <td><img src="https://ppiii-demo1.herokuapp.com/user/uploads/{{coment.imagenURL}}" alt={{coment.imagenURL}} style="width:100px;height:50px;"> </td>
                     <td>{{coment.fechaCreacion}}</td>
                 </tr>
             </tbody>
@@ -61,4 +53,5 @@
             <a class="btn btn-info" routerLink="/usuarios/home">Volver<span class="sr-only">(current)</span></a>
         </div>
     </div>
+</div>
 </div>
