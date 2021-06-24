@@ -1,21 +1,21 @@
+
+
 <div class="main">
   <br>
-  <div class="container" style="text-align: center; color: cornsilk;">
+  <div class="container" style="text-align: center; color: white;">
     <h1>ABM USUARIOS</h1>
   </div>
 
-  <tbody *ngIf="alert">
-    <div id="aviso">
-      <div class="alert alert-success alert-dismissible">
+    <div class="container" *ngIf="alert" id="aviso" style="text-align: center; align-items: center; width: 25%;">
+      <div class="alert alert-success alert-dismissible" style="text-align: center; align-items: center;">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong> Articulo Actualizado correctamente </strong>
+        <strong>{{mensaje}} </strong>
       </div>
     </div>
-  </tbody>
 
   <div class="container-fluid">
     <div style="margin-bottom: 1%;color:white">
-      Filtrar por nombre usuario:
+      <label style="font-size: large;">Filtrar por usuario :</label> 
       <input style="margin-left: 1%;" type="text" name="filterPost" [(ngModel)]="filterPost" autofocus>
   </div>
     <table class="table table-dark table-hover">

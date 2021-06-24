@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from '../../services/usuarios.service';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-usuarios-home',
@@ -9,9 +11,17 @@ export class UsuariosHomeComponent implements OnInit {
 
   usuario = "";
 
-  constructor() { }
+  constructor(private usuariosService:UsuariosService,private router:Router) { }
 
   ngOnInit(): void {
+    this.usuariosService.home().subscribe(
+      res => {
+       
+      },
+      err => {
+         
+      }
+    );
     this.usuario = localStorage.nombreApellido;
   }
 

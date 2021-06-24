@@ -10,6 +10,7 @@ export class AlumnoListarAprobComponent implements OnInit {
 
   constructor(private usuariosService:UsuariosService) { }
   materias:any = [];
+  filterPost="";
   ngOnInit(): void {
 
     this.usuariosService.listarMateriasAprobadas(localStorage.dni).subscribe(

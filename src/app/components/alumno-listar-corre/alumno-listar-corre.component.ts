@@ -9,6 +9,7 @@ import { UsuariosService } from '../../services/usuarios.service';
 export class AlumnoListarCorreComponent implements OnInit {
 
   materias:any = [];
+  filterPost="";
   constructor(private usuariosService:UsuariosService) { }
 
   ngOnInit(): void {

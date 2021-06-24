@@ -17,7 +17,8 @@ export class WebTPComponent implements OnInit {
   
   com = {
     comentario: "",
-    imagenURL: ""
+    imagenURL: "",
+    usuario:""
   }
   alert: boolean = false;
 
@@ -55,6 +56,9 @@ agregarComentario() {
   console.log('IMPRIMO LO que tengo en el bloque COM');
   console.log('IMPRIMO LO que tengo en el bloque COM');
   console.log('IMPRIMO LO que tengo en el bloque COM');
+  console.log(this.com);
+  this.com.usuario= localStorage.nombreApellido;
+
   console.log(this.com);
 
   this.usuariosService.agregarComentarios(this.com).subscribe(

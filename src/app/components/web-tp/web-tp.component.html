@@ -1,5 +1,4 @@
-<div style="height: 100%;">
-<div class="main" style="color: white; height: 100%;">
+<div class="main" style="color: white;">
 <br>
     <h1 style="text-align: center;">PUNTOS PARA TP WEB</h1>
 
@@ -13,6 +12,7 @@
         <table class="table table-dark table-hover">
             <thead>
                 <th>ID</th>
+                <th>Usuario</th>
                 <th>Comentario</th>
                 <th>Imagen</th>
                 <th>Fecha creacion</th>
@@ -20,6 +20,7 @@
             <tbody *ngIf="comentarios.length > 0; else fila ">
                 <tr *ngFor=" let coment of comentarios | filter:filterPost">
                     <td>{{coment.idcoment}}</td>
+                    <td>{{coment.usuario}}</td>
                     <td>{{coment.comentario}}</td>
                     <td><img src="https://ppiii-demo1.herokuapp.com/user/uploads/{{coment.imagenURL}}" alt={{coment.imagenURL}} style="width:100px;height:50px;"> </td>
                     <td>{{coment.fechaCreacion}}</td>
@@ -53,5 +54,4 @@
             <a class="btn btn-info" routerLink="/usuarios/home">Volver<span class="sr-only">(current)</span></a>
         </div>
     </div>
-</div>
 </div>

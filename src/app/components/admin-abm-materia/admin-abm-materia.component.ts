@@ -17,6 +17,9 @@ export class AdminAbmMateriaComponent implements OnInit {
     tipo:"",
     flagCorre:0
   };
+  materia="";
+  aprob="";
+  mensaje="";
   filterPost="";
   errorID=0;
   errorNombre=0;
@@ -25,6 +28,10 @@ export class AdminAbmMateriaComponent implements OnInit {
   alert:boolean=false;
 
   ngOnInit(): void {
+    setTimeout(()=>{                           
+      this.alert = false;
+      this.mensaje="";
+ }, 3000);
     this.usuariosService.listarMaterias().subscribe(
       res => {
         console.log("RES DE SERVICE");
@@ -45,9 +52,13 @@ export class AdminAbmMateriaComponent implements OnInit {
 			  let result:any=res;
 			  console.log('RESPUESTA DEL BACKEN STATUS:');
 			  console.log(result);
+        this.alert=true;
+        this.mensaje="Se pudo modificar la materia";
         this.ngOnInit();
 			},
 			err => {
+        this.alert=true;
+        this.mensaje="No se pudo modificar la materia";
 			  console.log(err.error);}
 		  );
   }
@@ -56,16 +67,19 @@ export class AdminAbmMateriaComponent implements OnInit {
     console.log('FE: Entre metod post eliminar materia!');
     console.log(mat);
     if(confirm("Esta seguro que desea eliminar al materia "+mat.nombreMat+" esto puede causar problemas de haber registros en la BD")) {
-      console.log("Implement delete functionality here");
     
     this.usuariosService.eliminarMateria(mat.idMat).subscribe(
       res => {
         let result:any=res;
         console.log(result.message);
         console.log(result);
+        this.alert=true;
+        this.mensaje="Se elimino la materia correctamente";
         this.ngOnInit();
       },
       err => {
+        this.alert=true;
+        this.mensaje="No se pudo eliminar la materia";
         console.log(err.error.message);     
       }
     );
@@ -78,13 +92,36 @@ export class AdminAbmMateriaComponent implements OnInit {
 			  let result:any=res;
 			  console.log('RESPUESTA DEL BACKEN STATUS:');
 			  console.log(result);
+        this.alert=true;
+        this.mensaje="Se pudo agrego la materia correctamente";
         this.limpiarTodo();
         this.ngOnInit();
 			},
 			err => {
+        this.alert=true;
+        this.mensaje="No se pudo agregar la materia";
 			  console.log(err.error);}
 		  );
   }
+
+  agregarCorrelativa(){
+    this.usuariosService.agregarCorrelativa(this.materia,this.aprob).subscribe(
+			res => {
+			  let result:any=res;
+			  console.log('RESPUESTA DEL BACKEN STATUS:');
+			  console.log(result);
+        this.alert=true;
+        this.mensaje="Se pudo agrego la correlativa correctamente";
+        this.limpiarTodo();
+        this.ngOnInit();
+			},
+			err => {
+        this.alert=true;
+        this.mensaje="No se pudo agregar la materia";
+			  console.log(err.error);}
+		  );
+  }
+
 
   verificarForm():boolean{
     this.errorID=this.verificarID(this.mat.idMat);
@@ -98,7 +135,7 @@ export class AdminAbmMateriaComponent implements OnInit {
   }
 
   verificarID(id:string):number {
-    const patron=/^[1-3]*$/;
+    const patron=/[1-9]/;
     if(id.length==0)
       return 1;
     if(id.length>6)
@@ -108,7 +145,7 @@ export class AdminAbmMateriaComponent implements OnInit {
     return 0;
   }
   verificarNombre(nombre:string):number {
-    const patron=/^\b(?!.*?\s{2})[A-Za-z ]{1,50}\b$/;
+    const patron=/[A-Za-z0-9]/;
     console.log(nombre);
     if(nombre.length==0)
       return 1;
