@@ -57,8 +57,8 @@ export class AdminAbmAlumnoComponent implements OnInit {
     this.usuariosService.modificarUsuario(user).subscribe(
 			res => {
 			  let result:any=res;
-			  console.log('RESPUESTA DEL BACKEN STATUS:');
-			  console.log(result);
+        this.alert=true;
+        this.mensaje="Se modifico el usuario correctamente";
         this.ngOnInit();
 			  // this.router.navigate(['usuarios/listar']);
 			},
