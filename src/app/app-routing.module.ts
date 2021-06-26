@@ -13,6 +13,7 @@ import {AuthGuard} from './auth.guard';
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { AdminGuard } from './admin.guard';
 import { AdminAbmMateriaComponent } from "./components/admin-abm-materia/admin-abm-materia.component";
+import { ActivadoComponent } from './components/activado/activado.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,10 @@ const routes: Routes = [
 	{	
 		path: 'usuarios/web-tp',
 		component: WebTPComponent,
+	},
+	{	
+		path: 'usuarios/activado/:id',
+		component: ActivadoComponent,
 	},
 	{	
 		path: 'admin/abmAlumn',

@@ -1,4 +1,4 @@
-<div class="main" style="color: white;">
+<div class="main" style="color: white; height: auto;">
 <br>
     <h1 style="text-align: center;">PUNTOS PARA TP WEB</h1>
 
@@ -21,8 +21,8 @@
                 <tr *ngFor=" let coment of comentarios | filter:filterPost">
                     <td>{{coment.idcoment}}</td>
                     <td>{{coment.usuario}}</td>
-                    <td>{{coment.comentario}}</td>
-                    <td><img src="https://ppiii-demo1.herokuapp.com/user/uploads/{{coment.imagenURL}}" alt={{coment.imagenURL}} style="width:100px;height:50px;"> </td>
+                    <td [innerHTML]="coment.comentario">{{coment.comentario}}</td>
+                    <td><img src="http://localhost:3000/user/uploads/{{coment.imagenURL}}" alt={{coment.imagenURL}} style="width:100px;height:50px;"> </td>
                     <td>{{coment.fechaCreacion}}</td>
                 </tr>
             </tbody>

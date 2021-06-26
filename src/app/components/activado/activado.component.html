@@ -1,0 +1,38 @@
+<div class="main">
+<div class="container">
+	<div class="avatar">
+		<a *ngIf="!error"	>
+			<img src="data:image/png;base64,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" alt="Activado" />
+		</a>
+		<a *ngIf="error">
+			<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Warning.svg/832px-Warning.svg.png" alt="Error" />
+		</a>
+	</div>
+	<tbody *ngIf="!error">
+	<div class="content">
+        <div style="color: white;">
+		<h1 style="color: white;">Activacion correcta del usuario {{usuario}}</h1>
+        <br>
+		<p style="color: white; font-size: larger">Ingrese a la aplicacion desde el siguiente link <a routerLink="/usuarios/ingresar" style="color:white;"><u>Libreta digital</u></a></p>
+    </div>
+		<p style="font-size: larger;color: white;">BY: Grupo 7</p>
+	</div>
+	</tbody>
+
+	<tbody *ngIf="error">
+		<div class="content">
+			<div style="color: white;">
+			<h1 style="color: white;">No se pudo activar el usuario {{usuario}}</h1>
+			<br>
+			<p style="color: white; font-size: larger">Si usted ya esta activado ingrese desde el siguiente link <a routerLink="/usuarios/ingresar" style="color:white;"><u>Libreta digital.</u></a>
+			 Si usted no esta registrado consulte a el instituto para su activación
+			</p>
+		</div>
+			<p>
+				<span><a href="https://ifts11.com/" target="_blank"><i class="fa fa-twitter"></i></a></span>
+			</p>
+			<p style="font-size: larger;color: white;">BY: Grupo 7</p>
+		</div>
+		</tbody>
+</div>
+</div>

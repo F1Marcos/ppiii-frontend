@@ -32,6 +32,7 @@ ngOnInit(): void {
 
   this.usuariosService.listarComentarios().subscribe(
     res => {
+      
       this.comentarios = res;
 
     },
@@ -57,6 +58,10 @@ agregarComentario() {
   console.log('IMPRIMO LO que tengo en el bloque COM');
   console.log('IMPRIMO LO que tengo en el bloque COM');
   console.log(this.com);
+  this.com.comentario=this.com.comentario.replace(/<(?!\/?b>|\/?strong>)[^>]+>/g, '');
+  console.log("imprimo dsp de parcear");
+  console.log(this.com);
+
   this.com.usuario= localStorage.nombreApellido;
 
   console.log(this.com);
@@ -79,6 +84,7 @@ selectImage(event: any) {
 }
 
 onSubmit() {
+
   console.log(this.images);
   const formData = new FormData();
   formData.append('file', this.images);
