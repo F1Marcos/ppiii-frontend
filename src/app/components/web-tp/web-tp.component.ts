@@ -58,6 +58,7 @@ agregarComentario() {
   console.log('IMPRIMO LO que tengo en el bloque COM');
   console.log('IMPRIMO LO que tengo en el bloque COM');
   console.log(this.com);
+  // ACA filtramos los TAG HTML menos los pedidos:
   this.com.comentario=this.com.comentario.replace(/<(?!\/?b>|\/?strong>)[^>]+>/g, '');
   console.log("imprimo dsp de parcear");
   console.log(this.com);
