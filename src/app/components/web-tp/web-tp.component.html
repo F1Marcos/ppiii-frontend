@@ -43,7 +43,7 @@
                 <div class="form-group">
                     Comentario:
                     <input type="text" name="comentario" [(ngModel)]="com.comentario" autofocus>
-                    Imagen: <input type="file" name="image" accept="image/png, image/jpeg" (change)="selectImage($event)" />
+                    Imagen: <input type="file" name="image"  (change)="selectImage($event)" />
                     <button class="btn btn-success" style="margin-left: 1%;">Enviar</button>
                 </div>
             </div>

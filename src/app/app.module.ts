@@ -23,6 +23,7 @@ import { AdminAbmMateriaComponent } from './components/admin-abm-materia/admin-a
 import { MateriasFilterPipe } from './pipes/materias-filter.pipe';
 import { UsuariosFilterPipe } from './pipes/usuarios-filter.pipe';
 import { ActivadoComponent } from './components/activado/activado.component';
+import { AdminActaCursadaComponent } from './components/admin-acta-cursada/admin-acta-cursada.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ActivadoComponent } from './components/activado/activado.component';
     AdminAbmMateriaComponent,
     MateriasFilterPipe,
     UsuariosFilterPipe,
-    ActivadoComponent
+    ActivadoComponent,
+    AdminActaCursadaComponent
   ],
   imports: [
     BrowserModule,
