@@ -14,6 +14,7 @@ import { AdminHomeComponent } from './components/admin-home/admin-home.component
 import { AdminGuard } from './admin.guard';
 import { AdminAbmMateriaComponent } from "./components/admin-abm-materia/admin-abm-materia.component";
 import { ActivadoComponent } from './components/activado/activado.component';
+import { AdminActaCursadaComponent } from './components/admin-acta-cursada/admin-acta-cursada.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,10 @@ const routes: Routes = [
 		path: 'admin/abmAlumn',
 		component: AdminAbmAlumnoComponent,
 		canActivate: [AuthGuard,AdminGuard]
+	},
+	{	
+		path: 'admin/actaCursada',
+		component: AdminActaCursadaComponent,
 	},
 	{
 		path: 'usuarios/listar',

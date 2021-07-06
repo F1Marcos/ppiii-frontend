@@ -153,4 +153,16 @@ export class UsuariosService{
 		//return this.http.get(this.API_URI+'/list');
 	}
 
+	crearActa(acta:any){
+
+		console.log(acta);
+		return this.http.post(`${this.API_URI}/crearActa`, acta);
+
+	}
+
+	agregarNotas(notas:any){
+		console.log(notas);
+		return this.http.post(`${this.API_URI}/agregarNotas`, notas);
+
+	}
 }
