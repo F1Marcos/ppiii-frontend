@@ -1,11 +1,42 @@
-<form (submit)="onSubmit()">
-    <div style="left:auto"> <br>
-        <div style="left: auto;">
-            <h3>Agregar Acta:</h3>
-        </div>
-        <div class="form-group">
-            Acta: <input type="file" name="image"  (change)="parcearCSV($event)" />
+<div class="main">
+    <div class="container" style="text-align: center; color: white;">
+        <br>
+        <table class='table table-dark'>
+            <thead>
+                <th>nroActa</th>
+                <th>idMat</th>
+                <th>curso</th>
+                <th>cuatrimestre</th>
+            </thead>
+            <tbody *ngIf="actasList.length > 0; else fila">
+                <tr *ngFor=" let actaList of actasList">
+                    <td>{{actaList.nroActa}}</td>
+                    <td>{{actaList.idMat}}</td>
+                    <td>{{actaList.curso}}</td>
+                    <td>{{actaList.cuatrimestre}}</td>
+                </tr>
+            </tbody>
+            <ng-template #fila>
+                <tbody>
+                    <tr>
+                        <td colspan="4">No hay materias</td>
+                    </tr>
+                </tbody>
+            </ng-template>
+        </table>
+
+        <form (submit)="onSubmit()">
+            <ngx-dropzone (change)="parcearCSV($event)" accept=".csv" style="width: 30%; margin-left: 35%; margin-right: 35%;">
+                <ngx-dropzone-label>Arrastrar CSV aca o Click para Seleccionar</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngIf="file" [removable]="true" (removed)="onRemove()">
+                    <ngx-dropzone-label>{{file.name}}</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+            </ngx-dropzone>
             <button class="btn btn-success" style="margin-left: 1%;">Enviar</button>
-        </div>
+        </form>
+
     </div>
-</form>
+    <div style="left:0%"> <br>
+        <a class="btn btn-dark" routerLink="/admin/home">Volver<span class="sr-only">(current)</span></a>
+    </div>
+</div>

@@ -15,15 +15,31 @@ export class AdminActaCursadaComponent implements OnInit {
     curso: "",
     cuatrimestre:""
   }
+  actasList: any = [];
+
   cargador:any=[];
   arrayBuffer:any;
   file: any;
   // archivosseleccionado: any;
   notasTotales:any=[];
 
+  //DROPZONE:
+  files: File[] = [];
+
+
   constructor(private usuariosService: UsuariosService, private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.usuariosService.listarActasCursadas().subscribe(
+			res => { 
+        console.log('ACA RECIBO LISTA DE ACTAS');
+        console.log(res);
+        this.actasList = res;
+      },
+      err => {
+        console.log(err.error.message);
+      }
+		)
   }
 
  /*parcearCSV(event: any): void {
@@ -138,9 +154,37 @@ export class AdminActaCursadaComponent implements OnInit {
     }
   
   }*/
-  parcearCSV(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-      this.file = <File>event.target.files[0];
+
+
+//DROPZONE:
+onSelect(event:any) {
+  console.log(event);
+  console.log(event.addedFiles[0]);
+ 
+  this.files.push(...event.addedFiles);
+}
+
+onRemove() {
+  delete this.file;
+  console.log(this.file);
+  
+}
+
+  parcearCSV(event:any): void {
+    console.log('ACA IMPRIMO EVENTO MATI:');
+    console.log(event);
+
+    if (event.addedFiles && event.addedFiles[0]) {
+      this.file = <File>event.addedFiles[0];
+      console.log(this.file);
+      console.log(this.file);
+      console.log(this.file);
+      console.log(this.file);
+      console.log(this.file);
+      console.log(this.file);
+      console.log(this.file);
+      console.log(this.file);
+
       let fileReader = new FileReader();
       this.notasTotales = [];
       fileReader.onload = (e) => {

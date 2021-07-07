@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 
 export class UsuariosService{
-	// API_URI = 'http://localhost:3000/user';
-	API_URI = 'https://ppiii-demo1.herokuapp.com/user';
+	API_URI = 'http://localhost:3000/user';
+	// API_URI = 'https://ppiii-demo1.herokuapp.com/user';
 
 	logued$ = new EventEmitter<string>();
 	
@@ -163,6 +163,11 @@ export class UsuariosService{
 	agregarNotas(notas:any){
 		console.log(notas);
 		return this.http.post(`${this.API_URI}/agregarNotas`, notas);
-
+	}
+	
+	//listarActasCursadas
+	listarActasCursadas() {
+		console.log('ENTRE AL SERVICE ACTAS GET');
+		return this.http.get(`${this.API_URI}/listarActasCursadas`);
 	}
 }
