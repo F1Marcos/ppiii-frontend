@@ -57,12 +57,15 @@ export class UsuariosIngresarComponent implements OnInit {
         {
           case 1: 
           console.log('Entre al caso 1');
+          localStorage.setItem('rolValidator', result.validarRol)
           this.router.navigate(['admin/home']);
           break; //Aca va la ruta del admin pero como por ahora no existe .. 
-          case 2: 
+          case 2:
+            console.log("Usuario"); 
           this.router.navigate(['usuarios/home']);
           break;        
         }
+
         
       },
       err => {

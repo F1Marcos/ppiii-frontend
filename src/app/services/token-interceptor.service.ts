@@ -17,6 +17,8 @@ export  class TokenInterceptorService {
     const tokenizeReq=req.clone({
       setHeaders:{
         Authotization: `Baerer ${this.usuariosService.getToken()}`,
+        RolValidator: `Baerer ${this.usuariosService.getRol()}`,
+
       }
     })
     return next.handle(tokenizeReq);

@@ -15,6 +15,7 @@ import { AdminGuard } from './admin.guard';
 import { AdminAbmMateriaComponent } from "./components/admin-abm-materia/admin-abm-materia.component";
 import { ActivadoComponent } from './components/activado/activado.component';
 import { AdminActaCursadaComponent } from './components/admin-acta-cursada/admin-acta-cursada.component';
+import { VerActaCursadaComponent } from './components/ver-acta-cursada/ver-acta-cursada.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,10 @@ const routes: Routes = [
 	{	
 		path: 'admin/actaCursada',
 		component: AdminActaCursadaComponent,
+	},
+	{	
+		path: 'admin/actaCursada/verActa/:nroActa',
+		component: VerActaCursadaComponent,
 	},
 	{
 		path: 'usuarios/listar',

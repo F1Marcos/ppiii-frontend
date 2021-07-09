@@ -28,22 +28,35 @@ export class AdminAbmMateriaComponent implements OnInit {
   alert:boolean=false;
 
   ngOnInit(): void {
-    setTimeout(()=>{                           
-      this.alert = false;
-      this.mensaje="";
- }, 3000);
-    this.usuariosService.listarMaterias().subscribe(
-      res => {
-        console.log("RES DE SERVICE");
-        console.log(res);
-        this.materias=res;
-        console.log(this.materias);
+    this.usuariosService.verificarRol().subscribe(
+			res => { 
+        setTimeout(()=>{                           
+          this.alert = false;
+          this.mensaje="";
+     }, 3000);
+        this.usuariosService.listarMaterias().subscribe(
+          res => {
+            console.log("RES DE SERVICE");
+            console.log(res);
+            this.materias=res;
+            console.log(this.materias);
+          },
+          err => {
+            console.log("ERR DE SERVICE");
+            console.log(err.error.message);    
+          }
+        );
       },
       err => {
-        console.log("ERR DE SERVICE");
-        console.log(err.error.message);    
+        console.log(err.error.message);
+        console.log("LOCALSTORAGE MODIFICADO, SESION FINALIZADA");
+        setTimeout(function () { alert("Sesion finalizada!"); }, 400);
+        this.usuariosService.logOut();
+
+        
       }
-    );
+		)
+    
   }
 
   modificarMateria(mat:any){

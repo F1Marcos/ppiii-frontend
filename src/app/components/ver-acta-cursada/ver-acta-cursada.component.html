@@ -1,0 +1,46 @@
+<html>
+<a class="btn btn-info" routerLink="/admin/actaCursada" style="margin-left: 0%;margin-top: 0%;">Volver<span class="sr-only">(current)</span></a>
+<div class="main" style="bottom: 0%; height: 100%;">
+ <div  style="height: 100%; width: 80%; margin-left: 10%; margin-bottom: 1%;">
+    <br>
+<h1 style="color: azure;text-align: center;"> ACTA DE CURSADA CON NUMERO {{nroActa}}</h1>
+<br>
+<div style="color: white; font-size: x-large;">Filtro</div>
+<input style="text-align: left; margin-bottom: 1%;" type="text" name="filterPost" [(ngModel)]="filterPost" autofocus>
+
+<table class='table table-dark'>
+    <thead>
+        <th>DNI</th>
+        <th>Nota 1</th>
+        <th>Nota 2</th>
+        <th>Nota 3</th>
+        <th>Nota 4</th>
+        <th>Nota final (N)</th>
+        <th>Nota final (L)</th>
+        <th>Estado</th>
+    </thead>
+    <tbody *ngIf="acta.length > 0; else fila" >
+        <tr *ngFor=" let notas of acta | notas:filterPost">
+            <td><input type="text" class="form-control" name="Udni" [(ngModel)]="notas.Udni"  readonly></td>
+            <td><input type="text" class="form-control" name="nota1" [(ngModel)]="notas.nota1"></td>
+            <td><input type="text" class="form-control" name="nota2" [(ngModel)]="notas.nota2"></td>
+            <td><input type="text" class="form-control" name="nota3" [(ngModel)]="notas.nota3"></td>
+            <td><input type="text" class="form-control" name="nota4" [(ngModel)]="notas.nota4"></td>
+            <td><input type="text" class="form-control" name="notaFinalNum" [(ngModel)]="notas.notaFinalNum"></td>
+            <td><input type="text" class="form-control" name="notaFinalLet" [(ngModel)]="notas.notaFinalLet"></td>
+            <td><input type="text" class="form-control" name="estado" [(ngModel)]="notas.estado"></td>
+            <td><button class="btn btn-info" (click)=modificarNota(notas)>Modificar</button></td>
+          <td><a class="btn btn-danger" (click)=eliminarNota(notas)>Eliminar</a></td>
+        </tr>
+    </tbody>
+    <ng-template #fila>
+        <tbody>
+            <tr>
+                <td colspan="4">No hay actas disponibles</td>
+            </tr>
+        </tbody>
+    </ng-template>
+</table>
+</div>
+</div>
+</html>

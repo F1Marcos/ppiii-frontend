@@ -15,6 +15,7 @@ export class AdminGuard implements CanActivate {
 
 	canActivate(){
 		if(localStorage.rol){
+      //if(localStorage.rol=='1'){
       if(localStorage.rol=='1'){
         console.log('Soy admin');
         return true;

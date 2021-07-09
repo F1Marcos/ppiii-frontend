@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
@@ -9,10 +11,27 @@ export class AdminHomeComponent implements OnInit {
   rol: string = "";
   usuario: string = "";
 
-  constructor() { }
+  constructor(private usuariosService:UsuariosService,private router:Router) { }
 
   ngOnInit(): void {
-    this.rol = localStorage.rol;
-    this.usuario = localStorage.nombreApellido;
+    this.usuariosService.verificarRol().subscribe(
+			res => { 
+        console.log("ROL OK");
+        this.rol = localStorage.rol;
+        this.usuario = localStorage.nombreApellido;
+      },
+      err => {
+        console.log(err.error.message);
+        console.log("LOCALSTORAGE MODIFICADO, SESION FINALIZADA");
+        setTimeout(function () { alert("Sesion finalizada!"); }, 400);
+        this.usuariosService.logOut();
+
+        
+      }
+		)
+  
+    
+  
+  
   }
 }

@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 
 export class UsuariosService{
-	API_URI = 'http://localhost:3000/user';
-	// API_URI = 'https://ppiii-demo1.herokuapp.com/user';
+	//API_URI = 'http://localhost:3000/user';
+	API_URI = 'https://ppiii-demo1.herokuapp.com/user';
 
 	logued$ = new EventEmitter<string>();
 	
@@ -49,10 +49,13 @@ export class UsuariosService{
 	logOut() {
 		//localStorage.removeItem('token');
 		localStorage.clear();
-		this.router.navigate(['usuarios/principal']);
+		this.router.navigate(['usuarios/ingresar']);
 	}
 	getToken() {//Obtenemos el token que despues enviara el interceptor x cada req
 		return localStorage.getItem('token');
+	}
+	getRol() {//Obtenemos el token que despues enviara el interceptor x cada req
+		return localStorage.getItem('rolValidator');
 	}
 	listarMateriasAprobadas(dni: any) {
 		console.log(dni);
@@ -164,10 +167,28 @@ export class UsuariosService{
 		console.log(notas);
 		return this.http.post(`${this.API_URI}/agregarNotas`, notas);
 	}
+	modificarNota(notas: any, nroActa:any) {
+		console.log('FE: Metodo servicio Modificar Notas:')
+		console.log(notas);
+		return this.http.post(`${this.API_URI}/modificarNotas`, notas, nroActa);
+	}
+	eliminarNota(Udni: any, nroActa:any) {
+		console.log('FE: Metodo servicio Eliminar Usuario:')
+		return this.http.post(`${this.API_URI}/eliminarNotas`,Udni,nroActa); // El service devuelve "usuario" tal vez se puede usar para mostrar un mensaje.
+	}
 	
 	//listarActasCursadas
 	listarActasCursadas() {
 		console.log('ENTRE AL SERVICE ACTAS GET');
 		return this.http.get(`${this.API_URI}/listarActasCursadas`);
+	}
+	verificarRol() {
+		console.log('ENTRE AL SERVICE ACTAS GET');
+		return this.http.get(`${this.API_URI}/verificarRol`);
+	}
+
+	verActa(nroActa:any) {
+		console.log('ENTRE AL SERVICE ACTAS GET');
+		return this.http.get(`${this.API_URI}/verActaCursada/${nroActa}`);
 	}
 }

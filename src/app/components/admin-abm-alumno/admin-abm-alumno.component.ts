@@ -33,24 +33,45 @@ export class AdminAbmAlumnoComponent implements OnInit {
 
 
   ngOnInit(): void {
-    setTimeout(()=>{                           
-      this.alert = false;
-      this.mensaje="";
- }, 3000);
-    this.usuariosService.listarUsuarios().subscribe(
-      res => {
-        console.log(res);
-        this.usuarios=res;
-        
-        console.log(this.usuarios);
-        // this.router.navigate(['admin/abm']);
+
+    this.usuariosService.verificarRol().subscribe(
+			res => { 
+        this.usuariosService.listarActasCursadas().subscribe(
+          res => { 
+            setTimeout(()=>{                           
+              this.alert = false;
+              this.mensaje="";
+         }, 3000);
+            this.usuariosService.listarUsuarios().subscribe(
+              res => {
+                console.log(res);
+                this.usuarios=res;
+                
+                console.log(this.usuarios);
+                // this.router.navigate(['admin/abm']);
+              },
+              err => {
+                console.log(err.error.message);
+                // this.reintentar=true;
+                // this.mensaje=err.error.message;      
+              }
+            );
+          },
+          err => {
+            console.log(err.error.message);
+          }
+        )
       },
       err => {
         console.log(err.error.message);
-        // this.reintentar=true;
-        // this.mensaje=err.error.message;      
+        console.log("LOCALSTORAGE MODIFICADO, SESION FINALIZADA");
+        setTimeout(function () { alert("Sesion finalizada!"); }, 400);
+        this.usuariosService.logOut();
+
+        
       }
-    );
+		)
+  
   }
 
   modificarUsuario(user:any){

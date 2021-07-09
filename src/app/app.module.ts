@@ -25,6 +25,8 @@ import { UsuariosFilterPipe } from './pipes/usuarios-filter.pipe';
 import { ActivadoComponent } from './components/activado/activado.component';
 import { AdminActaCursadaComponent } from './components/admin-acta-cursada/admin-acta-cursada.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { VerActaCursadaComponent } from './components/ver-acta-cursada/ver-acta-cursada.component';
+import { NotasPipe } from './pipes/notas.pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     MateriasFilterPipe,
     UsuariosFilterPipe,
     ActivadoComponent,
-    AdminActaCursadaComponent
+    AdminActaCursadaComponent,
+    VerActaCursadaComponent,
+    NotasPipe
   ],
   imports: [
     BrowserModule,

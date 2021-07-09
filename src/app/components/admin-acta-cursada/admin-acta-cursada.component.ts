@@ -30,16 +30,29 @@ export class AdminActaCursadaComponent implements OnInit {
   constructor(private usuariosService: UsuariosService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.usuariosService.listarActasCursadas().subscribe(
+    this.usuariosService.verificarRol().subscribe(
 			res => { 
-        console.log('ACA RECIBO LISTA DE ACTAS');
-        console.log(res);
-        this.actasList = res;
+        this.usuariosService.listarActasCursadas().subscribe(
+          res => { 
+            console.log('ACA RECIBO LISTA DE ACTAS');
+            console.log(res);
+            this.actasList = res;
+          },
+          err => {
+            console.log(err.error.message);
+          }
+        )
       },
       err => {
         console.log(err.error.message);
+        console.log("LOCALSTORAGE MODIFICADO, SESION FINALIZADA");
+        setTimeout(function () { alert("Sesion finalizada!"); }, 400);
+        this.usuariosService.logOut();
+
+        
       }
 		)
+  
   }
 
  /*parcearCSV(event: any): void {
