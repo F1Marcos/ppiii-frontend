@@ -240,9 +240,9 @@ onRemove() {
                 notas.notaFinalNum=objetos[7];
                 notas.notaFinalLet= objetos[8];
                 notas.estado=objetos[9];
-
+                console.log(notas);
                
-                if(!(notas.Udni="")){
+                if(notas.Udni!=""){
                   this.notasTotales.push(notas);
                 }
               
@@ -285,7 +285,7 @@ onRemove() {
   }
 
   onSubmit() {
-    this.usuariosService.crearActa(this.acta).subscribe(
+    this.usuariosService.crearActa(this.acta).subscribe(  
       res => {
         const result:any = res;
         for(var i =0; i < this.notasTotales.length;i++){
