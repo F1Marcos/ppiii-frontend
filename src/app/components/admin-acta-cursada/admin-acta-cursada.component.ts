@@ -26,6 +26,9 @@ export class AdminActaCursadaComponent implements OnInit {
   //DROPZONE:
   files: File[] = [];
 
+  //switch mostrar actas:
+  flag_cursada:boolean=false;
+  flag_final:boolean=false;
 
   constructor(private usuariosService: UsuariosService, private http: HttpClient) { }
 
@@ -193,5 +196,14 @@ onRemove() {
   }, 3000);
   }
   
+  actaCursada(){
+    this.flag_cursada=true;
+    this.flag_final=false;
+  }
+
+  actaFinal(){
+    this.flag_final=true;
+    this.flag_cursada=false;
+  }
 
 }
