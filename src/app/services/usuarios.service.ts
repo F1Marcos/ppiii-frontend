@@ -163,9 +163,9 @@ export class UsuariosService{
 
 	}
 
-	agregarNotas(notas:any){
+	agregarNotas(notas:any, tipo:any){
 		console.log(notas);
-		return this.http.post(`${this.API_URI}/agregarNotas`, notas);
+		return this.http.post(`${this.API_URI}/agregarNotas`, [notas,tipo]);
 	}
 	modificarNota(notas: any, nroActa:any) {
 		console.log('FE: Metodo servicio Modificar Notas:')
@@ -187,8 +187,8 @@ export class UsuariosService{
 		return this.http.get(`${this.API_URI}/verificarRol`);
 	}
 
-	verActa(nroActa:any) {
+	verActa(nroActa:any, tipo:any) {
 		console.log('ENTRE AL SERVICE ACTAS GET');
-		return this.http.get(`${this.API_URI}/verActaCursada/${nroActa}`);
+		return this.http.get(`${this.API_URI}/verActaCursada/${tipo}/${nroActa}`);
 	}
 }

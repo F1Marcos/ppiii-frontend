@@ -10,6 +10,7 @@ import {Router} from '@angular/router'
 export class UsuariosHomeComponent implements OnInit {
 
   usuario = "";
+  porcentaje:number = 30;
 
   constructor(private usuariosService:UsuariosService,private router:Router) { }
 

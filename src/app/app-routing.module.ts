@@ -42,7 +42,7 @@ const routes: Routes = [
 		component: AdminActaCursadaComponent,
 	},
 	{	
-		path: 'admin/actaCursada/verActa/:nroActa',
+		path: 'admin/actaCursada/verActa/:tipo/:nroActa',
 		component: VerActaCursadaComponent,
 	},
 	{

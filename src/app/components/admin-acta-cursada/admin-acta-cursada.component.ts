@@ -13,11 +13,12 @@ export class AdminActaCursadaComponent implements OnInit {
   acta = {
     idMat: "",
     curso: "",
-    cuatrimestre:""
+    cuatrimestre:"",
+    tipo:""
   }
-  actasList: any = [];
+  actasListCursada: any = [];
+  actasListFinal: any =[];
   load: any;
-  cargador:any=[];
   arrayBuffer:any;
   file: any;
   // archivosseleccionado: any;
@@ -38,9 +39,11 @@ export class AdminActaCursadaComponent implements OnInit {
         delete this.file;
         this.usuariosService.listarActasCursadas().subscribe(
           res => { 
+            const result:any = res;
             console.log('ACA RECIBO LISTA DE ACTAS');
             console.log(res);
-            this.actasList = res;
+            this.actasListCursada = result.cursada;
+            this.actasListFinal = result.final;
           },
           err => {
             console.log(err.error.message);
@@ -95,38 +98,64 @@ onRemove() {
           console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
           var aux:any;
           aux = XLSX.utils.sheet_to_json(worksheet,{raw:true});
-            console.log(aux);
+            //console.log(aux);
             var objetos = [];
             for(let i=0;i<aux.length ;i++){
               var valor = Object.values(aux[i]).toString();
+              objetos= valor.split(";");
               if(/^([0-9])/.test(valor)){
-                var notas={
-                  idacta:"",
-                  Udni: "",
-                  nota1:"",
-                  nota2:"",
-                  nota3:"",
-                  nota4:"",
-                  notaFinalNum:"",
-                  notaFinalLet:"",
-                  estado:""
+
+                switch(this.acta.tipo){
+
+                  case "cursada":
+                  var notas={
+                    idacta:"",
+                    Udni: "",
+                    nota1:"",
+                    nota2:"",
+                    nota3:"",
+                    nota4:"",
+                    notaFinalNum:"",
+                    notaFinalLet:"",
+                    estado:""
+                  }
+                  
+                  objetos= valor.split(";");
+                  objetos[2]= objetos[2].replace(/[.]/g,"");
+                  notas.Udni= objetos[2];
+                  notas.nota1= objetos[3];
+                  notas.nota2= objetos[4];
+                  notas.nota3=objetos[5];
+                  notas.nota4=objetos[6];
+                  notas.notaFinalNum=objetos[7];
+                  notas.notaFinalLet= objetos[8];
+                  notas.estado=objetos[9];
+                  console.log(notas);
+                 
+                  if(notas.Udni!=""){
+                    this.notasTotales.push(notas);
+                  }
+                  break;
+                  case "final":
+                    var notasFinal={
+                      idacta:"",
+                      Udni: "",
+                      nota:"",
+                      notaLetra:"",
+                    }
+                  objetos= valor.split(";");
+                  objetos[1]= objetos[1].replace(/[.]/g,"");
+                  notasFinal.Udni= objetos[1];
+                  notasFinal.nota= objetos[3];
+                  notasFinal.notaLetra= objetos[4];
+                  if(notasFinal.Udni!=""){
+                    this.notasTotales.push(notasFinal);
+                  }
+                  break;
+                  default: console.log("No hago nada");
+                  break;
                 }
                 
-                objetos= valor.split(";");
-                objetos[2]= objetos[2].replace(/[.]/g,"");
-                notas.Udni= objetos[2];
-                notas.nota1= objetos[3];
-                notas.nota2= objetos[4];
-                notas.nota3=objetos[5];
-                notas.nota4=objetos[6];
-                notas.notaFinalNum=objetos[7];
-                notas.notaFinalLet= objetos[8];
-                notas.estado=objetos[9];
-                console.log(notas);
-               
-                if(notas.Udni!=""){
-                  this.notasTotales.push(notas);
-                }
               
               }else{
                 valor =valor.replace(/[;]/g,"");
@@ -135,32 +164,30 @@ onRemove() {
                     this.acta.idMat=valor;
                     console.log(valor);
                 }
+                if(valor.match("Acta de Final")){
+                  this.acta.tipo="final";
+                }
+                if(valor.match("Acta de Cursada")){
+                this.acta.tipo="cursada";
+                }
                 if(valor.match("Curso:")){
-                  valor = valor.replace("Curso: ","");
+                  valor =valor.replace(/[ ]/g,"");
+                  valor = valor.replace("Curso:","");
                   this.acta.curso =valor;
                   console.log(valor);
               }
               if(valor.match("Cuatrimestre:")){
-                valor = valor.replace("Cuatrimestre: ","");
+                valor =valor.replace(/[ ]/g,"");
+                valor = valor.replace("Cuatrimestre:","");
                 if(valor.startsWith("1")){
                   this.acta.cuatrimestre= "Primero";
                 }
                 console.log(valor);
-            }
-              }
-  
-              if(!(valor=="")){
-                this.cargador.push(valor);
-              }
-              
-            }
-            return true;
-           
-
-          }
-      
-      fileReader.readAsArrayBuffer(this.file);
-  
+         }
+      }            
+      }
+    }
+    fileReader.readAsArrayBuffer(this.file);
   }
 
   async onSubmit() {  
@@ -170,13 +197,15 @@ onRemove() {
      console.log("IMPRIMO EN SUBMIT");                        
     console.log(this.acta);
     console.log(this.notasTotales);
+    if((this.flag_cursada==true && this.acta.tipo=="cursada")||(this.flag_final==true && this.acta.tipo=="final")){
+
     this.usuariosService.crearActa(this.acta).subscribe(  
       res => {
         const result:any = res;
         for(var i =0; i < this.notasTotales.length;i++){
           this.notasTotales[i].idacta =  result.id;
         }
-        this.usuariosService.agregarNotas(this.notasTotales).subscribe(
+        this.usuariosService.agregarNotas(this.notasTotales,this.acta.tipo).subscribe(
           res => {
             console.log("Se guardaron las notas");
             this.load=false
@@ -193,7 +222,12 @@ onRemove() {
         this.load=false
       }
     )
+  }else{
+    console.log("TIPO INCORRECTO");
+    this.load=false;
+  }
   }, 3000);
+  
   }
   
   actaCursada(){

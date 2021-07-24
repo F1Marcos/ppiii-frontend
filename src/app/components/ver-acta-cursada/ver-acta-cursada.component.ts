@@ -11,6 +11,7 @@ export class VerActaCursadaComponent implements OnInit {
 
   acta: any = [];
   nroActa:any = "";
+  tipo:any="";
   filterPost="";
   constructor(private usuariosService: UsuariosService,private route: ActivatedRoute) { }
 
@@ -18,12 +19,12 @@ export class VerActaCursadaComponent implements OnInit {
     this.route.queryParams
     .subscribe(params => {
       console.log(params);
-      this.nroActa = this.route.snapshot.paramMap.get('nroActa')
-      console.log(this.acta);
-    }
+      this.nroActa = this.route.snapshot.paramMap.get('nroActa');
+      this.tipo = this.route.snapshot.paramMap.get('tipo');
+  console.log(this.tipo);    }
   );
 
-  this.usuariosService.verActa(this.nroActa).subscribe(
+  this.usuariosService.verActa(this.nroActa, this.tipo).subscribe(
     res => { 
       console.log('ACA RECIBO LISTA DE ACTAS');
       console.log(res);

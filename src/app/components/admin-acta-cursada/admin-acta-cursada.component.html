@@ -1,23 +1,14 @@
 <html>
 <div class="main">
 
-    <nav class="navbar navbar-expand-lg">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="navbar-brand" (click)=actaCursada()>Actas Cursadas<span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" (click)=actaFinal()>Actas Finales<span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <nav class="navbar navbar-light" style="margin-right: 60%; opacity: .9;">
+        <form class="form-inline">
+            <a class="btn btn-outline-dark bg-dark" routerLink="/admin/home" style="font-size:larger; color:#ffffff; border-radius: 15%; margin: 5px;">Volver<span class="sr-only">(current)</span></a>
+            <button class="btn btn-outline-dark bg-dark" style="font-size:larger; color:#ffffff; border-radius: 15%; margin: 5px;" type="button" (click)=actaCursada()>Actas Cursadas</button>
+            <button class="btn btn-outline-dark bg-dark" style="font-size: larger; color:#ffffff; border-radius: 15%;"  type="button" (click)=actaFinal()>Actas Finales</button>
+        </form>
+      </nav>
+
     <div *ngIf="flag_cursada" class="row" style="text-align: center; color: white;width: 100%;margin-top: 1%">
         <br>
         <div class="column" id="demo" style="width:30%">
@@ -50,13 +41,13 @@
                     <th>Curso</th>
                     <th>Cuatrimestre</th>
                 </thead>
-                <tbody *ngIf="actasList.length > 0; else fila">
-                    <tr *ngFor=" let actaList of actasList">
+                <tbody *ngIf="actasListCursada.length > 0; else fila">
+                    <tr *ngFor=" let actaList of actasListCursada">
                         <td>{{actaList.nroActa}}</td>
                         <td>{{actaList.idMat}}</td>
                         <td>{{actaList.curso}}</td>
                         <td>{{actaList.cuatrimestre}}</td>
-                        <td><a class="btn btn-success" [routerLink]="['./verActa', actaList.nroActa]">Ver<span
+                        <td><a class="btn btn-success" [routerLink]="['./verActa', actaList.tipo,actaList.nroActa]">Ver<span
                                     class="sr-only">(current)</span></a></td>
                     </tr>
                 </tbody>
@@ -104,13 +95,13 @@
                     <th>Curso</th>
                     <th>Cuatrimestre</th>
                 </thead>
-                <tbody *ngIf="actasList.length > 0; else fila">
-                    <tr *ngFor=" let actaList of actasList">
+                <tbody *ngIf="actasListFinal.length > 0; else fila">
+                    <tr *ngFor=" let actaList of actasListFinal">
                         <td>{{actaList.nroActa}}</td>
                         <td>{{actaList.idMat}}</td>
                         <td>{{actaList.curso}}</td>
                         <td>{{actaList.cuatrimestre}}</td>
-                        <td><a class="btn btn-success" [routerLink]="['./verActa', actaList.nroActa]">Ver<span
+                        <td><a class="btn btn-success" [routerLink]="['./verActa', actaList.tipo,actaList.nroActa]">Ver<span
                                     class="sr-only">(current)</span></a></td>
                     </tr>
                 </tbody>
