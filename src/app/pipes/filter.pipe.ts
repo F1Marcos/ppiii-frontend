@@ -7,6 +7,7 @@ export class FilterPipe implements PipeTransform {
 
   transform(value: any,arg: any): any {
     console.log(value);
+    console.log("entro al pipe");
     const resultPosts = [];
    
     for(const post of value){

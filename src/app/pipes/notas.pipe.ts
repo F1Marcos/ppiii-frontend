@@ -10,7 +10,7 @@ export class NotasPipe implements PipeTransform {
     const resultPosts = [];
    
     for(const post of value){
-      if(post.Udni.toString().indexOf(arg)>-1 || post.notaFinalNum.toUpperCase() == arg.toUpperCase() || post.estado.toString().indexOf(arg)>-1 ){
+      if(post.Udni.toString().indexOf(arg)>-1){
         console.log(post.Udni.toString());
         console.log(arg);
         console.log("SIP");

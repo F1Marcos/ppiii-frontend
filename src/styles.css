@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-.main{
+
+
+
+    label{
+        color: antiquewhite;
+    }
+html{
     background: #0264d6; /* Old browsers */
     background: -moz-radial-gradient(center, ellipse cover,  #0264d6 1%, #1c2b5a 100%); /* FF3.6+ */
     background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#0264d6), color-stop(100%,#1c2b5a)); /* Chrome,Safari4+ */
@@ -10,9 +16,6 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0264d6', endColorstr='#1c2b5a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     height:calc(100vh);
     width:100%;
-    }
-
-
-    label{
-        color: antiquewhite;
-    }
+}
+ 
+    

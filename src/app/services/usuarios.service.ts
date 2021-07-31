@@ -162,6 +162,17 @@ export class UsuariosService{
 		return this.http.post(`${this.API_URI}/crearActa`, acta);
 
 	}
+	modificarActa(acta:any){
+
+		console.log(acta);
+		return this.http.post(`${this.API_URI}/crearActa`, acta);
+
+	}
+	eliminarActa(nroActa:any,tipo:any){
+
+		return this.http.post(`${this.API_URI}/eliminarActa`, [nroActa,tipo]);
+
+	}
 
 	agregarNotas(notas:any, tipo:any){
 		console.log(notas);

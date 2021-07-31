@@ -1,5 +1,4 @@
 <html>
-<div class="main">
 
     <nav class="navbar navbar-light" style="margin-right: 60%; opacity: .9;">
         <form class="form-inline">
@@ -10,6 +9,7 @@
       </nav>
 
     <div *ngIf="flag_cursada" class="row" style="text-align: center; color: white;width: 100%;margin-top: 1%">
+
         <br>
         <div class="column" id="demo" style="width:30%">
             <h1>Agregar acta de cursada</h1>
@@ -32,7 +32,8 @@
                 </div>
             </form>
         </div>
-        <div class="column" style="width:70%;;">
+        <span class="border-right" style="width: 1%;"></span>
+        <div class="column" style="width: 60%; margin-left: 5%;">
             <h1>Lista de actas</h1>
             <table class='table table-dark'>
                 <thead>
@@ -40,6 +41,7 @@
                     <th>ID de Materia</th>
                     <th>Curso</th>
                     <th>Cuatrimestre</th>
+                    <th>Fecha</th>
                 </thead>
                 <tbody *ngIf="actasListCursada.length > 0; else fila">
                     <tr *ngFor=" let actaList of actasListCursada">
@@ -47,8 +49,11 @@
                         <td>{{actaList.idMat}}</td>
                         <td>{{actaList.curso}}</td>
                         <td>{{actaList.cuatrimestre}}</td>
-                        <td><a class="btn btn-success" [routerLink]="['./verActa', actaList.tipo,actaList.nroActa]">Ver<span
-                                    class="sr-only">(current)</span></a></td>
+                        <td>{{actaList.fecha}}</td>
+                        <td><a class="btn btn-success" style="margin:2%" [routerLink]="['./verActa', actaList.tipo,actaList.nroActa]">Ver<span
+                            class="sr-only">(current)</span></a>
+                    <a class="btn btn-info" style="margin:2%" (click)="modificarActa(actaList)">Modificar</a>
+                <a class="btn btn-danger" style="margin:2%" (click)="eliminarActa(actaList)">Eliminar</a></td>
                     </tr>
                 </tbody>
                 <ng-template #fila>
@@ -65,7 +70,7 @@
 
     <div *ngIf="flag_final" class="row" style="text-align: center; color: white;width: 100%;margin-top: 1%">
         <br>
-        <div class="column" id="demo" style="width:30%">
+        <div class="column" id="demo" style="width:30%;">
             <h1>Agregar acta de final</h1>
             <form (submit)="onSubmit()">
                 <ngx-dropzone (change)="parcearCSV($event)" accept=".csv" style="margin-left: 20%; margin-right: 20%;">
@@ -86,7 +91,8 @@
                 </div>
             </form>
         </div>
-        <div class="column" style="width:70%;;">
+        <span class="border-right border-color:black" style="width: 1%;"></span>
+        <div class="column" style="width:60%;margin-left: 5%;">
             <h1>Lista de actas</h1>
             <table class='table table-dark'>
                 <thead>
@@ -94,6 +100,7 @@
                     <th>ID de Materia</th>
                     <th>Curso</th>
                     <th>Cuatrimestre</th>
+                    <th>Fecha</th>
                 </thead>
                 <tbody *ngIf="actasListFinal.length > 0; else fila">
                     <tr *ngFor=" let actaList of actasListFinal">
@@ -101,8 +108,11 @@
                         <td>{{actaList.idMat}}</td>
                         <td>{{actaList.curso}}</td>
                         <td>{{actaList.cuatrimestre}}</td>
-                        <td><a class="btn btn-success" [routerLink]="['./verActa', actaList.tipo,actaList.nroActa]">Ver<span
-                                    class="sr-only">(current)</span></a></td>
+                        <td>{{actaList.fecha}}</td>
+                        <td><a class="btn btn-success" style="margin:2%" [routerLink]="['./verActa', actaList.tipo,actaList.nroActa]">Ver<span
+                            class="sr-only">(current)</span></a>
+                    <a class="btn btn-info" style="margin:2%" (click)="modificarActa(actaList)">Modificar</a>
+                <a class="btn btn-danger" style="margin:2%" (click)="eliminarActa(actaList)">Eliminar</a></td>
                     </tr>
                 </tbody>
                 <ng-template #fila>
@@ -117,4 +127,4 @@
     </div>
 
 
-</div>
+</html>

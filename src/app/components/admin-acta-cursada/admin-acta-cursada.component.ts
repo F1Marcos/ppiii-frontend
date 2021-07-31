@@ -14,6 +14,7 @@ export class AdminActaCursadaComponent implements OnInit {
     idMat: "",
     curso: "",
     cuatrimestre:"",
+    fecha:"",
     tipo:""
   }
   actasListCursada: any = [];
@@ -21,6 +22,7 @@ export class AdminActaCursadaComponent implements OnInit {
   load: any;
   arrayBuffer:any;
   file: any;
+  
   // archivosseleccionado: any;
   notasTotales:any=[];
 
@@ -39,7 +41,15 @@ export class AdminActaCursadaComponent implements OnInit {
         delete this.file;
         this.usuariosService.listarActasCursadas().subscribe(
           res => { 
-            const result:any = res;
+            var result:any = res;
+            console.log(result.final.length);
+            for(var i=0;i<result.cursada.length;i++){
+              result.cursada[i].fecha=result.cursada[i].fecha.replace("T03:00:00.000Z","");
+            }
+            for(var i=0;i<result.final.length;i++){
+              console.log(result.final[i].fecha);
+              result.final[i].fecha= result.final[i].fecha.replace("T03:00:00.000Z","");
+            }
             console.log('ACA RECIBO LISTA DE ACTAS');
             console.log(res);
             this.actasListCursada = result.cursada;
@@ -72,8 +82,6 @@ onRemove() {
 }
   //Cargo el file
   parcearCSV(event:any): void {
-    console.log('ACA IMPRIMO EVENTO MATI:');
-    console.log(event);
 
     if (event.addedFiles && event.addedFiles[0]) {
       this.file = <File>event.addedFiles[0];
@@ -164,6 +172,15 @@ onRemove() {
                     this.acta.idMat=valor;
                     console.log(valor);
                 }
+                if(valor.match("Fecha:")){
+                  valor =valor.replace(/[ ]/g,"");
+                  valor = valor.replace("Fecha:","");
+                  var fecha = valor.split("/");
+                  console.log(fecha);
+                  valor = fecha[2]+"-"+fecha[1]+"-"+fecha[0];
+                  this.acta.fecha=valor;
+                  console.log(valor);
+              }
                 if(valor.match("Acta de Final")){
                   this.acta.tipo="final";
                 }
@@ -190,6 +207,36 @@ onRemove() {
     fileReader.readAsArrayBuffer(this.file);
   }
 
+  eliminarActa(actaSelect:any){
+    this.usuariosService.eliminarActa(actaSelect.nroActa,actaSelect.tipo).subscribe(
+      res => {
+        console.log("Se guardaron las notas");
+        this.load=false
+        this.ngOnInit();
+      },
+      err => {        
+        console.log("ERROR");
+        console.log(err);
+        this.load=false
+      }
+    )
+
+  }
+modificarActa(actaSelect:any){
+  this.usuariosService.modificarActa(actaSelect).subscribe(
+    res => {
+      console.log("Se guardaron las notas");
+      this.load=false
+      this.ngOnInit();
+    },
+    err => {        
+      console.log("ERROR");
+      console.log(err);
+      this.load=false
+    }
+  )
+    
+  }
   async onSubmit() {  
     this.load=true;
     this.cargaFile();
@@ -211,8 +258,9 @@ onRemove() {
             this.load=false
             this.ngOnInit();
           },
-          err => {
+          err => {        
             console.log("ERROR");
+            console.log(err);
             this.load=false
           }
         )

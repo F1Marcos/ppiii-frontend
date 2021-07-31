@@ -26,9 +26,10 @@ export class VerActaCursadaComponent implements OnInit {
 
   this.usuariosService.verActa(this.nroActa, this.tipo).subscribe(
     res => { 
+      const result:any =res;
       console.log('ACA RECIBO LISTA DE ACTAS');
       console.log(res);
-      this.acta = res;
+      this.acta = result[0];
     },
     err => {
       console.log(err.error.message);
