@@ -1,27 +1,36 @@
 <html>
-    <h1 style="color:cornsilk; text-align: center;">HOME DEL ADMIN {{usuario}}</h1>
-    <div class="container border" style="width: 50%; margin-top: 3%;">
-        <div class="row" style="height: 100px; margin-left: 25%;margin-right: 25%;">
-                <div  class="col-md-6 mx-auto" style="margin: 5%; text-align: right;">
-                    <a class="btn btn-info" routerLink="../abmAlumn" style="width: 200px;">ABM  Alumnos</a>
+   
+    <div class="container" style="width: 50%; margin-top: 1%;">
+        <h1 style="color:cornsilk; text-align: center;">HOME DEL ADMIN {{usuario}}</h1>
+
+        <div class="row" style="height: 100%;text-align: center; margin-top: 5%;">
+               
+            <div  class="col-lg-6 mx-auto" id="derecha" style="margin: 2.5%;width: auto;">
+                    <a class="btn btn-dark border" routerLink="../abmAlumn" style="width: 200px;"><img src="assets/icons8-añadir-usuario-masculino-100.png"><br><label style="font-size: x-large;">ABM Usuarios</label> </a>
+
+
                 </div>
                
-                <div class="col-md-6 mx-auto" style="margin: 5%; text-align: left;">
-                    <a class="btn btn-info" routerLink="../abmMateria" style="width: 200px;">ABM Materias</a>
+                <div class="col-lg-6 mx-auto" id="izquierda" style="margin: 2.5%;width: auto;">
+                    <a class="btn btn-dark border" routerLink="../abmMateria" style="width: 200px;"><img src="assets/icons8-libros-100.png"> <br><label style="font-size: x-large;">ABM Materias</label> </a>
+                    
                 </div>
                 
-            </div>
-
-            <div class="row" style="height: 100px; margin-left: 25%;margin-right: 25%;">
-                <div class="col-md-6 mx-auto" style="margin: 5%; text-align: right;">
-                    <a class="btn btn-info" routerLink="/usuarios/web-tp" style="width: 200px;">Listar TP WEB</a>
+                <div class="col-lg-6 mx-auto" id="derecha"style="margin: 2.5%;width: auto;">
+                    <a class="btn btn-dark border" routerLink="/usuarios/web-tp" style="width: 200px;"> <img src="assets/icons8-report-100.png">    <br> <label style="font-size: x-large;">Reportes</label> </a>
+                
                 </div>
-                <div class="col-md-6 mx-auto" style="margin: 5%; text-align: left, ;">
-                    <a class="btn btn-info" routerLink="../actaCursada" style="width: 200px;">ABM Actas</a>
+                <div class="col-lg-6 mx-auto"id="izquierda" style="margin: 2.5%;width: auto;">
+                    <a class="btn btn-dark border" routerLink="../actaCursada" style="width: 200px;"> <img src="assets/icons8-boleta-de-calificaciones-100.png">  <br> <label style="font-size: x-large;">ABM Actas</label>   </a>
+                  
                 </div>
                
            
         </div>
     </div>
+
+
+
+
 </html>
 

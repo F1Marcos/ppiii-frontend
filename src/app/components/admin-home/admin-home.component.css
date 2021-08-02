@@ -1,0 +1,29 @@
+a{
+    border-radius: 12px;
+}
+
+h1{
+    
+      font-size: calc(0.5rem + 2vw);
+      font-variant: normal;
+
+        
+      @media (min-width: 1200px) {
+        .title {
+          font-size: 4rem;
+        }
+      }
+}
+
+
+
+
+#derecha.col-lg-6{
+  text-align: right;
+
+}
+
+#izquierda.col-lg-6{
+  text-align: left;
+
+}

@@ -58,6 +58,9 @@ export class AdminAbmMateriaComponent implements OnInit {
 		)
     
   }
+  test(){
+    console.log(this.aprob);
+  }
 
   modificarMateria(mat:any){
     this.usuariosService.modificarMateria(mat).subscribe(

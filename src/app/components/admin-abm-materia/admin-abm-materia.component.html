@@ -1,5 +1,9 @@
 <html>
-    <br>
+  <nav class="navbar navbar-light" style="margin-right: 60%; opacity: .9; margin-bottom: 0%;">
+    <form class="form-inline">
+        <a class="btn btn-outline-dark bg-dark" routerLink="/admin/home" style="font-size:larger; color:#ffffff; border-radius: 15%; margin: 5px;">Volver<span class="sr-only">(current)</span></a>
+    </form>
+  </nav>
     <div class="container" style="text-align: center; color: cornsilk;">
         <h1>ABM MATERIAS</h1>
     </div>
@@ -11,8 +15,8 @@
     </div>
 
     <br>
-    
-    <div class="container" style="color:white">
+    <div class="row">
+    <div class="col-xl-8 col-lg-12" style="color:white">
       <label style="font-size: large;">Filtro por nombre de materia:</label>
       <input style="margin-left: 1%; margin-bottom: 1%;" type="text" name="filterPost" [(ngModel)]="filterPost" autofocus>
       <br>
@@ -48,9 +52,11 @@
             </ng-template>
         </table>
     </div>
-    <form class="container" (submit)="agregarMateria()">
+
+    <div class="col-xl-4 col-lg-12" style="margin-top: 3%;">
+    <form (submit)="agregarMateria()">
         <div class="form-row">
-          <div class="col-md-4 mb-3">
+          <div class="col-md-6 mb-3">
             <label>ID</label>
             <input type="text" class="form-control" name="idMat" placeholder="Ej: 5XXX" [(ngModel)]="mat.idMat" (focus)="limpiarID()" required>
             <div [ngSwitch]="errorID">
@@ -59,7 +65,7 @@
               <div *ngSwitchCase="3">El ID de la materia debe ser un numero.</div>
           </div>
           </div>
-          <div class="col-md-4 mb-3">
+          <div class="col-md-6 mb-3">
             <label>Materia</label>
             <input type="text" class="form-control" name="nombreMat" placeholder="Ej: Base de Datos" [(ngModel)]="mat.nombreMat" (focus)="limpiarNombre()" required>
             <div [ngSwitch]="errorNombre">
@@ -69,8 +75,10 @@
           </div>
           </div>
         </div>
+      
         <div class="form-row">
-          <div class="col-md-3 mb-3">
+          
+          <div class="col-md-6 mb-3">
             <label>AÑO</label>
             <select type="text" class="custom-select mr-sm-2" name="anio" [(ngModel)]="mat.anio" (focus)="limpiarAnio()">
               <option value=1>Primer año</option>
@@ -82,7 +90,7 @@
               <div *ngSwitchCase="2">Error inesperado. Si el error persiste recargue la pagina</div>
           </div>        
           </div>
-          <div class="col-md-3 mb-3">
+          <div class="col-md-6 mb-3">
             <label>TIPO</label>
             <select type="text" class="custom-select mr-sm-2" name="tipo" [(ngModel)]="mat.tipo" (focus)="limpiarTipo()">
               <option value="Cuatrimestral">Cuatrimestral</option>
@@ -99,6 +107,27 @@
         <button class="btn btn-dark" style="margin-left: 2%;" (click)="limpiarTodo()">Limpiar campos</button>
       </form>
 
+      <div class="form-row" style="margin-top: 10%;">
+      <div class="col-md-12">
+        <label style="padding-right: 1%; width: 20%;">Materia:    </label>
+              <select class="selectpicker" data-live-search="true" style="right: 0%; width: 60%;" [(ngModel)]="materia">
+                <option *ngFor="let mat of materias" [ngValue]="mat.idMat">{{mat.nombreMat}}</option>
+        
+              </select>
+            </div>
+            <div class="col-md-12">
+              <label style="padding-right: 1%;width: 20%;">Correlativa:    </label>
+              <select class="selectpicker" data-live-search="true"  style="right: 0%; width:60%;" [(ngModel)]="aprob">
+                <option *ngFor="let mat of materias" [ngValue]="mat.idMat">{{mat.nombreMat}}</option>
+        
+              </select>
+              <td><button class="btn btn-info" (click)="test()">Agregar correlativa</button></td>
+            </div>
+      </div>
+
+
+    </div>
+    </div>
 
 
 <br>

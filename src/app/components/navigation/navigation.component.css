@@ -1,3 +1,10 @@
 #logout{
     cursor: pointer;
 }
+
+label{
+
+    overflow:hidden;
+    text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -10,11 +10,13 @@ import {Router} from '@angular/router'
 })
 export class NavigationComponent implements OnInit {
 loginOkMostrar:boolean=false;
+nombre:any;
 
   constructor(private usuariosService:UsuariosService,private router:Router) { }
   ngOnInit(): void {
     if (localStorage.token) {
       this.loginOkMostrar = true;
+      this.nombre= localStorage.nombreApellido;
     }
     else{
       this.loginOkMostrar = false;
