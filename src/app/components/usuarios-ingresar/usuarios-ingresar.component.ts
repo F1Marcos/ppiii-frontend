@@ -83,9 +83,7 @@ export class UsuariosIngresarComponent implements OnInit {
     this.reintentar=false;
     this.user.usuario="";
     this.user.password="";
-	this.mensaje="";
+	  this.mensaje="";
+    this.loginFlag=false;
   }
-  
-
-
 }
