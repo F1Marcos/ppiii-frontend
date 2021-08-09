@@ -44,11 +44,11 @@ export class AdminActaCursadaComponent implements OnInit {
             var result:any = res;
             console.log(result.final.length);
             for(var i=0;i<result.cursada.length;i++){
-              result.cursada[i].fecha=result.cursada[i].fecha.replace("T03:00:00.000Z","");
+              result.cursada[i].fecha=result.cursada[i].fecha.replace("T00:00:00.000Z","");
             }
             for(var i=0;i<result.final.length;i++){
               console.log(result.final[i].fecha);
-              result.final[i].fecha= result.final[i].fecha.replace("T03:00:00.000Z","");
+              result.final[i].fecha= result.final[i].fecha.replace("T00:00:00.000Z","");
             }
             console.log('ACA RECIBO LISTA DE ACTAS');
             console.log(res);
