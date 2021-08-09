@@ -14,6 +14,7 @@ export class UsuariosIngresarComponent implements OnInit {
 
   reintentar:boolean=false;
   mensaje:string="";
+  loginFlag:boolean=false;
   user={  usuario:"", password:""};
   constructor(private usuariosService: UsuariosService,private router:Router) {
 
@@ -41,6 +42,7 @@ export class UsuariosIngresarComponent implements OnInit {
     
 		console.log("Sign In");
     console.log(this.user);
+    this.loginFlag = true;
     this.usuariosService.ingresar(this.user).subscribe(
       res => {
         console.log(res);

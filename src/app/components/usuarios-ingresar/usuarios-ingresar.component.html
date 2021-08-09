@@ -31,9 +31,20 @@
                             </p>
                             <!-- JS because of IE support; better: placeholder="Password" -->
 
-                            <div>
+                            <div *ngIf="loginFlag">
                                 <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text"
-                                        href="#">Forgot
+                                        href="http://ifts11.com/virtual/login/forgot_password.php">Forgot
+                                        password?</a></span>
+                                <span style="width:50%; text-align:right;  display: inline-block;">
+                                    <button type="submit" class="btn btn-dark">Enviar</button>
+                                </span>
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
+                            </div>
+                            <div *ngIf="!loginFlag">
+                                <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text"
+                                        href="http://ifts11.com/virtual/login/forgot_password.php">Forgot
                                         password?</a></span>
                                 <span style="width:50%; text-align:right;  display: inline-block;">
                                     <button type="submit" class="btn btn-dark">Enviar</button>
