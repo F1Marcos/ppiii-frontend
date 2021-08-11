@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 
 export class UsuariosService{
-	// API_URI = 'http://localhost:3000/user';
-	API_URI = 'https://ppiii-demo1.herokuapp.com/user';
+	 API_URI = 'http://localhost:3000/user';
+	//API_URI = 'https://ppiii-demo1.herokuapp.com/user';
 
 	logued$ = new EventEmitter<string>();
 	
@@ -84,11 +84,11 @@ export class UsuariosService{
 		return this.http.post(`${this.API_URI}/agregarComent`, com);
 		//si no funciona usar 
 	}
-	agregarCorrelativa(materia: string, aprob:string) {
+	agregarCorrelativa(asignadas: string, materia:string) {
 		//para expandir/especializar las variables usamos ` y no ' o "  
 		//Las variables salen pintadas de otro color diferente del de texto
 		console.log("entro a service");
-		return this.http.post(`${this.API_URI}/agregarCorrelativa`,[materia,aprob]);
+		return this.http.post(`${this.API_URI}/agregarCorrelativa`,[asignadas,materia]);
 		//si no funciona usar 
 	}
 	modificarComentario(com: any) {
@@ -192,6 +192,10 @@ export class UsuariosService{
 	listarActasCursadas() {
 		console.log('ENTRE AL SERVICE ACTAS GET');
 		return this.http.get(`${this.API_URI}/listarActasCursadas`);
+	}
+	traerCorrelativas(mat:any) {
+		console.log('ENTRE AL SERVICE ACTAS GET');
+		return this.http.get(`${this.API_URI}/traerCorrelativas/${mat.idMat}`);
 	}
 	verificarRol() {
 		console.log('ENTRE AL SERVICE ACTAS GET');

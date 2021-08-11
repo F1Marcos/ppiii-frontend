@@ -17,8 +17,6 @@ export class AdminAbmMateriaComponent implements OnInit {
     tipo:"",
     flagCorre:0
   };
-  materia="";
-  aprob="";
   mensaje="";
   filterPost="";
   errorID=0;
@@ -26,6 +24,12 @@ export class AdminAbmMateriaComponent implements OnInit {
   errorAnio=0;
   errorTipo=0;
   alert:boolean=false;
+  flagCorre:boolean=false;
+  flagMaterias:boolean=false;
+  asignadas: any=[];
+  noAsignadas:any=[];
+  matSeleccionada="";
+  matSeleccionadaNombre="";
 
   ngOnInit(): void {
     this.usuariosService.verificarRol().subscribe(
@@ -58,9 +62,7 @@ export class AdminAbmMateriaComponent implements OnInit {
 		)
     
   }
-  test(){
-    console.log(this.aprob);
-  }
+
 
   modificarMateria(mat:any){
     this.usuariosService.modificarMateria(mat).subscribe(
@@ -121,7 +123,7 @@ export class AdminAbmMateriaComponent implements OnInit {
   }
 
   agregarCorrelativa(){
-    this.usuariosService.agregarCorrelativa(this.materia,this.aprob).subscribe(
+    this.usuariosService.agregarCorrelativa(this.asignadas,this.matSeleccionada).subscribe(
 			res => {
 			  let result:any=res;
 			  console.log('RESPUESTA DEL BACKEN STATUS:');
@@ -138,6 +140,76 @@ export class AdminAbmMateriaComponent implements OnInit {
 		  );
   }
 
+  mostrarMaterias(){
+
+    this.flagMaterias=true;
+
+  }
+
+  mostrarCorr(){
+    this.flagMaterias=false;
+   
+  }
+
+  traerCorrelativas(mat:any){
+    
+    this.usuariosService.traerCorrelativas(mat).subscribe(
+			res => {
+			  let result:any=res;
+        this.matSeleccionada=mat.idMat;
+        this.matSeleccionadaNombre=mat.nombreMat;
+			  console.log('RESPUESTA DEL BACKEN STATUS:');
+			  console.log(result);
+        this.asignadas=result.asignadas;
+        this.noAsignadas=result.noAsignadas;
+        this.flagCorre=true;
+
+
+			},
+			err => {
+        this.alert=true;
+        this.mensaje="No se pudo agregar la materia";
+			  console.log(err.error);}
+		  );
+
+  }
+
+  cancelar(){
+    delete this.noAsignadas;
+    delete this.asignadas;
+    this.matSeleccionada="";
+    this.matSeleccionadaNombre="";
+    this.flagCorre=false;
+  }
+  asignar(mat:any){
+    var aux:any= [];
+    this.noAsignadas.forEach((element:any,index:number)=>{
+      if(element.idMat==mat.idMat){
+        delete this.noAsignadas[index];
+      } else{
+        aux.push(this.noAsignadas[index]);
+      }
+   });
+   this.noAsignadas= aux;
+   this.asignadas.push(mat);
+
+  }
+  noAsignar(mat:any){
+    var aux:any= [];
+    this.asignadas.forEach((element:any,index:number)=>{
+      if(element.idMat==mat.idMat){
+        delete this.asignadas[index];
+      } else{
+        aux.push(this.asignadas[index]);
+      }
+   });
+   this.asignadas= aux;
+   this.noAsignadas.push(mat);
+  }
+
+  enviarAsign(){
+    
+  }
 
   verificarForm():boolean{
     this.errorID=this.verificarID(this.mat.idMat);
