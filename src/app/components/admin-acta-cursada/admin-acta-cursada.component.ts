@@ -17,11 +17,14 @@ export class AdminActaCursadaComponent implements OnInit {
     fecha:"",
     tipo:""
   }
+  aux:any=[];
   actasListCursada: any = [];
   actasListFinal: any =[];
   load: any;
   arrayBuffer:any;
   file: any;
+  errorActa:boolean=false;
+  
   
   // archivosseleccionado: any;
   notasTotales:any=[];
@@ -42,14 +45,6 @@ export class AdminActaCursadaComponent implements OnInit {
         this.usuariosService.listarActasCursadas().subscribe(
           res => { 
             var result:any = res;
-            console.log(result.final.length);
-            for(var i=0;i<result.cursada.length;i++){
-              result.cursada[i].fecha=result.cursada[i].fecha.replace("T00:00:00.000Z","");
-            }
-            for(var i=0;i<result.final.length;i++){
-              console.log(result.final[i].fecha);
-              result.final[i].fecha= result.final[i].fecha.replace("T00:00:00.000Z","");
-            }
             console.log('ACA RECIBO LISTA DE ACTAS');
             console.log(res);
             this.actasListCursada = result.cursada;
@@ -141,7 +136,15 @@ onRemove() {
                   console.log(notas);
                  
                   if(notas.Udni!=""){
+                    if(!this.aux.includes(notas.Udni)){
+                      console.log(aux);
+                      console.log(notas.Udni);
                     this.notasTotales.push(notas);
+                    this.aux.push(notas.Udni);
+                  }else{
+                    this.errorActa=true;
+                    return
+                  }
                   }
                   break;
                   case "final":
@@ -208,6 +211,7 @@ onRemove() {
   }
 
   eliminarActa(actaSelect:any){
+    if(confirm("¿Esta seguro que desea eliminar al acta? sAl eliminar el acta se borraran todas las notas vinculadas a la misma")) {
     this.usuariosService.eliminarActa(actaSelect.nroActa,actaSelect.tipo).subscribe(
       res => {
         console.log("Se guardaron las notas");
@@ -220,6 +224,7 @@ onRemove() {
         this.load=false
       }
     )
+    }
 
   }
 modificarActa(actaSelect:any){
@@ -244,7 +249,9 @@ modificarActa(actaSelect:any){
      console.log("IMPRIMO EN SUBMIT");                        
     console.log(this.acta);
     console.log(this.notasTotales);
+    
     if((this.flag_cursada==true && this.acta.tipo=="cursada")||(this.flag_final==true && this.acta.tipo=="final")){
+      if(!this.errorActa){
 
     this.usuariosService.crearActa(this.acta).subscribe(  
       res => {
@@ -270,6 +277,10 @@ modificarActa(actaSelect:any){
         this.load=false
       }
     )
+  }else{
+    this.load=false;
+    console.log("NO SE CARGO BIEN EL ACTA");
+  }
   }else{
     console.log("TIPO INCORRECTO");
     this.load=false;

@@ -1,29 +1,26 @@
 <html>
-    <h1 style="color:cornsilk; text-align: center;">HOME DE ALUMNO {{usuario}}</h1>
+<div class="container" style="width: 50%; margin-top: 1%;">
+    <h1 style="color:cornsilk; text-align: center;">HOME DEL ALUMNO {{usuario}}</h1>
+    <div class="row" style="height: 100%;text-align: center; margin-top: 10%;">
+        
+        <div class="col-lg-6 mx-auto" id="derecha" style="margin: 2.5%;width: auto;">
+            <a class="btn btn-dark border" routerLink="../listMaterias" style="width: 300px;"><img
+                    src="assets/icons8-exam-100.png"><br><label style="font-size: x-large;">Listar Materias Aprobadas</label> </a>
+        </div>
+        <div class="col-lg-6 mx-auto" id="izquierda" style="margin: 2.5%;width: auto;">
+            <a class="btn btn-dark border" routerLink="../listCorre" style="width: 300px;"><img
+                    src="assets/icons8-aprobado-100.png"> <br><label style="font-size: x-large;">Listar Materias a inscribir</label> </a>
 
-    <div class="container p-3">
-        <div class="row p-3">
-            <div class="col-md-4 mx-auto">
-                <div style="margin: 5%; text-align: center;">
-                    <a class="btn btn-info" routerLink="../listMaterias" style="width: 200px;">Listar Materias Aprobadas</a>
-                </div>
-                <div style="margin: 5%; text-align: center;">
-                    <a class="btn btn-info" routerLink="../listCorre" style="width: 200px;">Listar Materias a inscribir</a>
-                </div>
-                <div style="margin: 5%; text-align: center;">
-                    <a class="btn btn-info" routerLink="../web-tp" style="width: 200px;">Listar TP WEB</a>
-                </div>
-            </div>
         </div>
     </div>
-    <h1 style="margin-top: 15%; margin-bottom: 1%; text-align: center; color: white;">Tu progreso de la carrera</h1>
-    <div class="progress" style="height: 8%; width: 70%; margin-left: 15%; text-align: center;">
-        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
-        [style.width.%]="porcentaje" aria-valuenow="25" aria-valuemin="1" aria-valuemax="100">
-            
-            <h4 style="color:white;">{{porcentaje}}%</h4>
-        </div>
-        <span class="sr-only">{{porcentaje}}%</span>
+</div>
+<h1 style="margin-top: 15%; margin-bottom: 1%; text-align: center; color: white;">Tu progreso de la carrera</h1>
+<div class="progress" style="height: 8%; width: 70%; margin-left: 15%; text-align: center;">
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+    [style.width.%]="porcentaje" aria-valuenow="25" aria-valuemin="1" aria-valuemax="100">
+        
+        <h4 style="color:white;">{{porcentaje}}%</h4>
     </div>
+    <span class="sr-only">{{porcentaje}}%</span>
+</div>
 </html>
-

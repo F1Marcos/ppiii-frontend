@@ -142,12 +142,12 @@ export class AdminAbmMateriaComponent implements OnInit {
 
   mostrarMaterias(){
 
-    this.flagMaterias=true;
+    this.flagMaterias=false;
 
   }
 
   mostrarCorr(){
-    this.flagMaterias=false;
+    this.flagMaterias=true;
    
   }
 
