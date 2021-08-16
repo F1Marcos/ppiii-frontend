@@ -39,9 +39,6 @@ export class UsuariosIngresarComponent implements OnInit {
   }
 
   ingresar(){
-    
-		console.log("Sign In");
-    console.log(this.user);
     this.loginFlag = true;
     this.usuariosService.ingresar(this.user).subscribe(
       res => {
