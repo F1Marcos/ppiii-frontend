@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 
 export class UsuariosService{
-	// API_URI = 'http://localhost:3000/user';
-	API_URI = 'https://ppiii-demo1.herokuapp.com/user'; 
+	 API_URI = 'http://localhost:3000/user';
+	// API_URI = 'https://ppiii-demo1.herokuapp.com/user'; 
 
 	logued$ = new EventEmitter<string>();
 	
@@ -95,8 +95,9 @@ export class UsuariosService{
 		console.log('FE: Metodo servicio Modificar Comentario:')
 		return this.http.post(`${this.API_URI}/modificarComent`, com,);
 	}
-	home(){
-		return this.http.get(`${this.API_URI}/home/`);
+	barraProgreso(dni:number){
+		// return this.http.delete(`${this.API_URI}/eliminarMateria/${idMat}`);
+		return this.http.get(`${this.API_URI}/barraProgreso/${dni}`);
 	}
 
 

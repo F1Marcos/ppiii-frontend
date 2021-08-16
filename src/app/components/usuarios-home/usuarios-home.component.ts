@@ -10,17 +10,18 @@ import {Router} from '@angular/router'
 export class UsuariosHomeComponent implements OnInit {
 
   usuario = "";
-  porcentaje:number = 30;
+  porcentaje:number = 0;
 
   constructor(private usuariosService:UsuariosService,private router:Router) { }
 
   ngOnInit(): void {
-    this.usuariosService.home().subscribe(
+    this.usuariosService.barraProgreso(localStorage.dni).subscribe(
       res => {
-       
+      const result:any = res;
+      this.porcentaje=result.porcentaje;
+      console.log(res);
       },
       err => {
-         
       }
     );
     this.usuario = localStorage.nombreApellido;

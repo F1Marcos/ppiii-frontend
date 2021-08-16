@@ -12,7 +12,6 @@ export class AdminAbmAlumnoComponent implements OnInit {
 
   usuarios: any = [];
   use={
-    usuario:"", 
     nombres:"",
     apellidos:"",
     dni:"",
@@ -118,7 +117,6 @@ export class AdminAbmAlumnoComponent implements OnInit {
   }
 
   agregarAlumno(){
-    
     this.usuariosService.agregarUsuario(this.use).subscribe(
 			res => {
 			  let result:any=res;
@@ -135,7 +133,6 @@ export class AdminAbmAlumnoComponent implements OnInit {
   }
 
   verificarForm():boolean{
-    this.errorUsuario=this.verificarUsuario(this.use.usuario);
     this.errorNombre=this.verificarNombre(this.use.nombres);
     this.errorApellido=this.verificarApellido(this.use.apellidos);
     this.errorDNI=this.verificarDNI(this.use.dni);
@@ -210,12 +207,6 @@ export class AdminAbmAlumnoComponent implements OnInit {
     return 0;
   }
 
-  limpiarUsuario() {
-    if (this.errorUsuario > 0) {
-      this.use.usuario = "";
-      this.errorUsuario = 0;
-    }
-  }
   limpiarNombre() {
     if (this.errorNombre > 0) {
       this.use.nombres = "";
@@ -249,7 +240,6 @@ export class AdminAbmAlumnoComponent implements OnInit {
 
   limpiarTodo(){
     this.use={
-      usuario:"", 
       nombres:"",
       apellidos:"",
       dni:"",

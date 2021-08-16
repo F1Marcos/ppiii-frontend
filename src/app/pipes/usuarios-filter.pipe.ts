@@ -10,7 +10,7 @@ export class UsuariosFilterPipe implements PipeTransform {
     const resultPosts = [];
    
     for(const post of value){
-     if(post.usuario.toUpperCase().indexOf(arg.toUpperCase())>-1){
+     if(post.apellidos.toUpperCase().indexOf(arg.toUpperCase())>-1){
        console.log("SIP");
        resultPosts.push(post);
      }
@@ -18,5 +18,4 @@ export class UsuariosFilterPipe implements PipeTransform {
    return resultPosts;
    
   }
-
 }
