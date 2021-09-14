@@ -19,6 +19,7 @@ export class UsuariosHomeComponent implements OnInit {
       res => {
       const result:any = res;
       this.porcentaje=result.porcentaje;
+      // this.porcentaje=+(this.porcentaje.toFixed(2));
       console.log(res);
       },
       err => {
