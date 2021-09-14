@@ -32,3 +32,9 @@ a.disabled {
   pointer-events: none;
   cursor: default;
 }
+
+a{
+  width: calc(200px*0.5rem);
+  height: calc(200px*0.5rem);
+
+}
