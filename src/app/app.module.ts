@@ -27,6 +27,8 @@ import { AdminActaCursadaComponent } from './components/admin-acta-cursada/admin
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { VerActaCursadaComponent } from './components/ver-acta-cursada/ver-acta-cursada.component';
 import { NotasPipe } from './pipes/notas.pipe';
+import { DatePipe } from '@angular/common';
+import { AlumnoListarCursadaComponent } from './components/alumno-listar-cursada/alumno-listar-cursada.component'
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { NotasPipe } from './pipes/notas.pipe';
     ActivadoComponent,
     AdminActaCursadaComponent,
     VerActaCursadaComponent,
-    NotasPipe
+    NotasPipe,
+    AlumnoListarCursadaComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { NotasPipe } from './pipes/notas.pipe';
   providers: [
     UsuariosService,
     AuthGuard,
+    [DatePipe],
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

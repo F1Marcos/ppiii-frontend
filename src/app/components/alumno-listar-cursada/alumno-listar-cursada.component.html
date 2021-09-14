@@ -4,19 +4,25 @@
         [(ngModel)]="filterPost" autofocus>
     <table class='table table-dark' style="text-align:center;">
         <thead>
-            <th>Numero Acta</th>
             <th>Materia</th>
+            <th>Primer Parcial</th>
+            <th>Recuperatorio</th>
+            <th>Segundo Parcial</th>
+            <th>Recuperatorio</th>
+            <th>Nota Final</th>
+            <th>Estado</th>
             <th>Fecha</th>
-            <th>Tipo</th>
-            <th>Nota</th>
         </thead>
         <tbody *ngIf="materias.length > 0; else fila">
             <tr *ngFor=" let materia of materias | materiasFilter:filterPost">
-                <td>{{materia.nroActa}}</td>
                 <td>{{materia.nombreMat}}</td>
-                <td>{{materia.fecha}}</td>
-                <td>{{materia.tipo}}</td>
+                <td>{{materia.nota1}}</td>
+                <td>{{materia.nota2}}</td>
+                <td>{{materia.nota3}}</td>
+                <td>{{materia.nota4}}</td>
                 <td>{{materia.notaFinalNum}}</td>
+                <td>{{materia.estado}}</td>
+                <td>{{materia.fecha}}</td>
             </tr>
         </tbody>
         <ng-template #fila>

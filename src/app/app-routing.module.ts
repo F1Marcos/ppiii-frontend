@@ -16,6 +16,7 @@ import { AdminAbmMateriaComponent } from "./components/admin-abm-materia/admin-a
 import { ActivadoComponent } from './components/activado/activado.component';
 import { AdminActaCursadaComponent } from './components/admin-acta-cursada/admin-acta-cursada.component';
 import { VerActaCursadaComponent } from './components/ver-acta-cursada/ver-acta-cursada.component';
+import { AlumnoListarCursadaComponent } from './components/alumno-listar-cursada/alumno-listar-cursada.component';
 
 
 const routes: Routes = [
@@ -71,8 +72,14 @@ const routes: Routes = [
 		canActivate: [AuthGuard]
 	},
 	{
-		path:'usuarios/listMaterias',
+		path:'usuarios/materiasFinalizadas',
 		component: AlumnoListarAprobComponent,
+		canActivate: [AuthGuard]
+		
+	},
+	{
+		path:'usuarios/materiasCursadas',
+		component: AlumnoListarCursadaComponent,
 		canActivate: [AuthGuard]
 		
 	},

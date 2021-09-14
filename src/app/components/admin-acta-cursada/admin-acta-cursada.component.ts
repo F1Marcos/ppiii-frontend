@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios.service';
 import { HttpClient } from '@angular/common/http';
 import * as XLSX from 'ts-xlsx';
+import { DatePipe } from '@angular/common'
+
 
 @Component({
   selector: 'app-admin-acta-cursada',
@@ -11,6 +13,7 @@ import * as XLSX from 'ts-xlsx';
 export class AdminActaCursadaComponent implements OnInit {
 
   acta = {
+    nroActa:"",
     idMat: "",
     curso: "",
     cuatrimestre:"",
@@ -36,7 +39,7 @@ export class AdminActaCursadaComponent implements OnInit {
   flag_cursada:boolean=false;
   flag_final:boolean=false;
 
-  constructor(private usuariosService: UsuariosService, private http: HttpClient) { }
+  constructor(private usuariosService: UsuariosService, private http: HttpClient, public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.usuariosService.verificarRol().subscribe(
@@ -84,6 +87,7 @@ onRemove() {
     }
   
   }
+  
 //Parceo el file antes de mandar
   cargaFile(){
     let fileReader = new FileReader();
@@ -101,7 +105,16 @@ onRemove() {
           console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
           var aux:any;
           aux = XLSX.utils.sheet_to_json(worksheet,{raw:true});
-            //console.log(aux);
+          //Convierto la fecha
+          function convert(str:any) {
+           var date = new Date(str),
+          mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+           day = ("0" + date.getDate()).slice(-2);
+          return [date.getFullYear(), mnth, day].join("-");
+          }
+          console.log(convert(Object.values(aux[12]).toString()));
+          this.acta.fecha=convert(Object.values(aux[12]).toString());
+            console.log(aux[12]);
             var objetos = [];
             for(let i=0;i<aux.length ;i++){
               var valor = Object.values(aux[i]).toString();
@@ -124,6 +137,7 @@ onRemove() {
                   }
                   
                   objetos= valor.split(";");
+                  console.log(objetos);
                   objetos[2]= objetos[2].replace(/[.]/g,"");
                   notas.Udni= objetos[2];
                   notas.nota1= objetos[3];
@@ -169,21 +183,33 @@ onRemove() {
                 
               
               }else{
+                
                 valor =valor.replace(/[;]/g,"");
-                if(valor.match("Materia:")){
-                    valor = valor.replace("Materia: ","");
+                console.log("HOLA");
+                console.log(valor);
+                if(valor.match("Codigo Materia:")){
+                    valor = valor.replace("Codigo Materia:","");
+                    valor =valor.replace(/[ ]/g,"");
                     this.acta.idMat=valor;
+                    console.log("IMPRIMO EL CODIGO");
                     console.log(valor);
                 }
-                if(valor.match("Fecha:")){
-                  valor =valor.replace(/[ ]/g,"");
+                if(valor.match("Fecha")){
+                  console.log("IMPRIMO FECHA");
+                  console.log(valor);
                   valor = valor.replace("Fecha:","");
-                  var fecha = valor.split("/");
-                  console.log(fecha);
+                  var fecha = valor.split("|");
+                  console.log("AAAAAAAAAAAAAAAAAAAA");            
                   valor = fecha[2]+"-"+fecha[1]+"-"+fecha[0];
                   this.acta.fecha=valor;
-                  console.log(valor);
-              }
+                  console.log(this.acta.fecha);
+                }
+                if(valor.match("Numero acta de cursada:")){
+                  valor = valor.replace("Numero acta de cursada:","");
+                  valor =valor.replace(/[ ]/g,"");
+                  this.acta.nroActa=valor;
+
+                }
                 if(valor.match("Acta de Final")){
                   this.acta.tipo="final";
                 }
@@ -201,6 +227,12 @@ onRemove() {
                 valor = valor.replace("Cuatrimestre:","");
                 if(valor.startsWith("1")){
                   this.acta.cuatrimestre= "Primero";
+                }
+                if(valor.startsWith("2")){
+                  this.acta.cuatrimestre= "Segundo";
+                }
+                if(valor.startsWith("A")){
+                  this.acta.cuatrimestre= "Anual";
                 }
                 console.log(valor);
          }
