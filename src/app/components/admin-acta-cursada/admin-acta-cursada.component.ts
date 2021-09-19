@@ -3,6 +3,7 @@ import { UsuariosService } from '../../services/usuarios.service';
 import { HttpClient } from '@angular/common/http';
 import * as XLSX from 'ts-xlsx';
 import { DatePipe } from '@angular/common'
+import { EMPTY } from 'rxjs';
 
 
 @Component({
@@ -44,7 +45,18 @@ export class AdminActaCursadaComponent implements OnInit {
   ngOnInit(): void {
     this.usuariosService.verificarRol().subscribe(
 			res => { 
+        this.acta = {
+          nroActa:"",
+          idMat: "",
+          curso: "",
+          cuatrimestre:"",
+          fecha:"",
+          tipo:""
+        };
         delete this.file;
+        delete this.arrayBuffer;
+        delete this.notasTotales;
+        delete this.aux;
         this.usuariosService.listarActasCursadas().subscribe(
           res => { 
             var result:any = res;
@@ -105,6 +117,8 @@ onRemove() {
           console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
           var aux:any;
           aux = XLSX.utils.sheet_to_json(worksheet,{raw:true});
+          console.log(aux);
+          console.log("IMPRIMO AUX");
           //Convierto la fecha
           function convert(str:any) {
            var date = new Date(str),
@@ -112,12 +126,14 @@ onRemove() {
            day = ("0" + date.getDate()).slice(-2);
           return [date.getFullYear(), mnth, day].join("-");
           }
-          console.log(convert(Object.values(aux[12]).toString()));
           this.acta.fecha=convert(Object.values(aux[12]).toString());
             console.log(aux[12]);
             var objetos = [];
             for(let i=0;i<aux.length ;i++){
-              var valor = Object.values(aux[i]).toString();
+              var valor:any;
+              valor = Object.values(aux[i]).toString();
+              console.log("IMPRIMO VALOR");
+                  console.log(valor);
               objetos= valor.split(";");
               if(/^([0-9])/.test(valor)){
 
@@ -137,6 +153,7 @@ onRemove() {
                   }
                   
                   objetos= valor.split(";");
+                  console.log("IMPRIMO OBJETOS");
                   console.log(objetos);
                   objetos[2]= objetos[2].replace(/[.]/g,"");
                   notas.Udni= objetos[2];
@@ -147,15 +164,17 @@ onRemove() {
                   notas.notaFinalNum=objetos[7];
                   notas.notaFinalLet= objetos[8];
                   notas.estado=objetos[9];
+                  console.log("IMPRIMO NOTAS");
                   console.log(notas);
                  
                   if(notas.Udni!=""){
-                    if(!this.aux.includes(notas.Udni)){
+                    if(!this.aux.includes(notas.Udni) || this.aux.length == 0){
                       console.log(aux);
                       console.log(notas.Udni);
                     this.notasTotales.push(notas);
                     this.aux.push(notas.Udni);
                   }else{
+                    console.log("entro al error");
                     this.errorActa=true;
                     return
                   }
@@ -318,7 +337,8 @@ modificarActa(actaSelect:any){
     this.load=false;
   }
   }, 3000);
-  
+
+
   }
   
   actaCursada(){
