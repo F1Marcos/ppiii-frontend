@@ -132,8 +132,6 @@ onRemove() {
             for(let i=0;i<aux.length ;i++){
               var valor:any;
               valor = Object.values(aux[i]).toString();
-              console.log("IMPRIMO VALOR");
-                  console.log(valor);
               objetos= valor.split(";");
               if(/^([0-9])/.test(valor)){
 
@@ -167,18 +165,19 @@ onRemove() {
                   console.log("IMPRIMO NOTAS");
                   console.log(notas);
                  
-                  if(notas.Udni!=""){
-                    if(!this.aux.includes(notas.Udni) || this.aux.length == 0){
-                      console.log(aux);
-                      console.log(notas.Udni);
+                  if(notas.Udni!="")
+                  {
+                    console.log("ENTRE A CARGAR LA NOTA")
+                    console.log(aux);
+                    console.log(notas.Udni);
                     this.notasTotales.push(notas);
-                    this.aux.push(notas.Udni);
+                   // this.aux.push(notas.Udni);
                   }else{
                     console.log("entro al error");
                     this.errorActa=true;
                     return
                   }
-                  }
+                  
                   break;
                   case "final":
                     var notasFinal={
@@ -187,7 +186,6 @@ onRemove() {
                       nota:"",
                       notaLetra:"",
                     }
-                  objetos= valor.split(";");
                   objetos[1]= objetos[1].replace(/[.]/g,"");
                   notasFinal.Udni= objetos[1];
                   notasFinal.nota= objetos[3];
@@ -254,8 +252,8 @@ onRemove() {
                   this.acta.cuatrimestre= "Anual";
                 }
                 console.log(valor);
-         }
-      }            
+          }
+        }            
       }
     }
     fileReader.readAsArrayBuffer(this.file);
