@@ -92,7 +92,9 @@ export class AdminAbmAlumnoComponent implements OnInit {
   eliminarUsuario(user:any){
     console.log('FE: Entre metod post eliminar usuario!');
     console.log(user);
-    if(confirm("Esta seguro que desea eliminar al usuario "+user.usuario)) {
+    
+
+    if(confirm("Esta seguro que desea eliminar al usuario "+user.nombres + " " + user.apellidos)) {
       console.log("Implement delete functionality here");
     
     this.usuariosService.eliminarUsuario(user.id).subscribe(

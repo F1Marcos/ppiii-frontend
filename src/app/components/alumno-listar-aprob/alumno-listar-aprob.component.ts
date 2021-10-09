@@ -23,7 +23,8 @@ export class AlumnoListarAprobComponent implements OnInit {
         console.log(err.error.message);
 
         
-      }
+      }      
+
 		)
 	}
   

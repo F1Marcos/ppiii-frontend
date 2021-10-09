@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class VerActaCursadaComponent implements OnInit {
 
   acta: any = [];
-  nroActa:any = "";
+  idActa:any = "";
   tipo:any="";
   filterPost="";
   constructor(private usuariosService: UsuariosService,private route: ActivatedRoute) { }
@@ -19,12 +19,12 @@ export class VerActaCursadaComponent implements OnInit {
     this.route.queryParams
     .subscribe(params => {
       console.log(params);
-      this.nroActa = this.route.snapshot.paramMap.get('nroActa');
+      this.idActa = this.route.snapshot.paramMap.get('nroActa');
       this.tipo = this.route.snapshot.paramMap.get('tipo');
   console.log(this.tipo);    }
   );
 
-  this.usuariosService.verActa(this.nroActa, this.tipo).subscribe(
+  this.usuariosService.verActa(this.idActa, this.tipo).subscribe(
     res => { 
       const result:any =res;
       console.log('ACA RECIBO LISTA DE ACTAS');
@@ -38,8 +38,10 @@ export class VerActaCursadaComponent implements OnInit {
   }
 
   modificarNota(notas:any){
-    console.log(notas);
-    this.usuariosService.modificarNota(notas,this.nroActa).subscribe(
+    delete notas.nroActa;
+    delete notas.idMat;
+    delete notas.fecha;
+    this.usuariosService.modificarNota(notas,this.idActa).subscribe(
       res => { 
         console.log(res);
         this.ngOnInit();
@@ -53,7 +55,7 @@ export class VerActaCursadaComponent implements OnInit {
 
   eliminarNota(notas:any){
   console.log(notas);
-  this.usuariosService.eliminarNota(notas.Udni,this.nroActa).subscribe(
+  this.usuariosService.eliminarNota(notas.Udni,this.idActa).subscribe(
     res => { 
       console.log(res);
       this.ngOnInit();

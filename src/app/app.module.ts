@@ -28,7 +28,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { VerActaCursadaComponent } from './components/ver-acta-cursada/ver-acta-cursada.component';
 import { NotasPipe } from './pipes/notas.pipe';
 import { DatePipe } from '@angular/common';
-import { AlumnoListarCursadaComponent } from './components/alumno-listar-cursada/alumno-listar-cursada.component'
+import { AlumnoListarCursadaComponent } from './components/alumno-listar-cursada/alumno-listar-cursada.component';
+import { AdminReportesComponent } from './components/admin-reportes/admin-reportes.component'
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { AlumnoListarCursadaComponent } from './components/alumno-listar-cursada
     AdminActaCursadaComponent,
     VerActaCursadaComponent,
     NotasPipe,
-    AlumnoListarCursadaComponent
+    AlumnoListarCursadaComponent,
+    AdminReportesComponent
   ],
   imports: [
     BrowserModule,

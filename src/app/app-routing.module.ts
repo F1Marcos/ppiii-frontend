@@ -17,6 +17,7 @@ import { ActivadoComponent } from './components/activado/activado.component';
 import { AdminActaCursadaComponent } from './components/admin-acta-cursada/admin-acta-cursada.component';
 import { VerActaCursadaComponent } from './components/ver-acta-cursada/ver-acta-cursada.component';
 import { AlumnoListarCursadaComponent } from './components/alumno-listar-cursada/alumno-listar-cursada.component';
+import { AdminReportesComponent } from './components/admin-reportes/admin-reportes.component'
 
 
 const routes: Routes = [
@@ -24,10 +25,6 @@ const routes: Routes = [
 		path: '',
 		redirectTo: 'usuarios/ingresar',
 		pathMatch: 'full'
-	},
-	{	
-		path: 'usuarios/web-tp',
-		component: WebTPComponent,
 	},
 	{	
 		path: 'usuarios/activado/:id',
@@ -97,6 +94,10 @@ const routes: Routes = [
 		path: 'admin/abmMateria',
 		component: AdminAbmMateriaComponent,
 		canActivate: [AuthGuard,AdminGuard]
+	},
+	{	
+		path: 'admin/reportes',
+		component: AdminReportesComponent,
 	}
 ];
 

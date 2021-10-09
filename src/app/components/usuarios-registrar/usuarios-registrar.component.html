@@ -1,33 +1,58 @@
 
+<html>
 <div class="container p-4">
-    <div class="row">
+    <div class="row" style="margin-top: 10%;">
         <div class="col-md-4 mx-auto">
             <div class="card text-center">
                 <div class="card-header">
-                    <h3>Sign Up</h3>
+                    <h3>Registro</h3>
                 </div>
-                <div *ngIf="!registroEnv" class="card-body">
+                <div  class="card-body">
                     <form (submit)="registrar()">
                         <div class="form-group">
-                            <input type="text" name="nombre" [(ngModel)]="user.nombre" placeholder="Nombre" class="form-control">
-                            <input type="password" name="password" [(ngModel)]="user.password" placeholder="Contraseña" class="form-control">
-                            <input type="password" name="repassword" [(ngModel)]="user.repassword" placeholder="Repetir Contraseña"class="form-control">
-                            <input type="email" name="email" [(ngModel)]="user.email" placeholder="email"class="form-control">
-                            <button type="submit" class="btn btn-success btn-block">Enviar</button>
+                         
+                            <label style="color: rgb(119, 102, 102)">DNI</label>
+                            <input type="text" class="form-control"  name="dni" [(ngModel)]="user.dni"
+                            disabled>
+                            <label style="color: black; margin-top: 3%;">Nombres</label>
+                            <input type="text" class="form-control" name="nombres" placeholder="Nombres" [(ngModel)]="user.nombres"
+                            (focus)="limpiarNombre()" required>
+                          <div [ngSwitch]="errorNombre">
+                            <div *ngSwitchCase="1">Debes completar el campo</div>
+                            <div *ngSwitchCase="2">Nombre demasiado largo</div>
+                            <div *ngSwitchCase="3">Nombre debe ser alfabetico y solo admite un espacio entre nombres</div>
+                          </div>
+                          <label style="color: black; margin-top: 3%;">Apellidos</label>
+                          <input type="text" class="form-control" name="apellidos" placeholder="Apellidos"
+                            [(ngModel)]="user.apellidos" (focus)="limpiarApellido()" required>
+                          <div [ngSwitch]="errorApellido">
+                            <div *ngSwitchCase="1">Debes completar el campo</div>
+                            <div *ngSwitchCase="2">Apellido demasiado largo</div>
+                            <div *ngSwitchCase="2">Apellido debe ser alfabetico y solo admite 1 espacio entre apellidos</div>
+                          </div>
+
+                          <label style="color: black; margin-top: 3%;">Email</label>
+                          <input type="text" class="form-control" placeholder="Email Ej roberto@ifts11.com" name="mail" [(ngModel)]="user.mail"
+                            (focus)="limpiarEmail()" required>
+                          <div [ngSwitch]="errorEmail">
+                            <div *ngSwitchCase="1">Debes completar el campo</div>
+                            <div *ngSwitchCase="2">Email muy largo</div>
+                            <div *ngSwitchCase="3">Email debe ser nombre@dominio.algo .</div>
+                          </div>
+                          <label style="color: black; margin-top: 3%;">Fecha de nacimiento</label>
+                          <input type="date"  class="form-control" placeholder="Fecha de nacimiento" name="fechaNac">
+
+
+                          <button type="submit" class="btn btn-success btn-block" style="margin-top: 8%;" (click)="verificarForm()">Enviar</button>
                         </div>
+
+                       
+                        
+                  
                     </form>
-                    </div>
-                    <div *ngIf="registroEnv" class="card-body">
-                <div *ngIf="registroOk" class="card-body">
-                    {{mensaje}} <br>
-                    <a class="btn btn-info" (click)=iniciarSesion()>Iniciar Sesion</a> 
-                </div>
-                <div *ngIf="!registroOk" class="card-body">
-                    {{mensaje}} <br>
-                    <a class="btn btn-info" (click)=reintentarReg()>Reintentar registro</a> 
-                </div>     
-            </div>   
+                    </div>                  
             </div>
         </div>
     </div>
 </div>
+</html>
