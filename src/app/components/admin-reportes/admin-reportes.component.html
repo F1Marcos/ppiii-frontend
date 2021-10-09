@@ -1,1 +1,13 @@
-<p>admin-reportes works!</p>
+<html>
+    <h1 style="text-align: center; color: white;">REPORTES</h1>
+    <select type="text" class="custom-select mr-sm-2" name="rol" [(ngModel)]="opcion">
+        <option value="1">{{opcion}} </option>
+        <option value="2">{{opcion}}</option>
+      </select>
+
+      <div [ngSwitch]="opcion">
+        <div *ngSwitchCase="1">PONE 1500 COSAS</div>
+        <div *ngSwitchCase="2">ACA PONE OTRAS 15000000 COSAS</div>
+      </div>
+
+</html>

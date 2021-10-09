@@ -8,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class AdminReportesComponent implements OnInit {
 
   constructor() { }
-
+  opcion = 0;
   ngOnInit(): void {
+
+    switch(this.opcion){
+      
+    }
   }
 
 }
