@@ -28,10 +28,11 @@ export class AdminHomeComponent implements OnInit {
 
         
       }
-		)
-  
-    
-  
+		) 
   
   }
+  logOut(){
+    this.usuariosService.logOut();
+  }
+
 }
