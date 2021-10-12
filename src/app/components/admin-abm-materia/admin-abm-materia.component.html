@@ -1,12 +1,76 @@
 <html>
-  <nav class="navbar navbar-light" style="margin-right: 60%; opacity: .9; margin-bottom: 0%;">
-    <form class="form-inline">
+  
+  <form (submit)="ModAgr()">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <h1 *ngIf="!seleccion" style="margin-top: 5%;">Agregar Materia</h1>
+            <h1 *ngIf="seleccion" style="margin-top: 5%;">Modificar Materia</h1>
+                  <label style="color: black;margin-top: 3%;">ID</label>
+                  <input  type="text" *ngIf="seleccion" class="form-control" name="idMat" placeholder="Ej: 5XXX" [(ngModel)]="mat.idMat" disabled>
+                  <input type="text" *ngIf="!seleccion" class="form-control" name="idMat" placeholder="Ej: 5XXX" [(ngModel)]="mat.idMat" (focus)="limpiarID()" required>
+                  <div [ngSwitch]="errorID">
+                    <div *ngSwitchCase="1">Debes completar el campo</div>
+                    <div *ngSwitchCase="2">Codigo de materia muy largo, maximo 6 numeros</div>
+                    <div *ngSwitchCase="3">El ID de la materia debe ser un numero.</div>
+                </div>
+                  <label style="color: black;margin-top: 3%;">MATERIA</label>
+                  <input type="text" class="form-control" name="nombreMat" placeholder="Ej: Base de Datos" [(ngModel)]="mat.nombreMat" (focus)="limpiarNombre()" required>
+                  <div [ngSwitch]="errorNombre">
+                    <div *ngSwitchCase="1">Debes completar el campo</div>
+                    <div *ngSwitchCase="2">Nombre muy largo</div>
+                    <div *ngSwitchCase="3">No debe haber mas de un espacio entre palabras</div>
+                </div>
+            
+                
+                  <label style="color: black; margin-top: 3%;">AÑO</label>
+                  <select type="text" class="custom-select mr-sm-2" name="anio" [(ngModel)]="mat.anio" (focus)="limpiarAnio()">
+                    <option value=1>Primer año</option>
+                    <option value=2>Segundo año</option>
+                    <option value=3>Tercer año</option>
+                  </select>  
+                  <div [ngSwitch]="errorAnio">
+                    <div *ngSwitchCase="1">Seleccione una opción</div>              
+                    <div *ngSwitchCase="2">Error inesperado. Si el error persiste recargue la pagina</div>        
+                </div>
+                  <label style="color: black;margin-top: 3%;">TIPO</label>
+                  <select type="text" class="custom-select mr-sm-2" name="tipo" [(ngModel)]="mat.tipo" (focus)="limpiarTipo()">
+                    <option value="Cuatrimestral">Cuatrimestral</option>
+                    <option value="Anual">Anual</option>
+                  </select>
+                  <div [ngSwitch]="errorTipo">
+                    <div *ngSwitchCase="1">Seleccione una opción</div>
+                    <div *ngSwitchCase="2">Error inesperado. Si el error persiste recargue la pagina</div>
+                </div>
+  
+          
+        </div>     
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cerrarForm()">Close</button>
+          <button *ngIf="!seleccion" class="btn btn-dark"  (click)="limpiarTodo()">Limpiar campos</button>
+          <button *ngIf="seleccion" class="btn btn-success" type="submit" (click)="verificarForm()">Modificar Materia</button>
+          <button *ngIf="!seleccion" class="btn btn-success" type="submit" (click)="verificarForm()">Agregar Materia</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+  <nav class="navbar navbar-dark bg-dark">
+  <form class="form-inline">
         <a class="btn btn-outline-dark bg-dark" routerLink="/admin/home" style="font-size:larger; color:#ffffff; border-radius: 15%; margin: 5px;">Volver<span class="sr-only">(current)</span></a>
         <button class="btn btn-outline-dark bg-dark" style="font-size:larger; color:#ffffff; border-radius: 15%; margin: 5px;" type="button" (click)=mostrarMaterias()>Materias</button>
         <button class="btn btn-outline-dark bg-dark" style="font-size: larger; color:#ffffff; border-radius: 15%;"  type="button" (click)=mostrarCorr()>Correlativas</button>
-      </form>
+      </form> 
+      <form class="form-inline">
+        <a class="btn btn-outline-danger bg-danger" style="color: white;" routerLink="/admin/home" (click)="logOut()">LogOut<span class="sr-only">(current)</span></a>
+      </form>    
   </nav>
-    <div class="container" style="text-align: center; color: cornsilk;">
+ 
+  
+    <div class="container" style="text-align: center; color: cornsilk; margin-top: 3%;">
         <h1>ABM MATERIAS</h1>
     </div>
     <div class="container" *ngIf="alert" id="aviso" style="text-align: center; align-items: center; width: 25%;">
@@ -15,14 +79,14 @@
         <strong>{{mensaje}} </strong>
       </div>
     </div>
-
     <br>
-    <div *ngIf="!flagMaterias" class="row">
-    <div class="col-xl-8 col-lg-12" style="color:white">
-      <label style="font-size: large;">Filtro por nombre de materia:</label>
-      <input style="margin-left: 1%; margin-bottom: 1%;" type="text" name="filterPost" [(ngModel)]="filterPost" autofocus>
-      <br>
-        <table class="table table-dark table-hover">
+    <div *ngIf="!flagMaterias" id="materias" class="container">
+      <nav class="navbar navbar-light  justify-content-between">
+        <button type="button" style="margin-right: 3%;" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Agregar Materia</button>
+       <input placeholder="Filtro por materia" type="text" name="filterPost" [(ngModel)]="filterPost" (input)="Paginado()" autofocus>
+        
+      </nav>
+        <table class="table table-dark table-hover" >
             <thead>
                 <th>ID</th>
                 <th>Materia</th>
@@ -32,86 +96,29 @@
                 <th>Modificar</th>
                 <th>Eliminar</th>
             </thead>
-            <tbody *ngIf="materias.length > 0; else fila">
-                <tr *ngFor=" let mat of materias | materiasFilter:filterPost">
-                    <td><input type="number" name="idMat" [(ngModel)]="mat.idMat" class=" form-control" disabled></td>
-                    <td><input type="text" name="nombreMat" [(ngModel)]="mat.nombreMat" class=" form-control"></td>
-                    <td><input type="text" name="anio" [(ngModel)]="mat.anio" class="form-control" autofocus required>
-                    </td>
-                    <td><input type="text" name="tipo" [(ngModel)]="mat.tipo" class="form-control" required></td>
-                    <td><input type="text" name="flagCorre" [(ngModel)]="mat.flagCorre" class=" form-control">
-                    </td>
-                    <td><button class="btn btn-info" (click)=modificarMateria(mat)>Modificar</button></td>
+            <tbody *ngIf="materias.length > 0 && elementos > 0 ; else fila">
+                <tr *ngFor=" let mat of materias | paginator:filterPost:page ">
+                    <td>{{mat.idMat}}</td>
+                    <td>{{mat.nombreMat}}</td>
+                    <td>{{mat.anio}}</td>
+                    <td>{{mat.tipo}}</td>
+                    <td>{{mat.flagCorre}}</td>
+                    <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" (click)="CargarModificar(mat)">Modificar</button></td>
                     <td><a class="btn btn-danger" (click)=eliminarMateria(mat)>Eliminar</a></td>
                 </tr>
             </tbody>
             <ng-template #fila>
                 <tbody>
                     <tr>
-                        <td colspan="4">No hay mas filas</td>
+                        <td colspan="4" style="text-align: center; width: 80%;">No hay datos para mostrar o lo ingresado en el filtro no corresponde a ninguna materia</td>
                     </tr>
                 </tbody>
             </ng-template>
         </table>
-    </div>
-
-    <div class="col-xl-4 col-lg-12" style="margin-top: 3%;">
-    <form (submit)="agregarMateria()">
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label>ID</label>
-            <input type="text" class="form-control" name="idMat" placeholder="Ej: 5XXX" [(ngModel)]="mat.idMat" (focus)="limpiarID()" required>
-            <div [ngSwitch]="errorID">
-              <div *ngSwitchCase="1">Debes completar el campo</div>
-              <div *ngSwitchCase="2">Codigo de materia muy largo, maximo 6 numeros</div>
-              <div *ngSwitchCase="3">El ID de la materia debe ser un numero.</div>
-          </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label>Materia</label>
-            <input type="text" class="form-control" name="nombreMat" placeholder="Ej: Base de Datos" [(ngModel)]="mat.nombreMat" (focus)="limpiarNombre()" required>
-            <div [ngSwitch]="errorNombre">
-              <div *ngSwitchCase="1">Debes completar el campo</div>
-              <div *ngSwitchCase="2">Nombre muy largo</div>
-              <div *ngSwitchCase="3">No debe haber mas de un espacio entre palabras</div>
-          </div>
-          </div>
-        </div>
-      
-        <div class="form-row">
-          
-          <div class="col-md-6 mb-3">
-            <label>AÑO</label>
-            <select type="text" class="custom-select mr-sm-2" name="anio" [(ngModel)]="mat.anio" (focus)="limpiarAnio()">
-              <option value=1>Primer año</option>
-              <option value=2>Segundo año</option>
-              <option value=3>Tercer año</option>
-            </select>  
-            <div [ngSwitch]="errorAnio">
-              <div *ngSwitchCase="1">Seleccione una opción</div>              
-              <div *ngSwitchCase="2">Error inesperado. Si el error persiste recargue la pagina</div>
-          </div>        
-          </div>
-          <div class="col-md-6 mb-3">
-            <label>TIPO</label>
-            <select type="text" class="custom-select mr-sm-2" name="tipo" [(ngModel)]="mat.tipo" (focus)="limpiarTipo()">
-              <option value="Cuatrimestral">Cuatrimestral</option>
-              <option value="Anual">Anual</option>
-            </select>
-            <div [ngSwitch]="errorTipo">
-              <div *ngSwitchCase="1">Seleccione una opción</div>
-              <div *ngSwitchCase="2">Error inesperado. Si el error persiste recargue la pagina</div>
-          </div>
-          </div>
-          
-        </div>
-        <button class="btn btn-success" type="submit" (click)="verificarForm()">Agregar Materia</button>
-        <button class="btn btn-dark" style="margin-left: 2%;" (click)="limpiarTodo()">Limpiar campos</button>
-      </form>
-
-    
-
-
+    <div>
+        <button class="btn btn-outline-info bg-info" style="color: white;" (click)="AnteriorPagina()">Anterior</button>
+      <label style="color: white; margin-right: 5%; margin-left: 5%;">{{page/10}}/{{pageCantidad}}</label>
+      <button class="btn btn-outline-info bg-info" style="color:white" (click)="SiguientePagina()">Siguiente</button>
     </div>
     </div>
 
@@ -126,7 +133,7 @@
             <th>Correlativa</th>
         </thead>
         <tbody *ngIf="materias.length > 0; else fila">
-            <tr *ngFor=" let mat of materias | materiasFilter:filterPost">
+            <tr *ngFor=" let mat of materias">
                 <td><input type="number" name="idMat" [(ngModel)]="mat.idMat" class=" form-control" disabled></td>
                 <td><input type="text" name="nombreMat" [(ngModel)]="mat.nombreMat" class=" form-control"></td>
                 <td><input type="text" name="anio" [(ngModel)]="mat.anio" class="form-control" autofocus required>

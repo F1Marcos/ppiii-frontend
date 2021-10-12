@@ -29,7 +29,11 @@ import { VerActaCursadaComponent } from './components/ver-acta-cursada/ver-acta-
 import { NotasPipe } from './pipes/notas.pipe';
 import { DatePipe } from '@angular/common';
 import { AlumnoListarCursadaComponent } from './components/alumno-listar-cursada/alumno-listar-cursada.component';
-import { AdminReportesComponent } from './components/admin-reportes/admin-reportes.component'
+import { AdminReportesComponent } from './components/admin-reportes/admin-reportes.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { PaginatorPipe } from './pipes/paginator.pipe';
+
 
 @NgModule({
   declarations: [
@@ -54,14 +58,18 @@ import { AdminReportesComponent } from './components/admin-reportes/admin-report
     VerActaCursadaComponent,
     NotasPipe,
     AlumnoListarCursadaComponent,
-    AdminReportesComponent
+    AdminReportesComponent,
+    PaginatorPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule
+
   ],
   providers: [
     UsuariosService,

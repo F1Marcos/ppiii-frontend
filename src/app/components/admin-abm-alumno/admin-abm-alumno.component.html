@@ -1,8 +1,74 @@
 <html>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+              <label id="modal">Nombres</label>
+              <input type="text" class="form-control" name="nombres" placeholder="Ej: Matias Marcos" [(ngModel)]="use.nombres"
+                (focus)="limpiarNombre()" required>
+              <div [ngSwitch]="errorNombre">
+                <div *ngSwitchCase="1">Debes completar el campo</div>
+                <div *ngSwitchCase="2">Nombre demasiado largo</div>
+                <div *ngSwitchCase="3">Nombre debe ser alfabetico y solo admite un espacio entre nombres</div>
+              </div>
+              <label  id="modal">Apellidos</label>
+              <input type="text" class="form-control" name="apellidos" placeholder="Ej: Rivero Quispe"
+                [(ngModel)]="use.apellidos" (focus)="limpiarApellido()" required>
+              <div [ngSwitch]="errorApellido">
+                <div *ngSwitchCase="1">Debes completar el campo</div>
+                <div *ngSwitchCase="2">Apellido demasiado largo</div>
+                <div *ngSwitchCase="2">Apellido debe ser alfabetico y solo admite 1 espacio entre apellidos</div>
+              </div>
+              <label  id="modal">DNI</label>
+              <input type="text" class="form-control" placeholder="Ej:400xxx32" name="dni" [(ngModel)]="use.dni"
+                (focus)="limpiarDNI()" required>
+              <div [ngSwitch]="errorDNI">
+                <div *ngSwitchCase="1">Debes completar el campo</div>
+                <div *ngSwitchCase="2">DNI muy largo</div>
+                <div *ngSwitchCase="3">DNI debe ser numerico</div>
+              </div>
+              <label  id="modal">Mail</label>
+              <input type="text" class="form-control" placeholder="Ej roberto@ifts11.com" name="mail" [(ngModel)]="use.mail"
+                (focus)="limpiarEmail()" required>
+              <div [ngSwitch]="errorEmail">
+                <div *ngSwitchCase="1">Debes completar el campo</div>
+                <div *ngSwitchCase="2">Email muy largo</div>
+                <div *ngSwitchCase="3">Email debe ser nombre@dominio.algo .</div>
+              </div>
+              <label  id="modal">Rol</label>
+              <select type="text" class="custom-select mr-sm-2" name="rol" [(ngModel)]="use.rol" (focus)="limpiarRol()">
+                <option value="1">Admin</option>
+                <option value="2">Alumno</option>
+              </select>
+              <div [ngSwitch]="errorRol">
+                <div *ngSwitchCase="1">Seleccione una opción</div>
+                <div *ngSwitchCase="2">Error inesperado. Seleccione una opción dentro de las validas, si el error persiste
+                  recargue la pagina</div>
+              </div>
+            <!--  El password local no se utiliza pero lo dejamos por si hace falta migrar el login de manera local 100x100.
+              <div class="col-md-3 mb-3">
+                <label>Password (opcional)</label>
+                <input type="text" class="form-control" name="password" placeholder="Ej: hola123" [(ngModel)]="use.password"
+                  required>
+              </div>
+              -->
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+          <button class="btn btn-dark" style="margin-left: 2%;" (click)="limpiarTodo()">Limpiar campos</button>
+          <button class="btn btn-success" type="submit" (click)="verificarForm()">Agregar Alumno</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
 <br>
 <div class="container" style="text-align: center; color: white;">
   <h1>ABM USUARIOS</h1>
 </div>
+
+
 
 <div class="container" *ngIf="alert" id="aviso" style="text-align: center; align-items: center; width: 25%;">
   <div class="alert alert-success alert-dismissible" style="text-align: center; align-items: center;">
@@ -11,11 +77,13 @@
   </div>
 </div>
 
-<div class="container-fluid">
-  <div style="margin-bottom: 1%;color:white">
-    <label style="font-size: large;">Filtrar por apellido :</label>
-    <input style="margin-left: 1%;" type="text" name="filterPost" [(ngModel)]="filterPost" autofocus>
-  </div>
+<div class="container">
+  <nav class="navbar navbar-light  justify-content-between">
+    <button type="button" style="margin-right: 3%;" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Agregar Usuario</button>
+    <input placeholder="Filtro por DNI" type="text" name="filterPost" [(ngModel)]="filterPost" autofocus>
+    
+  </nav>
+
   <table class="table table-dark table-hover">
     <thead>
       <th>DNI</th>
@@ -56,7 +124,7 @@
   </table>
 </div>
 
-<form class="container" (submit)="agregarAlumno()" style="font:bolder; color: brown;">
+<!--<form class="container" (submit)="agregarAlumno()" style="font:bolder; color: brown;">
   <div class="form-row">
     <div class="col-md-4 mb-3">
       <label>Nombres</label>
@@ -112,17 +180,18 @@
           recargue la pagina</div>
       </div>
     </div>
-    <!--  El password local no se utiliza pero lo dejamos por si hace falta migrar el login de manera local 100x100.
+     El password local no se utiliza pero lo dejamos por si hace falta migrar el login de manera local 100x100.
       <div class="col-md-3 mb-3">
         <label>Password (opcional)</label>
         <input type="text" class="form-control" name="password" placeholder="Ej: hola123" [(ngModel)]="use.password"
           required>
       </div>
-      -->
+      
   </div>
   <button class="btn btn-success" type="submit" (click)="verificarForm()">Agregar Alumno</button>
   <button class="btn btn-dark" style="margin-left: 2%;" (click)="limpiarTodo()">Limpiar campos</button>
 </form>
+-->
 <div style="left:auto"> <br>
   <a class="btn btn-dark" routerLink="/admin/home">Volver<span class="sr-only">(current)</span></a>
 </div>

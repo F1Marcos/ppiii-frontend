@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges,SimpleChanges, Input, SimpleChange } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+import { MateriasFilterPipe } from 'src/app/pipes/materias-filter.pipe';
 import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
@@ -18,7 +20,7 @@ export class AdminAbmMateriaComponent implements OnInit {
     flagCorre:0
   };
   mensaje="";
-  filterPost="";
+  filterPost= "";
   errorID=0;
   errorNombre=0;
   errorAnio=0;
@@ -30,8 +32,56 @@ export class AdminAbmMateriaComponent implements OnInit {
   noAsignadas:any=[];
   matSeleccionada="";
   matSeleccionadaNombre="";
+  pageCantidad:number=0;
+  page: number = 0;
+  elementos:number=1;
+  seleccion:boolean=false;
+
+
+  CargarModificar(materia:any){
+  
+    this.mat={
+      idMat:materia.idMat,
+      nombreMat:materia.nombreMat,
+      anio:materia.anio,
+      tipo:materia.tipo,
+      flagCorre:materia.flagCorre
+    }
+    this.seleccion=true;
+    console.log(materia);
+    console.log(this.mat);
+
+  }
+
+  ModAgr(){
+    console.log("Entre a ModAgr");
+    if(this.seleccion){
+      this.modificarMateria();
+    }else{
+      this.agregarMateria()
+
+    }
+  }
+
+  Paginado() {
+    var aux = []
+    for(var i =0; i<this.materias.length;i++){
+      if(this.materias[i].nombreMat.toString().includes(this.filterPost))
+      aux.push(this.materias[i])
+    }
+    this.pageCantidad = Math.trunc((aux.length)/10);
+    if(aux.length %10 == 0 && this.pageCantidad!=0)
+            this.pageCantidad--;
+
+    this.elementos= aux.length;
+    
+    if(this.page+10 > aux.length){
+      this.page = 0;
+    }
+  }
 
   ngOnInit(): void {
+    
     this.usuariosService.verificarRol().subscribe(
 			res => { 
         setTimeout(()=>{                           
@@ -43,7 +93,12 @@ export class AdminAbmMateriaComponent implements OnInit {
             console.log("RES DE SERVICE");
             console.log(res);
             this.materias=res;
-            console.log(this.materias);
+            this.pageCantidad=Math.trunc(this.materias.length/10);
+            console.log(this.pageCantidad);
+            console.log(this.pageCantidad%10);
+            console.log("cantidad");
+            if(this.materias.length %10 == 0 && this.pageCantidad!=0)
+            this.pageCantidad--;
           },
           err => {
             console.log("ERR DE SERVICE");
@@ -63,9 +118,37 @@ export class AdminAbmMateriaComponent implements OnInit {
     
   }
 
+  SiguientePagina(){
+    console.log(this.materias.length)
+    console.log(this.page)
+    var aux = []
+    for(var i =0; i<this.materias.length;i++){
+      if(this.materias[i].nombreMat.toString().includes(this.filterPost))
+      aux.push(this.materias[i])
+      
+    }
+    
+    if(this.page+10 < aux.length){
+      this.page += 10;
+    }
 
-  modificarMateria(mat:any){
-    this.usuariosService.modificarMateria(mat).subscribe(
+  }
+  AnteriorPagina(){
+    if(this.page>0){
+      this.page-=10
+    }
+  }
+
+  cerrarForm(){
+    setTimeout(()=>{ 
+    console.log("Entre a cerrar");
+    this.limpiarTodo()
+    this.seleccion=false;
+  }, 1000);
+  }
+
+  modificarMateria(){
+    this.usuariosService.modificarMateria(this.mat).subscribe(
 			res => {
 			  let result:any=res;
 			  console.log('RESPUESTA DEL BACKEN STATUS:');
@@ -80,6 +163,7 @@ export class AdminAbmMateriaComponent implements OnInit {
 			  console.log(err.error);}
 		  );
   }
+
 
   eliminarMateria(mat:any){
     console.log('FE: Entre metod post eliminar materia!');
@@ -298,5 +382,10 @@ export class AdminAbmMateriaComponent implements OnInit {
     this.errorAnio=0;
     this.errorTipo=0;
   }
+
+  logOut(){
+    this.usuariosService.logOut();
+  }
+
 }
 
