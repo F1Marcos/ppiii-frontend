@@ -28,4 +28,9 @@ export class UsuariosHomeComponent implements OnInit {
     this.usuario = localStorage.nombreApellido;
   }
 
+  logOut(){
+    this.usuariosService.logOut();
+  }
+
+
 }

@@ -7,9 +7,6 @@ import { AdminAbmMateriaComponent } from '../components/admin-abm-materia/admin-
 export class PaginatorPipe implements PipeTransform {
 
   transform(value: any,arg:any, arg2:any): any {
-    console.log("IMPRIMO VALUE");
-    console.log(arg);
-    console.log(value);
     const resultPosts = [];
    
     for(const post of value){
