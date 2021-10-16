@@ -15,7 +15,7 @@ export class UsuariosHomeComponent implements OnInit {
   constructor(private usuariosService:UsuariosService,private router:Router) { }
 
   ngOnInit(): void {
-    this.usuariosService.barraProgreso(localStorage.dni).subscribe(
+    this.usuariosService.barraProgreso().subscribe(
       res => {
       const result:any = res;
       this.porcentaje=result.porcentaje;
@@ -23,6 +23,7 @@ export class UsuariosHomeComponent implements OnInit {
       console.log(res);
       },
       err => {
+        this.usuariosService.logOut();
       }
     );
     this.usuario = localStorage.nombreApellido;
