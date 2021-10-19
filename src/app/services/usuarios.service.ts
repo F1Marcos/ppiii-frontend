@@ -57,21 +57,16 @@ export class UsuariosService{
 	getRol() {//Obtenemos el token que despues enviara el interceptor x cada req
 		return localStorage.getItem('rolValidator');
 	}
-	listarMateriasAprobadas(dni: any) {
-		console.log(dni);
-		console.log(dni);
-		return this.http.get(`${this.API_URI}/listAprobadas/${dni}`);
+	listarMateriasAprobadas() 
+	{
+		return this.http.get(`${this.API_URI}/listAprobadas`);
 	}
-	listarMateriasCursadas(dni: any) {
-		console.log(dni);
-		console.log(dni);
-		return this.http.get(`${this.API_URI}/listCursadas/${dni}`);
+	listarMateriasCursadas(){
+		return this.http.get(`${this.API_URI}/listCursadas`);
 	}
 
-	listarMateriasCorrelativas(dni: any) {
-		console.log(dni);
-		console.log(dni);
-		return this.http.get(`${this.API_URI}/listMateriasCorre/${dni}`);
+	listarMateriasCorrelativas(){
+		return this.http.get(`${this.API_URI}/listMateriasCorre`);
 	}
 
 	listarComentarios() {

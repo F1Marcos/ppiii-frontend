@@ -15,7 +15,7 @@ export class AlumnoListarCursadaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.usuariosService.listarMateriasCursadas(localStorage.dni).subscribe(
+    this.usuariosService.listarMateriasCursadas().subscribe(
 			res => { 
         console.log('ACA RECIBO');
         console.log(res);

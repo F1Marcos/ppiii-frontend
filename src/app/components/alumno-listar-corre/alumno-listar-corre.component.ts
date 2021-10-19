@@ -13,7 +13,7 @@ export class AlumnoListarCorreComponent implements OnInit {
   constructor(private usuariosService:UsuariosService) { }
 
   ngOnInit(): void {
-    this.usuariosService.listarMateriasCorrelativas(localStorage.dni).subscribe(
+    this.usuariosService.listarMateriasCorrelativas().subscribe(
 			res => { 
         console.log('ACA RECIBO');
         console.log(res);

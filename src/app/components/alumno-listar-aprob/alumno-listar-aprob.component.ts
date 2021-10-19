@@ -13,7 +13,7 @@ export class AlumnoListarAprobComponent implements OnInit {
   filterPost="";
   ngOnInit(): void {
 
-    this.usuariosService.listarMateriasAprobadas(localStorage.dni).subscribe(
+    this.usuariosService.listarMateriasAprobadas().subscribe(
 			res => { 
         console.log('ACA RECIBO');
         console.log(res);

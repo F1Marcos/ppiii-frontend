@@ -14,12 +14,14 @@ export class MateriasFilterPipe implements PipeTransform {
   
    
     for(const post of value){
-     if(post.nombreMat.toUpperCase().indexOf(arg.filtro.toUpperCase())>-1){
+      console.log(post);
+      console.log(arg);
+     if(post.nombreMat.toUpperCase().indexOf(arg.toUpperCase())>-1){
        console.log("SIP");
        resultPosts.push(post);
      }
    }
-   return resultPosts.slice(arg.page,arg.page+5);
+   return resultPosts;
    
   }
   
