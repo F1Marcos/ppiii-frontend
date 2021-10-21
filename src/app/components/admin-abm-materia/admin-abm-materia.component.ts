@@ -2,11 +2,14 @@ import { Component, OnInit, OnChanges,SimpleChanges, Input, SimpleChange } from 
 import { PageEvent } from '@angular/material/paginator';
 import { MateriasFilterPipe } from 'src/app/pipes/materias-filter.pipe';
 import { UsuariosService } from '../../services/usuarios.service';
+declare var jQuery:any
+declare var $:any
 
 @Component({
   selector: 'app-admin-abm-materia',
   templateUrl: './admin-abm-materia.component.html',
   styleUrls: ['./admin-abm-materia.component.css']
+  
 })
 export class AdminAbmMateriaComponent implements OnInit {
 
@@ -54,6 +57,7 @@ export class AdminAbmMateriaComponent implements OnInit {
   }
 
   ModAgr(){
+   
     console.log("Entre a ModAgr");
     if(this.seleccion){
       this.modificarMateria();
@@ -61,6 +65,11 @@ export class AdminAbmMateriaComponent implements OnInit {
       this.agregarMateria()
 
     }
+    $(function cerrar() {
+      console.log("Entro a modal")
+    $('.modal').modal('toggle');
+    });
+   
   }
 
   Paginado() {

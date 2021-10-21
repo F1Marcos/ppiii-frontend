@@ -1,6 +1,12 @@
 <html>
-  
-  <form (submit)="ModAgr()">
+  <script>
+      $(function cerrar {
+    console.log("Entro a modal")
+    return true
+});
+  </script>
+
+  <form (submit)="ModAgr()" id="altoform" onsubmit="cerrar">
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

@@ -132,6 +132,7 @@ onRemove() {
             for(let i=0;i<aux.length ;i++){
               var valor:any;
               valor = Object.values(aux[i]).toString();
+              valor =valor.replace(/[,]/g,"");
               objetos= valor.split(";");
               if(/^([0-9])/.test(valor)){
 
@@ -149,7 +150,6 @@ onRemove() {
                     notaFinalLet:"",
                     estado:""
                   }
-                  
                   objetos= valor.split(";");
                   console.log("IMPRIMO OBJETOS");
                   console.log(objetos);
@@ -186,8 +186,8 @@ onRemove() {
                       nota:"",
                       notaLetra:"",
                     }
-                  objetos[1]= objetos[1].replace(/[.]/g,"");
-                  notasFinal.Udni= objetos[1];
+                  objetos[2]= objetos[2].replace(/[.]/g,"");
+                  notasFinal.Udni= objetos[2];
                   notasFinal.nota= objetos[3];
                   notasFinal.notaLetra= objetos[4];
                   if(notasFinal.Udni!=""){
@@ -202,15 +202,19 @@ onRemove() {
               }else{
                 
                 valor =valor.replace(/[;]/g,"");
-                console.log("HOLA");
-                console.log(valor);
-                if(valor.match("Codigo Materia:")){
-                    valor = valor.replace("Codigo Materia:","");
+               
+
+                if(valor.match("Código Materia:")){
+                    valor = valor.replace("Código Materia:","");
                     valor =valor.replace(/[ ]/g,"");
                     this.acta.idMat=valor;
-                    console.log("IMPRIMO EL CODIGO");
-                    console.log(valor);
                 }
+
+                if(valor.match("Codigo Materia:")){
+                  valor = valor.replace("Codigo Materia:","");
+                  valor =valor.replace(/[ ]/g,"");
+                  this.acta.idMat=valor;
+              }
                 if(valor.match("Fecha")){
                   console.log("IMPRIMO FECHA");
                   console.log(valor);
@@ -227,6 +231,13 @@ onRemove() {
                   this.acta.nroActa=valor;
 
                 }
+                if(valor.match("Número acta de final:")){
+                  valor = valor.replace("Número acta de final:","");
+                  valor =valor.replace(/[ ]/g,"");
+                  this.acta.nroActa=valor;
+
+                }
+                
                 if(valor.match("Acta de Final")){
                   this.acta.tipo="final";
                 }
