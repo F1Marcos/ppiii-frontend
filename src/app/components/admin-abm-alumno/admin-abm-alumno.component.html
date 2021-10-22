@@ -1,5 +1,5 @@
 <html>
-  <form class="container" (submit)="agregarAlumno()" style="font:bolder; color: brown;">
+  <form class="container" (submit)="ModAgr()" style="font:bolder; color: brown;">
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -18,7 +18,7 @@
               <div [ngSwitch]="errorApellido">
                 <div *ngSwitchCase="1">Debes completar el campo</div>
                 <div *ngSwitchCase="2">Apellido demasiado largo</div>
-                <div *ngSwitchCase="2">Apellido debe ser alfabetico y solo admite 1 espacio entre apellidos</div>
+                <div *ngSwitchCase="3">Apellido debe ser alfabetico y solo admite 1 espacio entre apellidos</div>
               </div>
               <label  id="modal">DNI</label>
               <input type="text" class="form-control" placeholder="Ej:400xxx32" name="dni" [(ngModel)]="use.dni"
@@ -56,9 +56,10 @@
          
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-          <button class="btn btn-dark" style="margin-left: 2%;" (click)="limpiarTodo()">Limpiar campos</button>
-          <button class="btn btn-success" type="submit" (click)="verificarForm()">Agregar Alumno</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cerrarForm()">Close</button>
+          <button *ngIf="!seleccion" class="btn btn-dark"  (click)="limpiarTodo()">Limpiar campos</button>
+          <button *ngIf="seleccion" class="btn btn-success" type="submit" (click)="verificarForm()">Modificar Usuario</button>
+          <button *ngIf="!seleccion" class="btn btn-success" type="submit" (click)="verificarForm()">Agregar Usuario</button>
 
         </div>
       </div>
@@ -112,7 +113,7 @@
         <td><input type="number" name="rol" [(ngModel)]="user.rol" class="form-control" required min="1" max="2"></td>
         <td><input type="number" name="estado" [(ngModel)]="user.estado" class="form-control" required min="0" max="1">
         </td>
-        <td><button class="btn btn-info" (click)=modificarUsuario(user)>Modificar</button></td>
+        <td><button class="btn btn-info" data-toggle="modal" data-target="#exampleModal" (click)=CargarModificar(user)>Modificar</button></td>
         <td><a class="btn btn-danger" (click)=eliminarUsuario(user)>Eliminar</a></td>
       </tr>
     </tbody>

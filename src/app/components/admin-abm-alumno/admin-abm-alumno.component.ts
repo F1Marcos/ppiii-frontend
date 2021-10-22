@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios.service';
+declare var jQuery:any
+declare var $:any
+
 
 @Component({
   selector: 'app-admin-abm-alumno',
@@ -20,6 +23,7 @@ export class AdminAbmAlumnoComponent implements OnInit {
     password:""
   };
   filterPost = "";
+  seleccion:boolean = false;
 
   errorUsuario=0;
   errorNombre=0;
@@ -35,6 +39,7 @@ export class AdminAbmAlumnoComponent implements OnInit {
 
     this.usuariosService.verificarRol().subscribe(
 			res => { 
+        this.limpiarTodo();
         this.usuariosService.listarActasCursadas().subscribe(
           res => { 
             setTimeout(()=>{                           
@@ -73,8 +78,46 @@ export class AdminAbmAlumnoComponent implements OnInit {
   
   }
 
-  modificarUsuario(user:any){
-    this.usuariosService.modificarUsuario(user).subscribe(
+  cerrarForm(){
+    setTimeout(()=>{ 
+    console.log("Entre a cerrar");
+    this.limpiarTodo()
+    this.seleccion=false;
+  }, 500);
+  }
+
+  CargarModificar(pUser:any){
+  
+    this.use={
+      dni: pUser.dni,
+      nombres: pUser.nombres,
+      apellidos: pUser.apellidos,
+      mail: pUser.mail,
+      rol: pUser.rol,
+      password: pUser.password
+
+    }
+    this.seleccion=true;
+
+
+  }
+  ModAgr(){
+   
+    console.log("Entre a ModAgr");
+    if(this.seleccion){
+      this.modificarUsuario();
+    }else{
+      this.agregarAlumno()
+
+    }
+    $(function cerrar() {
+      console.log("Entro a modal")
+    $('.modal').modal('toggle');
+    });
+   
+  }
+  modificarUsuario(){
+    this.usuariosService.modificarUsuario(this.use).subscribe(
 			res => {
 			  let result:any=res;
         this.alert=true;
@@ -91,13 +134,13 @@ export class AdminAbmAlumnoComponent implements OnInit {
 
   eliminarUsuario(user:any){
     console.log('FE: Entre metod post eliminar usuario!');
-    console.log(user);
+    console.log(this.use);
     
 
     if(confirm("Esta seguro que desea eliminar al usuario "+user.nombres + " " + user.apellidos)) {
       console.log("Implement delete functionality here");
     
-    this.usuariosService.eliminarUsuario(user.id).subscribe(
+    this.usuariosService.eliminarUsuario(user.dni).subscribe(
       res => {
         let result:any=res;
         console.log(result.message);
@@ -159,16 +202,20 @@ export class AdminAbmAlumnoComponent implements OnInit {
   verificarNombre(nombre:string):number {
     const patron=/^\b(?!.*?\s{2})[A-Za-z ]{1,20}\b$/;
     console.log(nombre);
+    console.log("entro a 3 nombre")
     if(nombre.length==0)
       return 1;
     if(nombre.length>20)
       return 2;
-    if(!  patron.test(nombre))
+    if(!patron.test(nombre))
       return 3;
     return 0;
   }
   verificarApellido(apellido:string):number {
-    const patron=/^\b(?!.*?\s{2})[A-Za-z ]{1,30}\b$/;
+    const patron=/^\b(?!.*?\s{2})[A-Za-z ]{1,20}\b$/;
+    console.log("entro a 3 apellido")
+    console.log(apellido);
+    console.log(!patron.test(apellido))
     if(apellido.length==0)
       return 1;
     if(apellido.length>20)
@@ -255,6 +302,7 @@ export class AdminAbmAlumnoComponent implements OnInit {
     this.errorDNI=0;
     this.errorEmail=0;
     this.errorRol=0;
+    this.seleccion=false;
   }
 
 }
