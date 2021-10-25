@@ -177,6 +177,18 @@ export class AdminAbmAlumnoComponent implements OnInit {
 		  );
   }
 
+  activarUsuario(user:any){
+
+  }
+
+  desactivarUsuario(user:any){
+
+  }
+
+  logOut(){
+    this.usuariosService.logOut();
+  }
+
   verificarForm():boolean{
     this.errorNombre=this.verificarNombre(this.use.nombres);
     this.errorApellido=this.verificarApellido(this.use.apellidos);

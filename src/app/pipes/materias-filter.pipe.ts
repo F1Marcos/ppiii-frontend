@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FillerControllerDatasetOptions } from 'chart.js';
 
 @Pipe({
   name: 'materiasFilter'

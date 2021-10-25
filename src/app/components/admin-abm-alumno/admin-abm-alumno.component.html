@@ -66,12 +66,22 @@
     </div>
   </div>
 </form>
-<br>
+
+
+<nav class="navbar navbar-dark bg-dark">
+  <form class="form-inline">
+        <a class="btn btn-outline-dark bg-dark" routerLink="/admin/home" style="font-size:larger; color:#ffffff; border-radius: 15%;">Volver<span class="sr-only">(current)</span></a>
+      </form> 
+      <form class="form-inline">
+        <a class="btn btn-outline-danger bg-danger" style="color: white;" (click)="logOut()">LogOut<span class="sr-only">(current)</span></a>
+      </form>    
+  </nav>
+  <br>
 <div class="container" style="text-align: center; color: white;">
   <h1>ABM USUARIOS</h1>
 </div>
 
-
+ 
 
 <div class="container" *ngIf="alert" id="aviso" style="text-align: center; align-items: center; width: 25%;">
   <div class="alert alert-success alert-dismissible" style="text-align: center; align-items: center;">
@@ -80,14 +90,14 @@
   </div>
 </div>
 
-<div class="container">
+<div class="center" style="text-align: center;">
   <nav class="navbar navbar-light  justify-content-between">
     <button type="button" style="margin-right: 3%;" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Agregar Usuario</button>
     <input placeholder="Filtro por DNI" type="text" name="filterPost" [(ngModel)]="filterPost" autofocus>
     
   </nav>
 
-  <table class="table table-dark table-hover">
+  <table class="table table-dark table-hover" style="text-align: center; font-size: large;">
     <thead>
       <th>DNI</th>
       <th>Nombres</th>
@@ -98,23 +108,40 @@
       <th>Mail</th>
       <th>Rol</th>
       <th>Activo</th>
+      <th>Estado</th>
       <th>Modificar</th>
       <th>Eliminar</th>
     </thead>
     <tbody *ngIf="usuarios.length > 0; else fila">
       <tr *ngFor=" let user of usuarios | usuariosFilter:filterPost">
-        <td><input type="text" name="DNI" [(ngModel)]="user.dni" class=" form-control" readonly></td>
-        <td><input type="text" name="nombres" [(ngModel)]="user.nombres" class="form-control" autofocus required></td>
-        <td><input type="text" name="apellidos" [(ngModel)]="user.apellidos" class="form-control" required></td>
+        
         <!-- El password local no se utiliza pero lo dejamos por si hace falta migrar el login de manera local 100x100.
           <td><input type="text" name="password" [(ngModel)]="user.password" class="form-control" autofocus required></td>
           -->
-        <td><input type="text" name="mail" [(ngModel)]="user.mail" class="form-control" required></td>
-        <td><input type="number" name="rol" [(ngModel)]="user.rol" class="form-control" required min="1" max="2"></td>
-        <td><input type="number" name="estado" [(ngModel)]="user.estado" class="form-control" required min="0" max="1">
+        <td>{{user.dni}}</td>
+        <td>{{user.nombres}}</td>
+        <td>{{user.apellidos}}</td>
+        <td>{{user.mail}}</td>
+        <td [ngSwitch]="user.rol">
+          <div *ngSwitchCase="1">Admin</div>
+          <div *ngSwitchCase="2">Alumno</div>
         </td>
+  
+        <td *ngIf="user.estado== 1"><svg xmlns="http://www.w3.org/2000/svg" style="align-items: center;" width="32" height="32" fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </svg>
+        </td>
+        <td *ngIf="user.estado== 0"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="red" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+        </svg>
+        </td>
+        <td [ngSwitch]="user.estado">
+          <a class="btn btn-success" *ngSwitchCase="0" (click)=activarUsuario(user) style="width: 100%;">Activar</a>
+          <a class="btn btn-danger" *ngSwitchCase="1" (click)=desactivarUsuario(user) style="width: 100% ;">Desactivar</a>
+          </td>
         <td><button class="btn btn-info" data-toggle="modal" data-target="#exampleModal" (click)=CargarModificar(user)>Modificar</button></td>
         <td><a class="btn btn-danger" (click)=eliminarUsuario(user)>Eliminar</a></td>
+       
       </tr>
     </tbody>
     <ng-template #fila>
@@ -125,6 +152,11 @@
       </tbody>
     </ng-template>
   </table>
+<div style="float: right;">
+  <button  class="btn btn-success" style="align-content:right; margin-right: 0%;">Activar Todos</button>
+
+</div>
+
 </div>
 
 <!--<form class="container" (submit)="agregarAlumno()" style="font:bolder; color: brown;">

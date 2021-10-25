@@ -33,6 +33,8 @@ import { AdminReportesComponent } from './components/admin-reportes/admin-report
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { PaginatorPipe } from './pipes/paginator.pipe';
+import { ChartsModule } from 'ng2-charts';
+
 
 
 @NgModule({
@@ -68,8 +70,8 @@ import { PaginatorPipe } from './pipes/paginator.pipe';
     FormsModule,
     NgxDropzoneModule,
     BrowserAnimationsModule,
-    MatPaginatorModule
-
+    MatPaginatorModule,
+    ChartsModule
   ],
   providers: [
     UsuariosService,

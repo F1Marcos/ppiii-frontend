@@ -2,3 +2,9 @@ label#modal{
     color: black;
     margin-top: 2%;
 }
+
+.center {
+    margin: auto;
+    width: fit-content;
+    padding: 10px;
+  }

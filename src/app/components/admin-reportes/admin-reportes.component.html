@@ -1,16 +1,34 @@
-<div class="ct-chart ct-golden-section" id="chart1"></div>
-<div class="ct-chart ct-golden-section" id="chart2"></div>
+<html>
 
-<script>
-  // Initialize a Line chart in the container with the ID chart1
-  new Chartist.Line('#chart1', {
-    labels: [1, 2, 3, 4],
-    series: [[100, 120, 180, 200]]
-  });
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid</title>
+  <link rel="stylesheet" href="admin-reportes.component.css">
+</head>
 
-  // Initialize a Line chart in the container with the ID chart2
-  new Chartist.Bar('#chart2', {
-    labels: [1, 2, 3, 4],
-    series: [[5, 2, 8, 3]]
-  });
-</script>
+<body class="grid-container">
+  <header class="header">
+    <h1 style="color:cornsilk; text-align: center;">REPORTES:</h1>
+  </header>
+  <nav class="navbar" style="background-color: aliceblue;">
+
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+        [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+      </canvas>
+  </nav>
+  <article class="main">
+    <div style="display: block; background-color: aliceblue;">
+      <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+        [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+      </canvas>
+    </div>
+  </article>
+  <footer class="footer">
+    <div>
+    <a class="btn btn-dark" routerLink="/admin/home">Volver<span class="sr-only">(current)</span></a>
+  </div>
+  </footer>
+</body>
+
+</html>
