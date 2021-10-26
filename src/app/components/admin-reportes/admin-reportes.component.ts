@@ -2,12 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ChartOptions, ChartType, ChartDataSets} from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
-interface Country {
-  name: string;
-  flag: string;
-  area: number;
-  population: number;
-}
+import * as XLSX from 'xlsx'; 
+
 
 @Component({
   selector: 'app-admin-reportes',
@@ -41,10 +37,7 @@ export class AdminReportesComponent implements OnInit {
   ];
   // FIN BARRAS.
 
-  searchTerm: string = "";
-  page = 1;
-  pageSize = 4;
-  currentRate = 8;
+  fileName= 'ExcelSheet.xlsx'; 
 
   constructor(private http: HttpClient) { }
   opcion = 0;
@@ -54,5 +47,21 @@ export class AdminReportesComponent implements OnInit {
       
     }
   }
+  
+  exportexcel(): void 
+  {
+     /* table id is passed over here */   
+     let element = document.getElementById('excel-table'); 
+     const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+     /* generate workbook and add the worksheet */
+     const wb: XLSX.WorkBook = XLSX.utils.book_new();
+     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+     /* save to file */
+     XLSX.writeFile(wb, this.fileName);
+    
+  }
+
 
 }

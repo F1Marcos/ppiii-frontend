@@ -179,10 +179,37 @@ export class AdminAbmAlumnoComponent implements OnInit {
 
   activarUsuario(user:any){
 
+    console.log(user);
+
+    this.usuariosService.activarUsuario(user.dni).subscribe(
+			res => {
+			  let result:any=res;
+			  console.log('RESPUESTA DEL BACKEN STATUS:');
+			  console.log(result);
+        this.alert=true;
+        this.mensaje="Se activo el usuario correctamente";
+        this.ngOnInit();
+			},
+			err => {
+			  console.log(err.error);}
+		  );
   }
 
   desactivarUsuario(user:any){
-
+    console.log(user.dni);
+    const dni = user.dni;
+    this.usuariosService.desactivarUsuario(dni).subscribe(
+			res => {
+			  let result:any=res;
+			  console.log('RESPUESTA DEL BACKEN STATUS:');
+			  console.log(result);
+        this.alert=true;
+        this.mensaje="Se activo el usuario correctamente";
+        this.ngOnInit();
+			},
+			err => {
+			  console.log(err.error);}
+		  );
   }
 
   logOut(){

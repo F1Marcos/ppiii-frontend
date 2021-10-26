@@ -38,7 +38,7 @@ export class AdminAbmMateriaComponent implements OnInit {
   pageCantidad:number=0;
   page: number = 0;
   elementos:number=1;
-  seleccion:boolean=false;
+  seleccion:boolean=false; 
 
 
   CargarModificar(materia:any){
@@ -90,7 +90,6 @@ export class AdminAbmMateriaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
     this.usuariosService.verificarRol().subscribe(
 			res => { 
         setTimeout(()=>{                           
@@ -395,6 +394,8 @@ export class AdminAbmMateriaComponent implements OnInit {
   logOut(){
     this.usuariosService.logOut();
   }
+
+ 
 
 }
 

@@ -124,6 +124,17 @@ export class UsuariosService{
 		console.log('FE: Metodo servicio Eliminar Usuario:')
 		return this.http.delete(`${this.API_URI}/eliminarUsuario/${id}`); // El service devuelve "usuario" tal vez se puede usar para mostrar un mensaje.
 	}
+
+	activarUsuario(dni:any){
+		return this.http.post(`${this.API_URI}/activarUsuario`, [dni]);
+	}
+
+	desactivarUsuario(dni:any){
+		console.log("entro a service")
+		console.log(dni);
+		return this.http.post(`${this.API_URI}/desactivarUsuario`, [dni]);
+	}
+
 	// START ABM MATERIAS:
 	listarMaterias() {
 		//para expandir/especializar las variables usamos ` y no ' o "  

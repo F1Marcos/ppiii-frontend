@@ -25,6 +25,7 @@
     "chart.js": "^2.9.4",
     "dropzone": "^5.9.2",
     "express": "^4.17.1",
+    "file-saver": "^2.0.5",
     "ng2-charts": "^2.4.2",
     "ngx-dropzone": "^3.0.0",
     "rfs": "^9.0.5",

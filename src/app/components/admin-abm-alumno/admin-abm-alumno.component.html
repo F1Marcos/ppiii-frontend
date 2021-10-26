@@ -136,11 +136,11 @@
         </svg>
         </td>
         <td [ngSwitch]="user.estado">
-          <a class="btn btn-success" *ngSwitchCase="0" (click)=activarUsuario(user) style="width: 100%;">Activar</a>
-          <a class="btn btn-danger" *ngSwitchCase="1" (click)=desactivarUsuario(user) style="width: 100% ;">Desactivar</a>
+          <a class="btn btn-success" *ngSwitchCase="0" (click)= activarUsuario(user) style="width: 100%;">Activar</a>
+          <a class="btn btn-danger" *ngSwitchCase="1" (click)= desactivarUsuario(user) style="width: 100% ;">Desactivar</a>
           </td>
         <td><button class="btn btn-info" data-toggle="modal" data-target="#exampleModal" (click)=CargarModificar(user)>Modificar</button></td>
-        <td><a class="btn btn-danger" (click)=eliminarUsuario(user)>Eliminar</a></td>
+        <td><a class="btn btn-danger" (click)= eliminarUsuario(user)>Eliminar</a></td>
        
       </tr>
     </tbody>
