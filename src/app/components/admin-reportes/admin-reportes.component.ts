@@ -26,14 +26,15 @@ export class AdminReportesComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = ['2015', '2016', '2017', '2018', '2019', '2020', '2021'];
+  public barChartLabels: Label[] = ['2019', '2020', '2021'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Femeninas' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Masculinos' }
+    { data: [56, 55, 40], label: 'Aprobada' },
+    { data: [56, 55, 40], label: 'Cursada' },
+    { data: [86, 27, 90], label: 'No aprobada' }
   ];
   // FIN BARRAS.
 

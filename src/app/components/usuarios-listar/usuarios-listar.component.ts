@@ -20,8 +20,9 @@ export class UsuariosListarComponent implements OnInit {
         this.usuarios = res; 
         console.log(res)
       },
-			err => console.log(err)
-		)
+      err => {
+        this.usuariosService.logOut();
+      }		)
 	}
 
   

@@ -22,9 +22,7 @@ export class AlumnoListarCursadaComponent implements OnInit {
         this.materias = res;
       },
       err => {
-        console.log(err.error.message);
-
-        
+        this.usuariosService.logOut();
       }
 		)
   }
