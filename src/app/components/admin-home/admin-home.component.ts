@@ -25,8 +25,6 @@ export class AdminHomeComponent implements OnInit {
         console.log("LOCALSTORAGE MODIFICADO, SESION FINALIZADA");
         setTimeout(function () { alert("Sesion finalizada!"); }, 400);
         this.usuariosService.logOut();
-
-        
       }
 		) 
   

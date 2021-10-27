@@ -24,6 +24,7 @@ export class AlumnoListarAprobComponent implements OnInit {
         this.JSONData=this.materias
       },
       err => {
+        console.log(err.error.message);
         this.usuariosService.logOut();
       }    
 		)

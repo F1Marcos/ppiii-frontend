@@ -23,6 +23,7 @@ export class UsuariosHomeComponent implements OnInit {
       console.log(res);
       },
       err => {
+        console.log(err.error.message);
         this.usuariosService.logOut();
       }
     );

@@ -75,8 +75,6 @@ export class AdminActaCursadaComponent implements OnInit {
         console.log("LOCALSTORAGE MODIFICADO, SESION FINALIZADA");
         setTimeout(function () { alert("Sesion finalizada!"); }, 400);
         this.usuariosService.logOut();
-
-        
       }
 		)
   
@@ -215,6 +213,7 @@ onRemove() {
                   valor =valor.replace(/[ ]/g,"");
                   this.acta.idMat=valor;
               }
+              /*
                 if(valor.match("Fecha")){
                   console.log("IMPRIMO FECHA");
                   console.log(valor);
@@ -224,6 +223,16 @@ onRemove() {
                   valor = fecha[2]+"-"+fecha[1]+"-"+fecha[0];
                   this.acta.fecha=valor;
                   console.log(this.acta.fecha);
+                }
+                */
+                if(valor.match("Fecha:")){
+                  valor =valor.replace(/[ ]/g,"");
+                  valor = valor.replace("Fecha:","");
+                  var fecha = valor.split("/");
+                  console.log(fecha);
+                  valor = fecha[2]+"-"+fecha[1]+"-"+fecha[0];
+                  this.acta.fecha=valor;
+                  console.log(valor);
                 }
                 if(valor.match("Numero acta de cursada:")){
                   valor = valor.replace("Numero acta de cursada:","");
