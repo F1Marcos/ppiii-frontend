@@ -1,34 +1,40 @@
 <html>
+<div id="htmlData">
+  <!-- DESDE ACA TODO DENTRO DE ESTA ETIQUETA SE IMPRIME COMO IMAGEN! -->
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grid</title>
-  <link rel="stylesheet" href="admin-reportes.component.css">
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid</title>
+    <link rel="stylesheet" href="admin-reportes.component.css">
+  </head>
 
-<body class="grid-container">
-  <header class="header">
-    <h1 style="color:cornsilk; text-align: center;">REPORTES:</h1>
-  </header>
-  <nav class="navbar" style="background-color: aliceblue;">
+  <body class="grid-container">
+    <header class="header">
+      <h1 style="color:cornsilk; text-align: center;">REPORTES:</h1>
+    </header>
+    <nav class="navbar" style="background-color: aliceblue;">
 
       <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
         [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
       </canvas>
-  </nav>
-  <article class="main">
-    <div style="display: block; background-color: aliceblue;">
-      <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-        [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
-      </canvas>
-    </div>
-  </article>
-  <footer class="footer">
-    <div>
-    <a class="btn btn-dark btn-lg" routerLink="/admin/home">Volver<span class="sr-only">(current)</span></a>
-  </div>
-  </footer>
-</body>
+    </nav>
+    <article class="main">
+      <div style="display: block; background-color: aliceblue;">
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+          [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+        </canvas>
+      </div>
+    </article>
+    <footer class="footer">
+      <div>
+        <a class="btn btn-dark btn-lg" routerLink="/admin/home">Volver<span class="sr-only">(current)</span></a>
+      </div>
+      <div>
+        <a class="btn btn-info btn-lg" (click)="downloadPDF()">Download PDF</a>
+      </div>
+    </footer>
+  </body>
+</div> <!-- HASTA ACA TODO DENTRO DE ESTA ETIQUETA SE IMPRIME COMO IMAGEN! -->
 
 </html>
