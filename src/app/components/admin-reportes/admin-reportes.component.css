@@ -1,14 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Public+Sans&display=swap");
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
-html {
-  height: 100%;
-}
 
 body {
   font-family: "Public Sans", sans-serif;
@@ -28,10 +20,6 @@ body {
   background-color: #1156a5;
 }
 
-.navbar {
-  grid-area: navbar;    
-  background-color: #afd6af;
-}
 
 .sidebar {
   grid-area: sidebar;
@@ -62,9 +50,15 @@ body {
 @media (min-width: 900px) {
   .grid-container {
     grid-template:
-      "header  header"  10%
       "navbar   main" auto 
       "footer  footer"  13% / 
       49%       49%
     }
+}
+
+.center {
+  margin: auto;
+  width: fit-content;
+  padding: 10px;
+  width: 80%;
 }

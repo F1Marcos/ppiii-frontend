@@ -46,6 +46,16 @@
                 <div *ngSwitchCase="2">Error inesperado. Seleccione una opción dentro de las validas, si el error persiste
                   recargue la pagina</div>
               </div>
+              <label  id="modal">Sexo</label>
+              <select type="text" class="custom-select mr-sm-2" name="rol" [(ngModel)]="use.rol" (focus)="limpiarRol()">
+                <option value="1">Femenino</option>
+                <option value="2">Masculino</option>
+              </select>
+              <div [ngSwitch]="errorSexo">
+                <div *ngSwitchCase="1">Seleccione una opción</div>
+                <div *ngSwitchCase="2">Error inesperado. Seleccione una opción dentro de las validas, si el error persiste
+                  recargue la pagina</div>
+              </div>
             <!--  El password local no se utiliza pero lo dejamos por si hace falta migrar el login de manera local 100x100.
               <div class="col-md-3 mb-3">
                 <label>Password (opcional)</label>
@@ -125,6 +135,10 @@
         <td [ngSwitch]="user.rol">
           <div *ngSwitchCase="1">Admin</div>
           <div *ngSwitchCase="2">Alumno</div>
+        </td>
+        <td [ngSwitch]="user.sexo">
+          <div *ngSwitchCase="1">Femenino</div>
+          <div *ngSwitchCase="2">Masculino</div>
         </td>
   
         <td *ngIf="user.estado== 1"><svg xmlns="http://www.w3.org/2000/svg" style="align-items: center;" width="32" height="32" fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">

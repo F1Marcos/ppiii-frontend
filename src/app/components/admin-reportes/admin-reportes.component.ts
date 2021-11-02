@@ -5,6 +5,9 @@ import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsToolt
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { UsuariosService } from '../../services/usuarios.service';
+import { color } from 'html2canvas/dist/types/css/types/color';
+
 
 
 @Component({
@@ -13,12 +16,13 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./admin-reportes.component.css']
 })
 export class AdminReportesComponent implements OnInit {
+  
   // Pie |TORTA:
   public pieChartOptions: ChartOptions = {
     responsive: true,
   };
-  public pieChartLabels: Label[] = [['Masculino', 'IFTS11'], ['Femeninas', 'IFTS11']];
-  public pieChartData: SingleDataSet = [300, 500];
+  public pieChartLabels: Label[] = [[]];
+  public pieChartData: SingleDataSet = [0, 0];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
@@ -28,29 +32,150 @@ export class AdminReportesComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = ['2019', '2020', '2021'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
+  public chartColors: Array<any> = []
 
-  public barChartData: ChartDataSets[] = [
-    { data: [56, 55, 40], label: 'Aprobada' },
-    { data: [56, 55, 40], label: 'Cursada' },
-    { data: [86, 27, 90], label: 'No aprobada' }
-  ];
+  public barChartData: ChartDataSets[] = [];
   // FIN BARRAS.
 
+  materias:any = [];
   fileName= 'ExcelSheet.xlsx'; 
+  filterPost:any = ""
+  totalNotas:any = [];
+  flagMostrar:boolean= true;
+  dni:any = ""
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private usuariosService:UsuariosService ) { }
   opcion = 0;
   ngOnInit(): void {
 
+    
+    this.barChartData = [];
+    console.log(this.barChartData);
+    this.usuariosService.reporteTodasMaterias().subscribe(
+      res => { 
+        console.log('ACA RECIBO');
+        console.log(res);
+        const estadisticas:any = res;
+        console.log("estadisticas");
+        console.log(estadisticas);
+        var datos: any = [];
+        var labels:any = "";
+        var labelHead: any = [];
+        console.log("estoy aca")
+        console.log(this.barChartData);
+        var barChartDataFlag: ChartDataSets[] = []
+
+        for(var i =0; i < estadisticas.length; i++){
+          
+          if(!labelHead.includes(estadisticas[i]["anio"])){
+            labelHead.push(estadisticas[i]["anio"])
+          }
+
+          if(labels.length == 0){
+            labels = (estadisticas[i]["estado"])
+
+          }else{
+
+            if(labels == estadisticas[i]["estado"]){
+              datos.push(estadisticas[i]["cantidad"])
+              if(estadisticas.length - 1 == i){
+                //this.barChartData.push( { data: datos, label: labels})
+                barChartDataFlag.push( { data: datos, label: labels})
+              }
+            }else{
+              //this.barChartData.push( { data: datos, label: labels})
+              barChartDataFlag.push( { data: datos, label: labels})
+              datos = []
+              labels = estadisticas[i]["estado"]
+              datos.push(estadisticas[i]["cantidad"])
+            }
+          }
+        }
+        this.barChartData = barChartDataFlag
+        this.barChartLabels = labelHead;
+        var backgroundColor:any = []
+        for(var i = 0; i< 6;i++){
+          var color = Math.floor(0x2030040 * Math.random()).toString(16);
+          backgroundColor.push('#' + ('000000' + color).slice(-6));
+       }
+       this.chartColors =   [  { // all colors in order
+        backgroundColor: backgroundColor
+      }]
+      
+
+
+       
+      },
+      err => {
+        console.log(err.error.message);
+        this.usuariosService.logOut();
+      } 
+    )   
+
+    this.usuariosService.listarMaterias().subscribe(
+      res => { 
+        console.log('ACA RECIBO');
+        console.log(res);
+        this.materias = res;
+      },
+      err => {
+        console.log(err.error.message);
+        this.usuariosService.logOut();
+      } 
+    )   
+
     switch(this.opcion){
+
+      case 0 :
+        this.usuariosService.reporteSexo().subscribe(
+          res => { 
+            const sexo: any = res;
+            var data:any = [sexo[0]["cantidad"],sexo[1]["cantidad"]];
+            this.pieChartLabels= [["Femenino","IFTS11"],["Masculino","IFTS11"]]
+            this.pieChartData= [data];
+            this.chartColors =   [  { // all colors in order
+              backgroundColor: ['#ba0d4a','#151cd6']
+            }]
+          },
+          err => {
+            console.log(err.error.message);
+            this.usuariosService.logOut();
+          } 
+        )   
+        
+        
+        break;
+
+      
       
     }
   }
   
+  flag(flag:boolean){
+    this.flagMostrar = !flag
+  }
+  
+  buscarNotas(){
+    console.log(this.dni);
+    this.usuariosService.buscarNotasAlumno(this.dni).subscribe(
+      res => { 
+        this.totalNotas = res;
+
+      },
+      err => {
+        console.log(err.error.message);
+        //this.usuariosService.logOut();
+      } 
+    )   
+  }
+
+  logOut(){
+    this.usuariosService.logOut();
+  }
   exportexcel(): void 
   {
      /* table id is passed over here */   
@@ -70,7 +195,7 @@ export class AdminReportesComponent implements OnInit {
   downloadPDF() {
     // Extraemos el
     const DATA:any= document.getElementById('htmlData');
-    const doc = new jsPDF('l', 'pt', 'a4');
+    const doc = new jsPDF('p', 'pt', 'a4');
     const options = {
       background: 'white',
       scale: 3
@@ -81,7 +206,7 @@ export class AdminReportesComponent implements OnInit {
 
       // Add image Canvas to PDF
       const bufferX = 15;
-      const bufferY = 15;
+      const bufferY = 30;
       const imgProps = (doc as any).getImageProperties(img);
       const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;

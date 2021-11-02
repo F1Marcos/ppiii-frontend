@@ -76,6 +76,7 @@ export class UsuariosService{
 		//si no funciona usar 
 		//return this.http.get(this.API_URI+'/list');
 	}
+	
 
 	agregarComentarios(com: any) {
 		//para expandir/especializar las variables usamos ` y no ' o "  
@@ -217,4 +218,29 @@ export class UsuariosService{
 		console.log('ENTRE AL SERVICE ACTAS GET');
 		return this.http.get(`${this.API_URI}/verActaCursada/${tipo}/${nroActa}`);
 	}
+
+	reporteSexo() {
+		//para expandir/especializar las variables usamos ` y no ' o "  
+		//Las variables salen pintadas de otro color diferente del de texto
+		return this.http.get(`${this.API_URI}/reporteSexo`);
+		//si no funciona usar 
+		//return this.http.get(this.API_URI+'/list');
+	}
+
+	reporteTodasMaterias() {
+		//para expandir/especializar las variables usamos ` y no ' o "  
+		//Las variables salen pintadas de otro color diferente del de texto
+		return this.http.get(`${this.API_URI}/reporteTodasMaterias`);
+		//si no funciona usar 
+		//return this.http.get(this.API_URI+'/list');
+	}
+	buscarNotasAlumno(dni:any) {
+		//para expandir/especializar las variables usamos ` y no ' o "  
+		//Las variables salen pintadas de otro color diferente del de texto
+		return this.http.get(`${this.API_URI}/buscarNotasAlumno/${dni}`);
+		//si no funciona usar 
+		//return this.http.get(this.API_URI+'/list');
+	}
+
+
 }

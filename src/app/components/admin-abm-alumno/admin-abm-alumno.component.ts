@@ -20,7 +20,8 @@ export class AdminAbmAlumnoComponent implements OnInit {
     dni:"",
     mail:"",
     rol:"",
-    password:""
+    password:"",
+    sexo:""
   };
   filterPost = "";
   seleccion:boolean = false;
@@ -31,6 +32,7 @@ export class AdminAbmAlumnoComponent implements OnInit {
   errorDNI=0;
   errorEmail=0;
   errorRol=0;
+  errorSexo=0;
   alert:boolean=false;
   mensaje:string="";
 
@@ -92,7 +94,8 @@ export class AdminAbmAlumnoComponent implements OnInit {
       apellidos: pUser.apellidos,
       mail: pUser.mail,
       rol: pUser.rol,
-      password: pUser.password
+      password: pUser.password,
+      sexo: pUser.sexo
 
     }
     this.seleccion=true;
@@ -220,7 +223,9 @@ export class AdminAbmAlumnoComponent implements OnInit {
     this.errorDNI=this.verificarDNI(this.use.dni);
     this.errorEmail=this.verificarEmail(this.use.mail);
     this.errorRol=this.verificarRol(this.use.rol);
-    if(  (this.errorNombre+this.errorUsuario+this.errorApellido+this.errorDNI+this.errorEmail+this.errorRol)>0){
+    this.errorSexo= this.verificarSexo(this.use.sexo);
+    if(  (this.errorNombre+this.errorUsuario+this.errorApellido+this.errorDNI+this.errorEmail+this.errorRol+
+      this.errorSexo)>0){
       return false;
     }
     return true;
@@ -293,6 +298,17 @@ export class AdminAbmAlumnoComponent implements OnInit {
     return 0;
   }
 
+  verificarSexo(sexo:string):number {
+    const patron=/^[1-2]*$/;
+    if(sexo.length==0)
+      return 1;
+    if(sexo.length>1)
+      return 2;
+     if(!patron.test(sexo))
+      return 2;
+    return 0;
+  }
+
   limpiarNombre() {
     if (this.errorNombre > 0) {
       this.use.nombres = "";
@@ -323,6 +339,12 @@ export class AdminAbmAlumnoComponent implements OnInit {
       this.errorRol = 0;
     }
   }
+  limpiarSexo() {
+    if (this.errorSexo > 0) {
+      this.use.sexo = "";
+      this.errorSexo = 0;
+    }
+  }
 
   limpiarTodo(){
     this.use={
@@ -331,7 +353,8 @@ export class AdminAbmAlumnoComponent implements OnInit {
       dni:"",
       mail:"",
       rol:"",
-      password:""
+      password:"",
+      sexo:""
     };
     this.errorUsuario=0;
     this.errorNombre=0;
@@ -339,6 +362,7 @@ export class AdminAbmAlumnoComponent implements OnInit {
     this.errorDNI=0;
     this.errorEmail=0;
     this.errorRol=0;
+    this.errorSexo=0;
     this.seleccion=false;
   }
 

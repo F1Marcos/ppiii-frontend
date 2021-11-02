@@ -1,40 +1,87 @@
 <html>
-<div id="htmlData">
-  <!-- DESDE ACA TODO DENTRO DE ESTA ETIQUETA SE IMPRIME COMO IMAGEN! -->
-
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid</title>
-    <link rel="stylesheet" href="admin-reportes.component.css">
-  </head>
-
-  <body class="grid-container">
-    <header class="header">
-      <h1 style="color:cornsilk; text-align: center;">REPORTES:</h1>
-    </header>
-    <nav class="navbar" style="background-color: aliceblue;">
-
-      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-        [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
-      </canvas>
+  <nav class="navbar navbar-dark bg-dark">
+    <form class="form-inline">
+          <a class="btn btn-outline-dark bg-dark" routerLink="/admin/home" style="font-size:larger; color:#ffffff; border-radius: 15%;">Volver<span class="sr-only">(current)</span></a>
+          <button class="btn btn-outline-dark bg-dark" style="font-size:larger; color:#ffffff; border-radius: 15%; margin: 5px;" type="button" (click)=flag(false)>Reportes</button>
+          <button class="btn btn-outline-dark bg-dark" style="font-size: larger; color:#ffffff; border-radius: 15%;"  type="button" (click)=flag(true)>Buscar notas alumno</button>
+        </form> 
+        <form class="form-inline">
+          <a class="btn btn-outline-danger bg-danger" style="color: white;" (click)="logOut()">LogOut<span class="sr-only">(current)</span></a>
+        </form>    
     </nav>
+    <div class="center" *ngIf="!flagMostrar" style="margin-top: 3%;">
+      <form class="form-inline">
+        <label style="color: #ffffff;margin-right: 1.5%; font-size: larger;"> DNI del alumno</label>
+        <input type="text" class="form-control" placeholder="35020234" name="dni" [(ngModel)]="dni" required>  
+        <button class="btn btn-outline-success bg-success" style="font-size:larger; color:#ffffff; border-radius: 15%; margin: 5px;" type="button" (click)=buscarNotas()>Buscar Notas</button>
+      </form>
+    <div  >
+      <table class='table table-dark' style=" text-align: center;" *ngIf="totalNotas.length > 0">
+          <thead>
+              <th>Materia</th>
+              <th>Nota 1</th>
+              <th>Nota 2</th>
+              <th>Nota 3</th>
+              <th>Nota 4</th>
+              <th>Nota final (N)</th>
+              <th>Nota final (L)</th>
+              <th>Estado</th>
+          </thead>
+          <tbody>
+              <tr *ngFor=" let notas of totalNotas">
+                  <td> {{notas.nombreMat}}</td>
+                  <td> {{notas.nota1}}</td>
+                  <td> {{notas.nota2}}</td>
+                  <td> {{notas.nota3}}</td>
+                  <td> {{notas.nota4}}</td>
+                  <td> {{notas.notaFinalNum}}</td>
+                  <td> {{notas.notaFinalLet}}</td>
+                  <td> {{notas.estado}}</td>
+              </tr>
+          </tbody>
+
+      </table>
+      </div>
+    </div>
+
+<div id="htmlData" *ngIf="flagMostrar">
+  <!-- DESDE ACA TODO DENTRO DE ESTA ETIQUETA SE IMPRIME COMO IMAGEN! -->
+  <h1 style="color:cornsilk; text-align: center;">REPORTES:</h1>
+   <!--<div class="center">
+    <nav class="navbar">
+      <select name="tipos">
+        <option value="1">Egresados por año</option>
+        <option value="2">Alumnos femeninos y masculinos</option>
+        <option value="3">Estadisticas de una materia</option>
+        <option value="4">Cantidad de aprobados, desaprobados y ausentes en todas las materias</option>
+      </select>
+    </nav>
+  </div> -->
+      <!-- <select>
+        <option *ngFor="let materia of materias" 
+        [value]="materia.codMateria" >
+        {{materia.nombreMat}}
+      </option>
+      </select> -->
+    <div class="center" style="text-align: center; background-color: white;">
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+        [plugins]="barChartPlugins" [chartType]="barChartType" [colors]="chartColors">
+      </canvas>
+    </div>
+    <div class="center" style="text-align: center; margin-top: 5%;">
     <article class="main">
       <div style="display: block; background-color: aliceblue;">
         <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-          [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+          [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend" [colors]="chartColors">
         </canvas>
       </div>
     </article>
-    <footer class="footer">
-      <div>
-        <a class="btn btn-dark btn-lg" routerLink="/admin/home">Volver<span class="sr-only">(current)</span></a>
-      </div>
-      <div>
+  </div>
+</div>  <!-- HASTA ACA TODO DENTRO DE ESTA ETIQUETA SE IMPRIME COMO IMAGEN! -->
+
+
+      <div class="center" *ngIf="flagMostrar">
         <a class="btn btn-info btn-lg" (click)="downloadPDF()">Download PDF</a>
       </div>
-    </footer>
-  </body>
-</div> <!-- HASTA ACA TODO DENTRO DE ESTA ETIQUETA SE IMPRIME COMO IMAGEN! -->
 
 </html>
