@@ -4,7 +4,6 @@ import {Router} from '@angular/router';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import 'jspdf-autotable';
 declare var jQuery:any
 declare var $:any
 
@@ -21,16 +20,7 @@ export class UsuariosHomeComponent implements OnInit {
   fileName= 'ExcelSheet.xlsx'; 
 
 
-  head = [['ID', 'NAME', 'DESIGNATION', 'DEPARTMENT']]
 
-  data = [
-    [1, 'ROBERT', 'SOFTWARE DEVELOPER', 'ENGINEERING'],
-    [2, 'CRISTINAO','QA', 'TESTING'],
-    [3, 'KROOS','MANAGER', 'MANAGEMENT'],
-    [4, 'XYZ','DEVELOPER', 'DEVLOPEMENT'],
-    [5, 'ABC','CONSULTANT', 'HR'],
-    [73, 'QWE','VICE PRESIDENT', 'MANAGEMENT'],
-  ]
   constructor(private usuariosService:UsuariosService,private router:Router) { }
 
   ngOnInit(): void {
