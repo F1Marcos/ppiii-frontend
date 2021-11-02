@@ -34,7 +34,7 @@
 
         </div>
         <div class="col-lg-6 mx-auto" id="izquierda" style="margin: 2.5%;width: auto;">
-            <a class="btn btn-dark border disabled" routerLink="../materiasCursadas"
+            <a class="btn btn-dark border " (click)="descarga()"
                 style="width: 150px; height: 150px;"> <img src="assets/icons8-imprimir-100.png">
                 <br> <label style="font-size: medium;">Imprimir notas</label> </a>
         </div>
@@ -49,5 +49,35 @@
     </div>
     <span class="sr-only">{{porcentaje | number: '1.1-1'}}%</span>
 </div>
+
+<div id="tablaDescarga" class="center">
+    <h1 class="center"> Materias aprobadas de {{usuario}}</h1>
+    <table class='table table-dark center'  style="text-align:center;"  >
+        <thead>
+            <th>Numero Acta</th>
+            <th>Materia</th>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Nota</th>
+        </thead>
+        <tbody *ngIf="materias.length > 0; else fila">
+            <tr *ngFor=" let materia of materias">
+                <td>{{materia.nroActa}}</td>
+                <td>{{materia.nombreMat}}</td>
+                <td>{{materia.fecha}}</td>
+                <td>{{materia.tipo}}</td>
+                <td>{{materia.notaFinalNum}}</td>
+            </tr>
+        </tbody>
+        <ng-template #fila>
+            <tbody>
+                <tr>
+                    <td colspan="4">No hay materias aprobadas</td>
+                </tr>
+            </tbody>
+        </ng-template>
+    </table>
+</div>
+
 
 </html>

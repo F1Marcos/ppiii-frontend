@@ -30,7 +30,10 @@ export class AlumnoListarAprobComponent implements OnInit {
 		)
 	}
 
-  
+  logOut(){
+    this.usuariosService.logOut();
+  }
+
   
 exportexcel(): void 
 {

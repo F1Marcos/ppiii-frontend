@@ -26,5 +26,8 @@ export class AlumnoListarCorreComponent implements OnInit {
 		)
 
   }
+  logOut(){
+    this.usuariosService.logOut();
+  }
 
 }

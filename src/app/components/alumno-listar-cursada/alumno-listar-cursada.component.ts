@@ -27,5 +27,8 @@ export class AlumnoListarCursadaComponent implements OnInit {
       }
 		)
   }
+  logOut(){
+    this.usuariosService.logOut();
+  }
 
 }

@@ -1,4 +1,12 @@
 <html>
+    <nav class="navbar navbar-dark bg-dark">
+        <form class="form-inline">
+              <a class="btn btn-outline-dark bg-dark" routerLink="../home" style="font-size:larger; color:#ffffff; border-radius: 15%;">Volver<span class="sr-only">(current)</span></a>
+            </form> 
+            <form class="form-inline">
+              <a class="btn btn-outline-danger bg-danger" style="color: white;" (click)="logOut()">LogOut<span class="sr-only">(current)</span></a>
+            </form>    
+        </nav>
 <div class="container p-4">
     <input style="margin-left: 1%; margin-bottom: 1%;" type="text" name="filterPost"
         [(ngModel)]="filterPost" autofocus>
