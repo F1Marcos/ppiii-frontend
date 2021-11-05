@@ -5,9 +5,9 @@
     <br>
 <h1 style="color: azure;text-align: center;"> ACTA DE {{tipo}} CON NUMERO {{idActa}}</h1>
 <br>
-<div style="color: white; font-size: x-large;">Filtro</div>
+<div class="center" [ngSwitch]="tipo">
+    <div style="color: white; font-size: x-large;">Filtro</div>
 <input style="text-align: left; margin-bottom: 1%;" type="text" name="filterPost" [(ngModel)]="filterPost" autofocus>
-<div class="table-responsive" [ngSwitch]="tipo">
 <table class='table table-dark' style="width:auto; text-align: center;">
    <div *ngSwitchCase="'cursada'">
     <thead>
@@ -30,8 +30,6 @@
             <td><input type="text" class="form-control" name="notaFinalNum" [(ngModel)]="notas.notaFinalNum"></td>
             <td><input type="text" class="form-control" name="notaFinalLet" [(ngModel)]="notas.notaFinalLet"></td>
             <td><input type="text" class="form-control" name="estado" [(ngModel)]="notas.estado"></td>
-            <td><button class="btn btn-info" (click)=modificarNota(notas)>Modificar</button></td>
-          <td><a class="btn btn-danger" (click)=eliminarNota(notas)>Eliminar</a></td>
         </tr>
     </tbody>
     <ng-template #fila>
@@ -53,8 +51,6 @@
             <td><input type="text" class="form-control" name="Udni" [(ngModel)]="notas.Udni"  readonly></td>
             <td><input type="text" class="form-control" name="notaFinalNum" [(ngModel)]="notas.nota"></td>
             <td><input type="text" class="form-control" name="notaFinalLet" [(ngModel)]="notas.notaLetra"></td>
-            <td><button class="btn btn-info" (click)=modificarNota(notas)>Modificar</button>
-          <td><a class="btn btn-danger" (click)=eliminarNota(notas)>Eliminar</a></td>
         </tr>
     </tbody>
     <ng-template #fila>

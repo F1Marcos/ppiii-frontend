@@ -12,6 +12,8 @@ export class PaginatorPipe implements PipeTransform {
     for(const post of value){
      if(post.nombreMat.toUpperCase().indexOf(arg.toUpperCase())>-1){
        console.log("SIP");
+       console.log(post.nombreMat);
+       console.log(arg);
        resultPosts.push(post);
      }
    }

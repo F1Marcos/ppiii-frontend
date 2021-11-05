@@ -83,7 +83,7 @@ export class AdminAbmAlumnoComponent implements OnInit {
     console.log("Entre a cerrar");
     this.limpiarTodo()
     this.seleccion=false;
-  }, 500);
+  }, 100);
   }
 
   CargarModificar(pUser:any){
@@ -131,6 +131,18 @@ export class AdminAbmAlumnoComponent implements OnInit {
         this.mensaje="No se pudo modificar el usuario";
 			  console.log(err.error);}
 		  );
+  }
+
+  activasTodos(){
+    this.usuariosService.activarTodos().subscribe(
+      res => {
+        this.ngOnInit();
+      },
+      err => {
+
+      }
+    )
+
   }
 
   eliminarUsuario(user:any){
@@ -235,7 +247,7 @@ export class AdminAbmAlumnoComponent implements OnInit {
     const patron=/^[a-zA-Z0-9]+$/;
     if(nombre.length==0)
       return 1;
-    if(nombre.length>20)
+    if(nombre.length>45)
       return 2;
     if(!patron.test(nombre))
       return 3;
@@ -247,7 +259,7 @@ export class AdminAbmAlumnoComponent implements OnInit {
     console.log("entro a 3 nombre")
     if(nombre.length==0)
       return 1;
-    if(nombre.length>20)
+    if(nombre.length>45)
       return 2;
     if(!patron.test(nombre))
       return 3;

@@ -18,6 +18,7 @@ export class UsuariosRegistrarComponent implements OnInit {
     dni:"",
     mail:"",
     rol:2,
+    sexo:""
   };
 
   errorUsuario=0;
@@ -26,6 +27,7 @@ export class UsuariosRegistrarComponent implements OnInit {
   errorDNI=0;
   errorEmail=0;
   errorRol=0;
+  errorSexo=0;
 
   constructor(private usuariosService: UsuariosService,private router:Router) {
    }
@@ -105,12 +107,24 @@ export class UsuariosRegistrarComponent implements OnInit {
     this.errorApellido=this.verificarApellido(this.user.apellidos);
     this.errorDNI=this.verificarDNI(this.user.dni);
     this.errorEmail=this.verificarEmail(this.user.mail);
-    if(  (this.errorNombre+this.errorUsuario+this.errorApellido+this.errorDNI+this.errorEmail+this.errorRol)>0){
+    this.errorSexo= this.verificarSexo(this.user.sexo);
+    if(  (this.errorNombre+this.errorUsuario+this.errorApellido+this.errorDNI+this.errorEmail+
+      this.errorSexo)>0){
       return false;
     }
     return true;
   }
 
+  verificarSexo(sexo:string):number {
+    const patron=/^[1-2]*$/;
+    if(sexo.length==0)
+      return 1;
+    if(sexo.length>1)
+      return 2;
+     if(!patron.test(sexo))
+      return 2;
+    return 0;
+  }
   limpiarNombre() {
     if (this.errorNombre > 0) {
       this.user.nombres = "";
@@ -136,6 +150,12 @@ export class UsuariosRegistrarComponent implements OnInit {
     }
   }
 
+  limpiarSexo() {
+    if (this.errorSexo > 0) {
+      this.user.sexo = "";
+      this.errorSexo = 0;
+    }
+  }
 
 
 }

@@ -30,7 +30,7 @@
                 <td>{{materia.nota4}}</td>
                 <td>{{materia.notaFinalNum}}</td>
                 <td>{{materia.estado}}</td>
-                <td>{{materia.fecha}}</td>
+                <td>{{materia.fecha | date :'shortDate'}}</td>
             </tr>
         </tbody>
         <ng-template #fila>

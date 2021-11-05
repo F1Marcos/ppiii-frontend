@@ -47,6 +47,9 @@ export class AdminReportesComponent implements OnInit {
   totalNotas:any = [];
   flagMostrar:boolean= true;
   dni:any = ""
+  tipo:string = "";
+  tipoTabla:string="";
+
 
   constructor(private http: HttpClient, private usuariosService:UsuariosService ) { }
   opcion = 0;
@@ -160,17 +163,26 @@ export class AdminReportesComponent implements OnInit {
   }
   
   buscarNotas(){
-    console.log(this.dni);
-    this.usuariosService.buscarNotasAlumno(this.dni).subscribe(
-      res => { 
-        this.totalNotas = res;
+    console.log(this.tipo)
+    if(this.tipo=="")
+    alert("Por favor seleccione si cursada o final")
+    if(this.dni == "")
+    alert("Por favor ingrese un dni")
 
-      },
-      err => {
-        console.log(err.error.message);
-        //this.usuariosService.logOut();
-      } 
-    )   
+    if(!(this.dni==""|| this.tipo=="")){
+      this.usuariosService.buscarNotasAlumno(this.dni,this.tipo).subscribe(
+        res => {
+          this.tipoTabla=this.tipo; 
+          this.totalNotas = res;
+          console.log(this.totalNotas);
+  
+        },
+        err => {
+          console.log(err.error.message);
+          //this.usuariosService.logOut();
+        } 
+      )  
+    } 
   }
 
   logOut(){

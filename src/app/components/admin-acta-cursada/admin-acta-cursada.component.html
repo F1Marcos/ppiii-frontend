@@ -42,6 +42,8 @@
                     <th>Curso</th>
                     <th>Cuatrimestre</th>
                     <th>Fecha</th>
+                    <th></th>
+                    <th></th>
                 </thead>
                 <tbody *ngIf="actasListCursada.length > 0; else fila">
                     <tr *ngFor=" let actaList of actasListCursada">
@@ -49,10 +51,9 @@
                         <td>{{actaList.nombreMat}}</td>
                         <td>{{actaList.curso}}</td>
                         <td>{{actaList.cuatrimestre}}</td>
-                        <td>{{actaList.fecha}}</td>
+                        <td>{{actaList.fecha | date :'shortDate'}}</td>
                         <td><a class="btn btn-success" style="margin:2%" [routerLink]="['./verActa', actaList.tipo,actaList.nroActa]">Ver<span
                             class="sr-only">(current)</span></a> </td>
-                            <td><a class="btn btn-info" style="margin:2%" (click)="modificarActa(actaList)">Modificar</a> </td>
                 <td><a class="btn btn-danger" style="margin:2%" (click)="eliminarActa(actaList)">Eliminar</a></td>
                     </tr>
                 </tbody>
@@ -101,6 +102,10 @@
                     <th>Curso</th>
                     <th>Cuatrimestre</th>
                     <th>Fecha</th>
+                    <th></th>
+                    <th></th>
+
+
                 </thead>
                 <tbody *ngIf="actasListFinal.length > 0; else fila">
                     <tr *ngFor=" let actaList of actasListFinal">
@@ -108,11 +113,10 @@
                         <td>{{actaList.nombreMat}}</td>
                         <td>{{actaList.curso}}</td>
                         <td>{{actaList.cuatrimestre}}</td>
-                        <td>{{actaList.fecha}}</td>
+                        <td>{{actaList.fecha | date :'shortDate'}}</td>
                         <td><a class="btn btn-success" style="margin:2%" [routerLink]="['./verActa', actaList.tipo,actaList.nroActa]">Ver<span
-                            class="sr-only">(current)</span></a>
-                    <a class="btn btn-info" style="margin:2%" (click)="modificarActa(actaList)">Modificar</a>
-                <a class="btn btn-danger" style="margin:2%" (click)="eliminarActa(actaList)">Eliminar</a></td>
+                            class="sr-only">(current)</span></a></td>
+                            <td> <a class="btn btn-danger" style="margin:2%" (click)="eliminarActa(actaList)">Eliminar</a></td>
                     </tr>
                 </tbody>
                 <ng-template #fila>

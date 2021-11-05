@@ -75,7 +75,7 @@ export class AdminAbmMateriaComponent implements OnInit {
   Paginado() {
     var aux = []
     for(var i =0; i<this.materias.length;i++){
-      if(this.materias[i].nombreMat.toString().includes(this.filterPost))
+      if(this.materias[i].nombreMat.toString().toUpperCase().includes(this.filterPost.toUpperCase()))
       aux.push(this.materias[i])
     }
     this.pageCantidad = Math.trunc((aux.length)/10);
@@ -150,7 +150,7 @@ export class AdminAbmMateriaComponent implements OnInit {
     console.log("Entre a cerrar");
     this.limpiarTodo()
     this.seleccion=false;
-  }, 1000);
+  }, 100);
   }
 
   modificarMateria(){
@@ -297,9 +297,7 @@ export class AdminAbmMateriaComponent implements OnInit {
    this.noAsignadas.push(mat);
   }
 
-  enviarAsign(){
-    
-  }
+
 
   verificarForm():boolean{
     this.errorID=this.verificarID(this.mat.idMat);
@@ -327,7 +325,7 @@ export class AdminAbmMateriaComponent implements OnInit {
     console.log(nombre);
     if(nombre.length==0)
       return 1;
-    if(nombre.length>20)
+    if(nombre.length>45)
       return 2;
     if(! patron.test(nombre))
       return 3;

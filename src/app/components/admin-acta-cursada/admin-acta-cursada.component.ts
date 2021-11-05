@@ -37,7 +37,7 @@ export class AdminActaCursadaComponent implements OnInit {
   files: File[] = [];
 
   //switch mostrar actas:
-  flag_cursada:boolean=false;
+  flag_cursada:boolean=true;
   flag_final:boolean=false;
 
   constructor(private usuariosService: UsuariosService, private http: HttpClient, public datepipe: DatePipe) { }

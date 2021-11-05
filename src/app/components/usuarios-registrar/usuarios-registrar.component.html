@@ -30,7 +30,16 @@
                             <div *ngSwitchCase="2">Apellido demasiado largo</div>
                             <div *ngSwitchCase="2">Apellido debe ser alfabetico y solo admite 1 espacio entre apellidos</div>
                           </div>
-
+                          <label style="color: black; margin-top: 3%;">Sexo</label>
+                          <select type="text" class="custom-select mr-sm-2" name="sexo" [(ngModel)]="user.sexo" (focus)="limpiarSexo()">
+                            <option value="1">Femenino</option>
+                            <option value="2">Masculino</option>
+                          </select>
+                          <div [ngSwitch]="errorSexo">
+                            <div *ngSwitchCase="1">Seleccione una opción</div>
+                            <div *ngSwitchCase="2">Error inesperado. Seleccione una opción dentro de las validas, si el error persiste
+                              recargue la pagina</div>
+                          </div>
                           <label style="color: black; margin-top: 3%;">Email</label>
                           <input type="text" class="form-control" placeholder="Email Ej roberto@ifts11.com" name="mail" [(ngModel)]="user.mail"
                             (focus)="limpiarEmail()" required>

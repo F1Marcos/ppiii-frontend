@@ -22,7 +22,7 @@
             <tr *ngFor=" let materia of materias | materiasFilter:filterPost">
                 <td>{{materia.nroActa}}</td>
                 <td>{{materia.nombreMat}}</td>
-                <td>{{materia.fecha}}</td>
+                <td>{{materia.fecha | date :'shortDate'}}</td>
                 <td>{{materia.tipo}}</td>
                 <td>{{materia.notaFinalNum}}</td>
             </tr>

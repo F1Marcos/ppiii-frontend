@@ -93,7 +93,6 @@
                 <th>Materia</th>
                 <th>Año</th>
                 <th>Tipo</th>
-                <th>Correlativa</th>
                 <th>Modificar</th>
                 <th>Eliminar</th>
             </thead>
@@ -103,7 +102,6 @@
                     <td>{{mat.nombreMat}}</td>
                     <td>{{mat.anio}}</td>
                     <td>{{mat.tipo}}</td>
-                    <td>{{mat.flagCorre}}</td>
                     <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" (click)="CargarModificar(mat)">Modificar</button></td>
                     <td><a class="btn btn-danger" (click)=eliminarMateria(mat)>Eliminar</a></td>
                 </tr>

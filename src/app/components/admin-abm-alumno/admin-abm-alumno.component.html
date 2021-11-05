@@ -47,7 +47,7 @@
                   recargue la pagina</div>
               </div>
               <label  id="modal">Sexo</label>
-              <select type="text" class="custom-select mr-sm-2" name="rol" [(ngModel)]="use.rol" (focus)="limpiarRol()">
+              <select type="text" class="custom-select mr-sm-2" name="sexo" [(ngModel)]="use.sexo" (focus)="limpiarSexo()">
                 <option value="1">Femenino</option>
                 <option value="2">Masculino</option>
               </select>
@@ -167,7 +167,7 @@
     </ng-template>
   </table>
 <div style="float: right;">
-  <button  class="btn btn-success" style="align-content:right; margin-right: 0%;">Activar Todos</button>
+  <button  class="btn btn-success" style="align-content:right; margin-right: 0%;" (click)="activasTodos()">Activar Todos</button>
 
 </div>
 
@@ -241,8 +241,5 @@
   <button class="btn btn-dark" style="margin-left: 2%;" (click)="limpiarTodo()">Limpiar campos</button>
 </form>
 -->
-<div style="left:auto"> <br>
-  <a class="btn btn-dark" routerLink="/admin/home">Volver<span class="sr-only">(current)</span></a>
-</div>
 
 </html>

@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 
 export class UsuariosService{
-	// API_URI = 'http://localhost:3000/user';
-	API_URI = 'https://ppiii-demo1.herokuapp.com/user'; 
+	 API_URI = 'http://localhost:3000/user';
+	//API_URI = 'https://ppiii-demo1.herokuapp.com/user'; 
 
 	logued$ = new EventEmitter<string>();
 	
@@ -130,6 +130,10 @@ export class UsuariosService{
 		return this.http.post(`${this.API_URI}/activarUsuario`, [dni]);
 	}
 
+	activarTodos(){
+		return this.http.get(`${this.API_URI}/activarTodos`);
+	}
+
 	desactivarUsuario(dni:any){
 		console.log("entro a service")
 		console.log(dni);
@@ -234,10 +238,10 @@ export class UsuariosService{
 		//si no funciona usar 
 		//return this.http.get(this.API_URI+'/list');
 	}
-	buscarNotasAlumno(dni:any) {
+	buscarNotasAlumno(dni:any, tipo:any) {
 		//para expandir/especializar las variables usamos ` y no ' o "  
 		//Las variables salen pintadas de otro color diferente del de texto
-		return this.http.get(`${this.API_URI}/buscarNotasAlumno/${dni}`);
+		return this.http.get(`${this.API_URI}/buscarNotasAlumno/${dni}/${tipo}`);
 		//si no funciona usar 
 		//return this.http.get(this.API_URI+'/list');
 	}
