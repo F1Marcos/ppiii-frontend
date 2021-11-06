@@ -118,13 +118,6 @@ onRemove() {
           console.log(aux);
           console.log("IMPRIMO AUX");
           //Convierto la fecha
-          function convert(str:any) {
-           var date = new Date(str),
-          mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-           day = ("0" + date.getDate()).slice(-2);
-          return [date.getFullYear(), mnth, day].join("-");
-          }
-          this.acta.fecha=convert(Object.values(aux[12]).toString());
             console.log(aux[12]);
             var objetos = [];
             for(let i=0;i<aux.length ;i++){

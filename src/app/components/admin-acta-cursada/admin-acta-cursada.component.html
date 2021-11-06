@@ -113,7 +113,7 @@
                         <td>{{actaList.nombreMat}}</td>
                         <td>{{actaList.curso}}</td>
                         <td>{{actaList.cuatrimestre}}</td>
-                        <td>{{actaList.fecha | date :'shortDate'}}</td>
+                        <td>{{actaList.fecha}}</td>
                         <td><a class="btn btn-success" style="margin:2%" [routerLink]="['./verActa', actaList.tipo,actaList.nroActa]">Ver<span
                             class="sr-only">(current)</span></a></td>
                             <td> <a class="btn btn-danger" style="margin:2%" (click)="eliminarActa(actaList)">Eliminar</a></td>
