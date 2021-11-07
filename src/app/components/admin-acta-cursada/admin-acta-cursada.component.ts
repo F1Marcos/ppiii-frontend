@@ -28,6 +28,12 @@ export class AdminActaCursadaComponent implements OnInit {
   arrayBuffer:any;
   file: any;
   errorActa:boolean=false;
+  mensaje:string="";
+  alert:boolean=false;
+  pageCantidad:number=0;
+  page: number = 0;
+  elementos:number=1;
+  filterPost= "";
   
   
   // archivosseleccionado: any;
@@ -45,6 +51,10 @@ export class AdminActaCursadaComponent implements OnInit {
   ngOnInit(): void {
     this.usuariosService.verificarRol().subscribe(
 			res => { 
+        setTimeout(()=>{                           
+          this.alert = false;
+          this.mensaje="";
+     }, 3000);
         this.acta = {
           nroActa:"",
           idMat: "",
@@ -64,6 +74,12 @@ export class AdminActaCursadaComponent implements OnInit {
             console.log(res);
             this.actasListCursada = result.cursada;
             this.actasListFinal = result.final;
+            this.pageCantidad=Math.trunc(this.actasListCursada.length/10);
+            console.log(this.pageCantidad);
+            console.log(this.pageCantidad%10);
+            console.log("cantidad");
+            if(this.actasListCursada.length %10 == 0 && this.pageCantidad!=0)
+            this.pageCantidad--;
           },
           err => {
             console.log(err.error.message);
@@ -278,11 +294,14 @@ onRemove() {
     if(confirm("¿Esta seguro que desea eliminar al acta? sAl eliminar el acta se borraran todas las notas vinculadas a la misma")) {
     this.usuariosService.eliminarActa(actaSelect.nroActa,actaSelect.tipo).subscribe(
       res => {
-        console.log("Se guardaron las notas");
+        this.alert=true;
+        this.mensaje="Se elimino el acta correctamente";
         this.load=false
         this.ngOnInit();
       },
       err => {        
+        this.alert=true;
+        this.mensaje="No se pudo eliminar el acta, vuelva a intentar mas tarde";
         console.log("ERROR");
         console.log(err);
         this.load=false
@@ -291,10 +310,12 @@ onRemove() {
     }
 
   }
-modificarActa(actaSelect:any){
+/*modificarActa(actaSelect:any){
   this.usuariosService.modificarActa(actaSelect).subscribe(
     res => {
       console.log("Se guardaron las notas");
+      this.alert=true;
+      this.mensaje="Se modifico el acta de correctamente";
       this.load=false
       this.ngOnInit();
     },
@@ -305,7 +326,7 @@ modificarActa(actaSelect:any){
     }
   )
     
-  }
+  }*/
   async onSubmit() {  
     this.load=true;
     this.cargaFile();
@@ -325,7 +346,8 @@ modificarActa(actaSelect:any){
         }
         this.usuariosService.agregarNotas(this.notasTotales,this.acta.tipo).subscribe(
           res => {
-            console.log("Se guardaron las notas");
+            this.alert=true;
+            this.mensaje="Se creo el acta correctamente";
             this.load=false
             this.ngOnInit();
           },
@@ -357,11 +379,83 @@ modificarActa(actaSelect:any){
   actaCursada(){
     this.flag_cursada=true;
     this.flag_final=false;
+    this.pageCantidad=Math.trunc(this.actasListCursada.length/10);
+    if(this.actasListCursada.length %10 == 0 && this.pageCantidad!=0)
+    this.pageCantidad--;
   }
 
   actaFinal(){
     this.flag_final=true;
     this.flag_cursada=false;
+    this.pageCantidad=Math.trunc(this.actasListFinal.length/10);
+    if(this.actasListFinal.length %10 == 0 && this.pageCantidad!=0)
+    this.pageCantidad--;
+  }
+
+  SiguientePagina(){
+    const actas = this.TipoActa()
+    console.log(actas.length)
+    console.log(this.page)
+    var aux = []
+    for(var i =0; i< actas.length;i++){
+      if(actas[i].nombreMat.toString().includes(this.filterPost))
+      aux.push(actas[i])
+      
+    }
+    
+    if(this.page+10 < aux.length){
+      this.page += 10;
+    }
+
+  }
+  AnteriorPagina(){
+    if(this.page>0){
+      this.page-=10
+    }
+  }
+
+  Paginado() {
+    console.log("ENTRE A PAGINADO")
+    var actas = this.TipoActa()
+    console.log(actas);
+    var aux = []
+   
+    for(var i =0; i<actas.length;i++){
+      console.log("imprimo valores")
+      console.log(actas[i].nombreMat);
+      console.log(this.filterPost);
+      if(actas[i].nombreMat.toUpperCase().includes(this.filterPost.toUpperCase()))
+      {
+        console.log("entro a if")
+        aux.push(actas[i])
+      }
+      
+    }
+    console.log("imprimo aux");
+    console.log(aux); 
+    this.pageCantidad = Math.trunc((aux.length)/10);
+    if(aux.length %10 == 0 && this.pageCantidad!=0)
+    this.pageCantidad--;
+
+    this.elementos= aux.length;
+    
+    if(this.page+10 > aux.length){
+      this.page = 0;
+    }
+  
+  }
+
+    TipoActa(){
+    var actas: any;
+    if(this.flag_cursada)
+    return this.actasListCursada;
+    else
+    return this.actasListFinal;
+    
+  }
+
+  logOut(){
+    this.usuariosService.logOut();
   }
 
 }

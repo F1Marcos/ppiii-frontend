@@ -1,12 +1,21 @@
 <html>
-
-    <nav class="navbar navbar-light" style="margin-right: 60%; opacity: .9;">
+    <div class="container" *ngIf="alert" id="aviso" style="text-align: center; align-items: center; width: 25%;">
+        <div class="alert alert-success alert-dismissible" style="text-align: center; align-items: center;">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>{{mensaje}} </strong>
+        </div>
+      </div>
+      <nav class="navbar navbar-dark bg-dark">
         <form class="form-inline">
-            <a class="btn btn-outline-dark bg-dark" routerLink="/admin/home" style="font-size:larger; color:#ffffff; border-radius: 15%; margin: 5px;">Volver<span class="sr-only">(current)</span></a>
-            <button class="btn btn-outline-dark bg-dark" style="font-size:larger; color:#ffffff; border-radius: 15%; margin: 5px;" type="button" (click)=actaCursada()>Actas Cursadas</button>
+              <a class="btn btn-outline-dark bg-dark" routerLink="/admin/home" style="font-size:larger; color:#ffffff; border-radius: 15%;">Volver<span class="sr-only">(current)</span></a>
+              <button class="btn btn-outline-dark bg-dark" style="font-size:larger; color:#ffffff; border-radius: 15%; margin: 5px;" type="button" (click)=actaCursada()>Actas Cursadas</button>
             <button class="btn btn-outline-dark bg-dark" style="font-size: larger; color:#ffffff; border-radius: 15%;"  type="button" (click)=actaFinal()>Actas Finales</button>
-        </form>
-      </nav>
+            </form> 
+            <form class="form-inline">
+              <a class="btn btn-outline-danger bg-danger" style="color: white;" (click)="logOut()">LogOut<span class="sr-only">(current)</span></a>
+            </form>    
+        </nav>
+  
 
     <div *ngIf="flag_cursada" class="row" style="text-align: center; color: white;width: 100%;margin-top: 1%">
 
@@ -35,6 +44,7 @@
         <span class="border-right" style="width: 1%;"></span>
         <div class="column" style="width: 60%; margin-left: 5%;">
             <h1>Lista de actas</h1>
+            <input placeholder="Filtro por materia" style="float: left;" type="text" name="filterPost" [(ngModel)]="filterPost" (input)="Paginado()" autofocus>
             <table class='table table-dark'>
                 <thead>
                     <th>Numero de acta</th>
@@ -46,7 +56,7 @@
                     <th></th>
                 </thead>
                 <tbody *ngIf="actasListCursada.length > 0; else fila">
-                    <tr *ngFor=" let actaList of actasListCursada">
+                    <tr *ngFor=" let actaList of actasListCursada | paginator:filterPost:page ">
                         <td>{{actaList.nroActa}}</td>
                         <td>{{actaList.nombreMat}}</td>
                         <td>{{actaList.curso}}</td>
@@ -65,7 +75,11 @@
                     </tbody>
                 </ng-template>
             </table>
+            <button class="btn btn-outline-info bg-info" style="color: white;" (click)="AnteriorPagina()">Anterior</button>
+            <label style="color: white; margin-right: 5%; margin-left: 5%;">{{page/10}}/{{pageCantidad}}</label>
+            <button class="btn btn-outline-info bg-info" style="color:white" (click)="SiguientePagina()">Siguiente</button>
         </div>
+        
     </div>
     <!--  SWITCH VIEWS-->
 
@@ -95,6 +109,7 @@
         <span class="border-right border-color:black" style="width: 1%;"></span>
         <div class="column" style="width:60%;margin-left: 5%;">
             <h1>Lista de actas</h1>
+            <input placeholder="Filtro por materia" style="float: left;" type="text" name="filterPost" [(ngModel)]="filterPost" (input)="Paginado()" autofocus>
             <table class='table table-dark'>
                 <thead>
                     <th>Numero de acta</th>
@@ -108,7 +123,7 @@
 
                 </thead>
                 <tbody *ngIf="actasListFinal.length > 0; else fila">
-                    <tr *ngFor=" let actaList of actasListFinal">
+                    <tr *ngFor=" let actaList of actasListFinal | paginator:filterPost:page">
                         <td>{{actaList.nroActa}}</td>
                         <td>{{actaList.nombreMat}}</td>
                         <td>{{actaList.curso}}</td>
@@ -127,6 +142,9 @@
                     </tbody>
                 </ng-template>
             </table>
+            <button class="btn btn-outline-info bg-info" style="color: white;" (click)="AnteriorPagina()">Anterior</button>
+            <label style="color: white; margin-right: 5%; margin-left: 5%;">{{page/10}}/{{pageCantidad}}</label>
+            <button class="btn btn-outline-info bg-info" style="color:white" (click)="SiguientePagina()">Siguiente</button>
         </div>
     </div>
 
