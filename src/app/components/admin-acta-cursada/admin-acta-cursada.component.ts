@@ -218,6 +218,8 @@ onRemove() {
                   console.log(this.acta.fecha);
                 }
                 */
+
+                console.log(valor);
                 if(valor.match("Fecha:")){
                   valor =valor.replace(/[ ]/g,"");
                   valor = valor.replace("Fecha:","");
